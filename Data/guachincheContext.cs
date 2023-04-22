@@ -2,13 +2,15 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Data
 {
-    public partial class guachincheContext : DbContext
+    public partial class guachincheContext : IdentityDbContext
     {
         public guachincheContext()
         {
@@ -134,9 +136,51 @@ namespace MiGuachincheWeb.Data
                     .IsUnicode(false);
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            List<IdentityRole> roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Name = "Default",
+                    NormalizedName = "DEFAULT"
+                },
+                new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                }
+            };
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
+
+            List<IdentityUser> users = new List<IdentityUser>
+            {
+                new IdentityUser
+                {
+                    UserName = "Admin@guachinche.com",
+                    Email = "Admin@guachinche.com",
+                    NormalizedEmail = "ADMIN@GUACHINCHE.COM",
+                    NormalizedUserName = "ADMIN@GUACHINCHE.COM",
+                    EmailConfirmed = true
+                }
+            };
+
+            modelBuilder.Entity<IdentityUser>().HasData(users);
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+            users[0].PasswordHash = passwordHasher.HashPassword(users[0], "guachinpass");
+
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>
+            {
+                new IdentityUserRole<string>
+                {
+                    RoleId = roles.Find(r => r.Name == "Admin").Id,
+                    UserId = users[0].Id
+                }
+            };
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
+
+            base.OnModelCreating(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

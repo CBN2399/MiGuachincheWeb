@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MiGuachincheWeb.Data;
@@ -6,9 +7,13 @@ using MiGuachincheWeb.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<guachincheContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MiGuachincheContext") ?? throw new InvalidOperationException("Connection string 'MiGuachincheContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<guachincheContext>();
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -25,10 +30,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
