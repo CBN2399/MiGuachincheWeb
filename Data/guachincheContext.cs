@@ -10,7 +10,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Data
 {
-    public partial class guachincheContext : IdentityDbContext
+    public partial class guachincheContext : IdentityDbContext<CustomUser>
     {
         public guachincheContext()
         {
@@ -136,49 +136,107 @@ namespace MiGuachincheWeb.Data
                     .IsUnicode(false);
             });
 
-            List<IdentityRole> roles = new List<IdentityRole>
+            //Perzonalizar la tabla user
+            modelBuilder.Entity<CustomUser>(e =>
             {
-                new IdentityRole
-                {
-                    Name = "Default",
-                    NormalizedName = "DEFAULT"
-                },
-                new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                }
-            };
+                e.ToTable(nameof(CustomUser));
+                e.Property(p => p.Nombre).HasMaxLength(25);
+                e.Property(p => p.Apelllidos).HasMaxLength(50);
+                e.Property(p => p.isActive).HasDefaultValue(true);
+                e.Property(p => p.Telefono).HasMaxLength(9);
+
+            });
+
+            modelBuilder.Entity<CustomUser>().Ignore(i => i.platosFavoritos);
+            modelBuilder.Entity<CustomUser>().Ignore(i => i.restaurantesFavoritos);
+
+
+            //Seeders
+
+            List<IdentityRole> roles = new List<IdentityRole>();
+            roles.Add(new IdentityRole { Name = "Default", NormalizedName = "DEFAULT" });
+            roles.Add(new IdentityRole { Name = "Manager", NormalizedName = "MANAGER" });
+            roles.Add(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" });
             modelBuilder.Entity<IdentityRole>().HasData(roles);
 
-            List<IdentityUser> users = new List<IdentityUser>
-            {
-                new IdentityUser
-                {
-                    UserName = "Admin@guachinche.com",
-                    Email = "Admin@guachinche.com",
-                    NormalizedEmail = "ADMIN@GUACHINCHE.COM",
-                    NormalizedUserName = "ADMIN@GUACHINCHE.COM",
-                    EmailConfirmed = true
-                }
-            };
 
-            modelBuilder.Entity<IdentityUser>().HasData(users);
-            var passwordHasher = new PasswordHasher<IdentityUser>();
+            List<CustomUser> users = new List<CustomUser>();
+
+            users.Add(new CustomUser //ADMIN
+            {
+                Nombre = "Cesar",
+                Apelllidos = "Bartolome Navarro",
+                Telefono = "922111333",
+                isActive = true,
+                UserName = "Admin@guachinche.com",
+                NormalizedUserName = "ADMIN@GUACHINCHE.COM",
+                Email = "Admin@guachinche.com",
+                NormalizedEmail = "ADMIN@GUACHINCHE.COM",
+                EmailConfirmed = true,
+            });
+
+            users.Add(new CustomUser //MANAGER
+            {
+                Nombre = "Manager",
+                Apelllidos = "Guachinche",
+                Telefono = "922000111",
+                isActive = true,
+                UserName = "Manager@guachinche.com",
+                NormalizedUserName = "MANAGER@GUACHINCHE.COM",
+                Email = "Manager@guachinche.com",
+                NormalizedEmail = "MANAGER@GUACHINCHE.COM",
+                EmailConfirmed = true,
+            });
+
+            users.Add(new CustomUser //DEFAULT
+            {
+                Nombre = "User",
+                Apelllidos = "Guachinche",
+                Telefono = "922456789",
+                isActive = true,
+                UserName = "User@guachinche.com",
+                NormalizedUserName = "USER@GUACHINCHE.COM",
+                Email = "User@guachinche.com",
+                NormalizedEmail = "USER@GUACHINCHE.COM",
+                EmailConfirmed = true,
+            });
+
+            modelBuilder.Entity<CustomUser>().HasData(users);
+            var passwordHasher = new PasswordHasher<CustomUser>();
             users[0].PasswordHash = passwordHasher.HashPassword(users[0], "guachinpass");
+            users[1].PasswordHash = passwordHasher.HashPassword(users[1], "1234");
+            users[2].PasswordHash = passwordHasher.HashPassword(users[2], "1234");
 
-            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>();
+
+            userRoles.Add(new IdentityUserRole<string>
             {
-                new IdentityUserRole<string>
-                {
-                    RoleId = roles.Find(r => r.Name == "Admin").Id,
-                    UserId = users[0].Id
-                }
-            };
+                RoleId = roles.Find(r => r.Name == "Admin").Id,
+                UserId = users[0].Id
+            });
+
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                RoleId = roles.Find(r => r.Name == "Manager").Id,
+                UserId = users[1].Id
+            });
+
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                RoleId = roles.Find(r => r.Name == "Default").Id,
+                UserId = users[2].Id
+            });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
             base.OnModelCreating(modelBuilder);
+
+            List<EstadoReserva> estados = new List<EstadoReserva>();
+            estados.Add(new EstadoReserva { Id = -1, Name= "Activa"});
+            estados.Add(new EstadoReserva { Id = -2, Name = "Cancelada" });
+            estados.Add(new EstadoReserva { Id = -3, Name = "Finalizada" });
+
+            modelBuilder.Entity<EstadoReserva>().HasData(estados);
         }
 
         //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

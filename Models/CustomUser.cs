@@ -12,7 +12,7 @@ namespace MiGuachincheWeb.Models
 
         public String Telefono { get; set; }
 
-        public bool isActive { get; set; }
+        public bool? isActive { get; set; }
 
         public ICollection<restaurante>? restaurantesFavoritos { get; set; }
 

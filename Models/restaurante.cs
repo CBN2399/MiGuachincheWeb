@@ -23,5 +23,7 @@ namespace MiGuachincheWeb.Models
         public virtual tipoRestaurante Id_tipoNavigation { get; set; }
         public virtual zona zona { get; set; }
         public virtual ICollection<plato_restaurante> plato_restaurantes { get; set; }
+
+        public virtual ICollection<Reserva> reservas { get; set; }
     }
 }
