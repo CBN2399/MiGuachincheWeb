@@ -14,11 +14,11 @@ namespace MiGuachincheWeb.Models
 
         public bool isActive { get; set; }
 
-        public List<restaurante>? restaurantesFavoritos { get; set; }
+        public ICollection<restaurante>? restaurantesFavoritos { get; set; }
 
-        public List<plato_restaurante>? platosFavoritos { get; set; }
+        public ICollection<plato_restaurante>? platosFavoritos { get; set; }
 
-        public List<Reserva>? reservas { get; set; }
+        public ICollection<Reserva>? reservas { get; set; }
 
 
 
