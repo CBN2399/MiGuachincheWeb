@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<guachincheContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MiGuachincheContext") ?? throw new InvalidOperationException("Connection string 'MiGuachincheContext' not found.")));
 
+builder.Services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<guachincheContext>();
+
 
 builder.Services.AddIdentityCore<CustomUser>(options =>
 {
