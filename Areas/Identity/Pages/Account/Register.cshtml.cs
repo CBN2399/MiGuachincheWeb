@@ -26,6 +26,7 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<CustomUser> _signInManager;
         private readonly UserManager<CustomUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager; //añadi esta
         private readonly IUserStore<CustomUser> _userStore;
         private readonly IUserEmailStore<CustomUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -33,12 +34,14 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<CustomUser> userManager,
+            RoleManager<IdentityRole> roleManager,//añadi esta
             IUserStore<CustomUser> userStore,
             SignInManager<CustomUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager; //añadi esta
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -121,6 +124,13 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    /**/
+                    var defaultrole = _roleManager.FindByNameAsync("Default").Result;
+                    if (defaultrole != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
+                    /**/
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
