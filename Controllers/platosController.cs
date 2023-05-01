@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -20,10 +21,37 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var guachincheContext = _context.platos.Include(p => p.tipo);
-            return View(await guachincheContext.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
+            ViewData["TypeSortParm"] = sortOrder == "Tipo" ? "Tipo_desc" : "Tipo";
+            ViewData["CurrentFilter"] = searchString;
+
+
+            var platos = (IQueryable<plato>)_context.platos.Include(p => p.tipo);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                platos = platos.Where(s => s.Nombre.Contains(searchString)
+                                       || s.tipo.nombre.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Nombre":
+                    platos = platos.OrderBy(s => s.Nombre);
+                    break;
+                case "Tipo":
+                    platos = platos.OrderBy(s => s.tipo.nombre);
+                    break;
+                case "Tipo_desc":
+                    platos = platos.OrderByDescending(s => s.tipo.nombre);
+                    break;
+                default:
+                    platos = platos.OrderByDescending(s => s.Nombre);
+                    break;
+            }
+
+            return View(await platos.AsNoTracking().ToListAsync());
         }
 
         // GET: platos/Details/5
