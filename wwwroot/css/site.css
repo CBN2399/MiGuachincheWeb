@@ -16,3 +16,98 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.stroke {
+    text-align: center;
+    letter-spacing: 5px;
+    font-family: impact;
+    font-size: 60px;
+    text-shadow: -2px -5px 1px #000;
+    -webkit-text-fill-color: #6a5da8;
+    -webkit-text-stroke: 2px black;
+}
+
+.gallery {
+    background: linear-gradient(90deg, rgba(33,33,219,1) 20%, rgba(255,255,255,1) 70%, rgba(33,33,219,1) 100%);
+    border-radius:5px;
+    padding: 20px;
+    margin: 0 auto;
+    columns: 4 180px;
+    column-gap: 15px;
+}
+
+.gallery img {
+    max-width: 100%;
+    margin-bottom: 15px;
+    display: block;
+    outline: 2px solid black;
+    border-radius: 5px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
+
+.text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.text {
+    position:relative;
+    left:15%;
+    margin: 15px auto;   
+    height: 50px; 
+}
+
+p {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+
+.word {
+    position: absolute;
+    width: 220px;
+    opacity: 0;
+}
+
+.letter {
+    position: relative;
+    float: left;
+    transform: translateZ(25px);
+    transform-origin: 50% 50% 25px;
+}
+
+    .letter.out {
+        transform: rotateX(90deg);
+        transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    .letter.behind {
+        transform: rotateX(-90deg);
+    }
+
+    .letter.in {
+        transform: rotateX(0deg);
+        transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+.wisteria {
+    color: #8e44ad;
+}
+
+.belize {
+    color: #2980b9;
+}
+
+.pomegranate {
+    color: #c0392b;
+}
+
+.green {
+    color: #16a085;
+}
+
+.midnight {
+    color: ##376796;
+}
