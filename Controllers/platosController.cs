@@ -21,7 +21,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string plateType, List<SelectListItem> tipoPlato)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
             ViewData["TypeSortParm"] = sortOrder == "Tipo" ? "Tipo_desc" : "Tipo";
@@ -30,11 +30,49 @@ namespace MiGuachincheWeb.Controllers
 
             var platos = (IQueryable<plato>)_context.platos.Include(p => p.tipo);
 
-            if (!String.IsNullOrEmpty(searchString))
+            if(tipoPlato.Count() == 0)
             {
-                platos = platos.Where(s => s.Nombre.Contains(searchString)
-                                       || s.tipo.nombre.Contains(searchString));
+                if (plateType == null || plateType == "Todos")
+                {
+                    tipoPlato.Add(new SelectListItem { Text = "Todos", Value = "Todos", Selected = true });
+                }
+                else
+                {
+                    tipoPlato.Add(new SelectListItem { Text = "Todos", Value = "Todos" });
+                }
+
+                foreach (string tipo in platos.Select(o => o.tipo.nombre).Distinct().ToList())
+                {
+                    if (plateType == tipo)
+                    {
+                        tipoPlato.Add(new SelectListItem { Text = tipo, Value = tipo, Selected = true });
+                    }
+                    else
+                    {
+                        tipoPlato.Add(new SelectListItem { Text = tipo, Value = tipo });
+                    }
+                }
             }
+            
+            ViewBag.plateType = tipoPlato;
+
+            if (!String.IsNullOrEmpty(searchString) || plateType != null)
+            {
+                if(plateType == null || plateType == "Todos")
+                {
+                    foreach (var type in tipoPlato)
+                    {
+                        platos = platos.Where(s => s.Nombre.Contains(searchString)
+                                    && s.tipo.nombre.Contains(type.Value));
+                    }
+                }
+                else
+                {
+                    platos = platos.Where(s => s.Nombre.Contains(searchString)
+                                    && s.tipo.nombre.Contains(plateType));
+                }
+            }
+
             switch (sortOrder)
             {
                 case "Nombre":
