@@ -56,21 +56,15 @@ namespace MiGuachincheWeb.Controllers
             
             ViewBag.plateType = tipoPlato;
 
-            if (!String.IsNullOrEmpty(searchString) || plateType != null)
+            if (!String.IsNullOrEmpty(searchString))
             {
-                if(plateType == null || plateType == "Todos")
-                {
-                    foreach (var type in tipoPlato)
-                    {
-                        platos = platos.Where(s => s.Nombre.Contains(searchString)
-                                    && s.tipo.nombre.Contains(type.Value));
-                    }
-                }
-                else
-                {
-                    platos = platos.Where(s => s.Nombre.Contains(searchString)
-                                    && s.tipo.nombre.Contains(plateType));
-                }
+                platos = platos.Where(s => s.Nombre.Contains(searchString));
+                
+            }
+
+            if (!String.IsNullOrEmpty(plateType))
+            {
+                platos = platos.Where(s => s.tipo.nombre.Equals(plateType));
             }
 
             switch (sortOrder)

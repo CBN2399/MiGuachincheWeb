@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -20,10 +22,67 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: restaurantes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string restZone, List<SelectListItem> zonaRest)
         {
-            var guachincheContext = _context.restaurantes.Include(r => r.Id_tipoNavigation).Include(r => r.zona);
-            return View(await guachincheContext.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
+            ViewData["ValSortParm"] = sortOrder == "Val" ? "Val_asc" : "Val";
+            ViewData["CurrentFilter"] = searchString;
+
+            var restaurantes = (IQueryable<restaurante>)_context.restaurantes.Include(r => r.Id_tipoNavigation).Include(r => r.zona);
+
+            if(restaurantes.Count() != 0)
+            {
+                if (restZone == null || restZone == "Todos")
+                {
+                    zonaRest.Add(new SelectListItem { Text = "Todos", Value = "Todos", Selected = true });
+                }
+                else
+                {
+                    zonaRest.Add(new SelectListItem { Text = "Todos", Value = "Todos" });
+                }
+
+                foreach (string zona in restaurantes.Select(o => o.zona.nombre).Distinct().ToList())
+                {
+                    if (restZone == zona)
+                    {
+                        zonaRest.Add(new SelectListItem { Text = zona, Value = zona, Selected = true });
+                    }
+                    else
+                    {
+                        zonaRest.Add(new SelectListItem { Text = zona, Value = zona });
+                    }
+                }
+            }
+
+            ViewBag.restZone = zonaRest;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                restaurantes = restaurantes.Where(s => s.Nombre.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(restZone))
+            {
+                restaurantes = restaurantes.Where(s => s.zona.nombre.Equals(restZone));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nombre":
+                    restaurantes = restaurantes.OrderBy(s => s.Nombre);
+                    break;
+                case "Val_asc":
+                    restaurantes = restaurantes.OrderBy(s => s.valoracion);
+                    break;
+                case "Val":
+                    restaurantes = restaurantes.OrderByDescending(s => s.valoracion);
+                    break;
+                default:
+                    restaurantes = restaurantes.OrderByDescending(s => s.Nombre);
+                    break;
+            }
+
+            return View(await restaurantes.AsNoTracking().ToListAsync());
         }
 
         // GET: restaurantes/Details/5
