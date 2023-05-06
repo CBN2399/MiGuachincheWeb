@@ -61,7 +61,7 @@ namespace MiGuachincheWeb.Controllers
                 restaurantes = restaurantes.Where(s => s.Nombre.Contains(searchString));
             }
 
-            if (!String.IsNullOrEmpty(restZone))
+            if (!String.IsNullOrEmpty(restZone) && !restZone.Equals("Todos"))
             {
                 restaurantes = restaurantes.Where(s => s.zona.nombre.Equals(restZone));
             }

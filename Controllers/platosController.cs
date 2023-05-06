@@ -62,7 +62,7 @@ namespace MiGuachincheWeb.Controllers
                 
             }
 
-            if (!String.IsNullOrEmpty(plateType))
+            if (!String.IsNullOrEmpty(plateType) && !plateType.Equals("Todos"))
             {
                 platos = platos.Where(s => s.tipo.nombre.Equals(plateType));
             }
