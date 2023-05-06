@@ -14,7 +14,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  position:relative;
+  padding-bottom:350px;
+  min-height:100vh;
 }
 
 .stroke {
@@ -44,6 +46,10 @@ body {
     border-radius: 5px;
 }
 
+.gallery > img:hover{
+    filter:contrast(2);
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
 
 .text {
@@ -52,12 +58,6 @@ body {
     font-size: 40px;
 }
 
-.text {
-    position:relative;
-    left:15%;
-    margin: 15px auto;   
-    height: 50px; 
-}
 
 p {
     display: inline-block;
@@ -67,8 +67,11 @@ p {
 
 .word {
     position: absolute;
-    width: 220px;
+    width: 100%;
+    left: 42%;
     opacity: 0;
+    margin: 0 auto;
+    font-size:60px;
 }
 
 .letter {
@@ -109,5 +112,43 @@ p {
 }
 
 .midnight {
-    color: ##376796;
+    color: #376796;
+}
+
+.pie{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+
+@media screen and (max-width: 767.98px) {
+    .word {
+        left: 40%;
+        font-size: 40px;
+    }
+
+    body {
+        padding-bottom: 400px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .word {
+        left: 35%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 405px) {
+    body {
+        padding-bottom: 450px;
+    }
+}
+
+@media screen and (max-width: 350px) and (min-width:285px) {
+    .word {
+        left: 30%;
+        font-size: 40px;
+    }
 }
