@@ -25,8 +25,25 @@ namespace MiGuachincheWeb.Controllers
             var users = await _guachincheContext.Users.ToListAsync();
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
             users.RemoveAll(u => u.Id == currentUser.Result.Id);
-            Console.WriteLine("hecho");
             return View(users);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(String? id)
+        {
+            if (id == null || _guachincheContext.Users == null)
+            {
+                return NotFound();
+            }
+
+            var currentUser =  _userManager.GetUserAsync(HttpContext.User);
+            CustomUser user = currentUser.Result;
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
     }
 }

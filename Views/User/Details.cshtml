@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model MiGuachincheWeb.Models.CustomUser
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <h4>Detalles del Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apelllidos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apelllidos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class="col-sm-2">Restaurantes Favoritos</dt>
+        <dd class="col-sm-10">
+            <a class="nav-link text-secondary" asp-controller="user" asp-action="restList" asp-route-id="@Model.Id">Ir a la lista</a>
+        </dd>
+        <dt class="col-sm-2">Platos Favoritos</dt>
+        <dd class="col-sm-10">
+            <a class="nav-link text-secondary" asp-controller="user" asp-action="platoList" asp-route-id="@Model.Id">Ir a la lista</a>
+        </dd>
+    </dl>
+    
+</div>
+<div>
+    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> 
+    <a class="btn btn-outline-info"  asp-controller="Home" asp-action="Index">Volver</a>
+</div>
+
+ 
+
