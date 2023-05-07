@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<CustomUser>
+@inject UserManager<CustomUser> _MiManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h3>Listado de Usuarios</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CustomUser user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => user.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

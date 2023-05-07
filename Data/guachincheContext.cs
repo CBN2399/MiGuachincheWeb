@@ -27,6 +27,11 @@ namespace MiGuachincheWeb.Data
         public virtual DbSet<tipo> tipos { get; set; }
         public virtual DbSet<tipoRestaurante> tipoRestaurantes { get; set; }
         public virtual DbSet<zona> zonas { get; set; }
+        public virtual DbSet<CustomUser> custom_users { get; set; }
+        public virtual DbSet<Reserva> reservas { get; set; }
+        public virtual DbSet<EstadoReserva> estadoReservas { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
