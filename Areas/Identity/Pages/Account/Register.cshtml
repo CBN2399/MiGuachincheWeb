@@ -6,27 +6,36 @@
 </div>
 <div class="row">
     
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div class="col-12 col-md-4 mt-3">
+        <form class="fondo text-center" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group my-2">
-                <label asp-for="Input.Email"></label>
+            <div class="form-group my-5">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group my-2">
-                <label asp-for="Input.Password"></label>
+            <div class="form-group my-5">
+                <label class="mb-3 fw-bolder" asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-group my-2">
-                <label asp-for="Input.ConfirmPassword"></label>
+            <div class="form-group my-5">
+                <label class="mb-3 text-white" asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg bg-dark text-white">Register</button>
         </form>
+    </div>
+    <div class="col-12 col-md-8 mt-3">
+        <div class="card" style="width:100%;">
+            <img src="~/img/guachinche.jpg" class="card-img-top" alt="foto tipico guachinche canario">
+            <div class="card-body">
+                <h5 class="card-title text-center fs-1 fw-bold">Guachinches</h5>
+                <p class="card-text justificado">Convertidos en un estandarte de la cultura gastronómica canaria, los 'guachinches' de Tenerife son esos restaurantes de campo donde quedar con los amigos para probar el vino de la cosecha. El menú, sencillo, sabroso y de la tierra, está diseñado para acompañar estas catas informales.</p>
+            </div>
+        </div>
     </div>
 </div>
 

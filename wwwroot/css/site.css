@@ -121,6 +121,17 @@ p {
     width:100%;
 }
 
+.justificado{
+    text-align:justify;
+    font-size:16px;
+    line-height:30px;
+}
+
+.fondo {
+    background: #008B8B;
+    padding: 35px;
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 767.98px) {
     .word {
