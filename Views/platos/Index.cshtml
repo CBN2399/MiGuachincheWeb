@@ -9,16 +9,21 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Buscar plato: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Reiniciar Búsqueda</a>
-        </p>
-    </div>
-</form>
+@using (Html.BeginForm("Index", "platos", FormMethod.Get))
+{
+    <fieldset>
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Buscar plato: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    @Html.DropDownList("plateType")
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Index">Reiniciar Búsqueda</a>
+                </p>
+            </div>
+        </form>
+    </fieldset>
+}
 
 
 <table class="table">

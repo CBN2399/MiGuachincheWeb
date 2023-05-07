@@ -9,11 +9,25 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<fieldset>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Buscar restaurante: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                @Html.DropDownList("restZone")
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Reiniciar Búsqueda</a>
+            </p>
+        </div>
+    </form>
+</fieldset>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Nombre)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rest_Url)
@@ -22,7 +36,7 @@
                 @Html.DisplayNameFor(model => model.telefono)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valoracion)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ValSortParm"]">@Html.DisplayNameFor(model => model.valoracion)</a>
             </th>
             <th>Especialidad</th>
             <th>
