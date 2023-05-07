@@ -74,6 +74,17 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Nombre")]
+            public string Nombre { get; set; }
+
+            [Required]
+            [Display(Name = "Apellidos")]
+            public string Apellidos { get; set; }
+
+            [Required]
+            [Display(Name = "Telefono")]
+            public string Telefono { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -117,6 +128,15 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.platosFavoritos = new List<plato_restaurante>();
+                user.restaurantesFavoritos = new List<restaurante>();
+                user.reservas = new List<Reserva>();
+                user.isActive = true;
+
+                user.Nombre = Input.Nombre;
+                user.Apelllidos = Input.Apellidos;
+                user.Telefono = Input.Telefono;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

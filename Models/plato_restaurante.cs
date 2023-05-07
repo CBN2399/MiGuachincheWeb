@@ -7,6 +7,11 @@ namespace MiGuachincheWeb.Models
 {
     public partial class plato_restaurante
     {
+        public plato_restaurante()
+        {
+            user_plato_restaurantes = new HashSet<user_plato_restaurante>();
+        }
+
         public int id { get; set; }
         public int plato_Id { get; set; }
         public int restaurante_Id { get; set; }
@@ -15,5 +20,6 @@ namespace MiGuachincheWeb.Models
 
         public virtual plato plato { get; set; }
         public virtual restaurante restaurante { get; set; }
+        public virtual ICollection<user_plato_restaurante> user_plato_restaurantes { get; set; }
     }
 }

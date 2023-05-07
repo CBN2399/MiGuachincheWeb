@@ -10,6 +10,26 @@
         <form class="fondo text-center" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!--Parte nueva a adaptar en el front-->
+            <div class="form-group my-5">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.Nombre"></label>
+                <input asp-for="Input.Nombre" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group my-5">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.Apellidos"></label>
+                <input asp-for="Input.Apellidos" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+            </div>
+
+            <div class="form-group my-5">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.Telefono"></label>
+                <input asp-for="Input.Telefono" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Telefono" class="text-danger"></span>
+            </div>
+
+
             <div class="form-group my-5">
                 <label class="mb-3 text-white fw-bolder" asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />

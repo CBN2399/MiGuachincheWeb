@@ -12,7 +12,7 @@
    "ProjectRootNamespace": "MiGuachincheWeb",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
-   "SelectedToBeGenerated": 0,
+   "SelectedToBeGenerated": 2,
    "Tables": [
       {
          "Name": "[dbo].[plato]",
@@ -32,6 +32,14 @@
       },
       {
          "Name": "[dbo].[tipoRestaurante]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[user_plato_restaurante]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[user_restaurante]",
          "ObjectType": 0
       },
       {

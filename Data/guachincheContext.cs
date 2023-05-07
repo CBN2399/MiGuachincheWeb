@@ -152,8 +152,7 @@ namespace MiGuachincheWeb.Data
 
             });
 
-            modelBuilder.Entity<CustomUser>().Ignore(i => i.platosFavoritos);
-            modelBuilder.Entity<CustomUser>().Ignore(i => i.restaurantesFavoritos);
+            
 
 
             //Seeders

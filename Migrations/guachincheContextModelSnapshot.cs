@@ -51,22 +51,22 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "321b53e9-0efa-4fc3-b82e-6d74fb850b36",
-                            ConcurrencyStamp = "e02c6640-728b-408a-afca-582049c7fc5f",
+                            Id = "00779b1d-a5b9-4157-8738-426f4772dc01",
+                            ConcurrencyStamp = "576e25df-4b75-4f52-90b8-3bdbcc268055",
                             Name = "Default",
                             NormalizedName = "DEFAULT"
                         },
                         new
                         {
-                            Id = "2e8112ce-912d-441d-941e-a8f025540208",
-                            ConcurrencyStamp = "efb5efe8-845e-4113-b791-b08f0a04be19",
+                            Id = "795f1789-d547-4049-a3a6-f36c2b37b634",
+                            ConcurrencyStamp = "94459d6b-2b79-466e-b113-6e2aad932414",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "6534a50b-ea65-455b-916f-9c301d8d3f77",
-                            ConcurrencyStamp = "2d6de524-d99f-4672-b4ca-688977343736",
+                            Id = "0b1c6815-a61d-4a6a-b418-fc5adf1618c4",
+                            ConcurrencyStamp = "039c0974-d4b1-4832-bdfb-4acccb48dfad",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -125,10 +125,12 @@ namespace MiGuachincheWeb.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -161,18 +163,23 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "94972ecf-f00e-4375-a189-10bdc8609400",
-                            RoleId = "6534a50b-ea65-455b-916f-9c301d8d3f77"
+                            UserId = "7f9d80ae-6de1-4000-aed7-0bff629569b3",
+                            RoleId = "0b1c6815-a61d-4a6a-b418-fc5adf1618c4"
                         },
                         new
                         {
-                            UserId = "087561cc-71b8-4cd0-8bd9-3e0a67f0442f",
-                            RoleId = "2e8112ce-912d-441d-941e-a8f025540208"
+                            UserId = "d39e0a79-81a8-452c-a661-9c5c2d356e77",
+                            RoleId = "795f1789-d547-4049-a3a6-f36c2b37b634"
                         },
                         new
                         {
-                            UserId = "39a992d0-9dd4-4f77-b730-5737eed7594c",
-                            RoleId = "321b53e9-0efa-4fc3-b82e-6d74fb850b36"
+                            UserId = "3c1f6f95-f964-4cac-a304-13745015c28a",
+                            RoleId = "00779b1d-a5b9-4157-8738-426f4772dc01"
+                        },
+                        new
+                        {
+                            UserId = "b48e2be9-bbd2-47dc-a4cc-8990b48a38e5",
+                            RoleId = "00779b1d-a5b9-4157-8738-426f4772dc01"
                         });
                 });
 
@@ -182,10 +189,12 @@ namespace MiGuachincheWeb.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -282,19 +291,19 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "94972ecf-f00e-4375-a189-10bdc8609400",
+                            Id = "7f9d80ae-6de1-4000-aed7-0bff629569b3",
                             AccessFailedCount = 0,
                             Apelllidos = "Bartolome Navarro",
-                            ConcurrencyStamp = "7ec0dce7-5989-4506-8074-99fe277f5d5b",
+                            ConcurrencyStamp = "320a961e-9616-4d51-88e8-6c6097ff61c4",
                             Email = "Admin@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "Cesar",
                             NormalizedEmail = "ADMIN@GUACHINCHE.COM",
                             NormalizedUserName = "ADMIN@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL3wTDX82PLz/oVk2Cpq3SrWW4EwslYeAoUzC+NCueEJRNk0wpxkawXl7ee8MecrTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB491q/O8dkFxx53S48B0dOLRcPMdQeK2jbtuUs3e/fmljEVSea5hAF06XOb7dK5sQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "40a41bb0-6ffc-4d5e-8fc3-0917a0ead6ba",
+                            SecurityStamp = "8d22f184-18d8-4bee-81da-c7bfeac2a5dd",
                             Telefono = "922111333",
                             TwoFactorEnabled = false,
                             UserName = "Admin@guachinche.com",
@@ -302,19 +311,19 @@ namespace MiGuachincheWeb.Migrations
                         },
                         new
                         {
-                            Id = "087561cc-71b8-4cd0-8bd9-3e0a67f0442f",
+                            Id = "d39e0a79-81a8-452c-a661-9c5c2d356e77",
                             AccessFailedCount = 0,
                             Apelllidos = "Guachinche",
-                            ConcurrencyStamp = "f75e5acb-5755-4187-bec0-7c3efeca1455",
+                            ConcurrencyStamp = "f04bf3bd-5bda-4ec2-b2e9-6626b01942a3",
                             Email = "Manager@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "Manager",
                             NormalizedEmail = "MANAGER@GUACHINCHE.COM",
                             NormalizedUserName = "MANAGER@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELsqV4rdcuNWopUf1RDx3bar3cXUeO/6ZQyzIRZWHeGizieCUDDROymIiB+qlslH4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEzKJGzNDbvG6rC196rnIWHDeGxfDPbOWqRB1uu+jVQNnZg1x7R15FwySlfpnYjHdA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0c1f6e8c-cbb7-413a-9d8d-99b10bbecb13",
+                            SecurityStamp = "ddacf5a4-7114-4199-b672-91481dbc5837",
                             Telefono = "922000111",
                             TwoFactorEnabled = false,
                             UserName = "Manager@guachinche.com",
@@ -322,22 +331,42 @@ namespace MiGuachincheWeb.Migrations
                         },
                         new
                         {
-                            Id = "39a992d0-9dd4-4f77-b730-5737eed7594c",
+                            Id = "3c1f6f95-f964-4cac-a304-13745015c28a",
                             AccessFailedCount = 0,
                             Apelllidos = "Guachinche",
-                            ConcurrencyStamp = "0f14267a-8be0-47e2-91dc-f2dd56e2806b",
+                            ConcurrencyStamp = "c0bdc75f-43f5-478e-8ff2-815092ba34ef",
                             Email = "User@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "User",
                             NormalizedEmail = "USER@GUACHINCHE.COM",
                             NormalizedUserName = "USER@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBPcaRXYgc7GoumZTD9E0fwnCfL2femUOyuq16GZ1UdPPxaX5CjfB64wJluI53UpEw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB4+7jBCuuzuDSSN8tvQoMCKLBC05jq/9nVsaaptkzNHwP/iRDYvu7EKWcSyeJMvXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58964b77-058b-49e1-ab0a-c1c324b00dee",
+                            SecurityStamp = "332f5ef0-2c25-452c-99d0-e25eb6c1c2de",
                             Telefono = "922456789",
                             TwoFactorEnabled = false,
                             UserName = "User@guachinche.com",
+                            isActive = true
+                        },
+                        new
+                        {
+                            Id = "b48e2be9-bbd2-47dc-a4cc-8990b48a38e5",
+                            AccessFailedCount = 0,
+                            Apelllidos = "Guachinche",
+                            ConcurrencyStamp = "b5cebe83-bc83-4611-9d8a-ac2db32b8e4d",
+                            Email = "User2@guachinche.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Nombre = "User2",
+                            NormalizedEmail = "USER2@GUACHINCHE.COM",
+                            NormalizedUserName = "USER2@GUACHINCHE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAED2cAGqiUVPR1tX/o+Uv9ZIEvfvKU1UBqq54V3guznpJgnStFaMMyzzXk0Mg5hhC0Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b2bc47b3-fbcf-4ffd-aa4a-1f5af1ff15ea",
+                            Telefono = "1111111",
+                            TwoFactorEnabled = false,
+                            UserName = "Use2@guachinche.com",
                             isActive = true
                         });
                 });
@@ -356,7 +385,7 @@ namespace MiGuachincheWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EstadoReserva");
+                    b.ToTable("estadoReservas");
 
                     b.HasData(
                         new

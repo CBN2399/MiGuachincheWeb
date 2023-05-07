@@ -161,3 +161,34 @@ insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values 
 insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,2,3,1);
 insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (12,6,3,1);
 go
+
+--parte nueva
+create table user_restaurante(
+	id integer primary key identity,
+	usuario_Id nvarchar(450) not null,
+	restaurante_Id integer not null
+);
+
+alter table user_restaurante
+add constraint fk_user
+foreign key(usuario_Id) references AspNetUsers(Id) on delete cascade on update cascade;
+
+
+alter table user_restaurante
+add constraint fk_userRest
+foreign Key(restaurante_Id) references restaurante(RestauranteId) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+create table user_plato_restaurante(
+	id integer primary key identity,
+	usuario_Id nvarchar(450) not null,
+	plato_restaurante_Id integer not null
+);
+
+alter table user_plato_restaurante
+add constraint fk_user_plato
+foreign key(usuario_Id) references AspNetUsers(Id) on delete cascade on update cascade;
+
+alter table user_plato_restaurante
+add constraint fk_plato_restaurante
+foreign Key(plato_restaurante_Id) references plato_restaurante(id) ON DELETE CASCADE ON UPDATE CASCADE;
