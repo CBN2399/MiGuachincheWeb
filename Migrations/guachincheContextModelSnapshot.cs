@@ -51,22 +51,22 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "00779b1d-a5b9-4157-8738-426f4772dc01",
-                            ConcurrencyStamp = "576e25df-4b75-4f52-90b8-3bdbcc268055",
+                            Id = "27402d78-a987-438f-a4df-3884633b951a",
+                            ConcurrencyStamp = "5ded6073-515f-4f28-8930-a4c1a0821244",
                             Name = "Default",
                             NormalizedName = "DEFAULT"
                         },
                         new
                         {
-                            Id = "795f1789-d547-4049-a3a6-f36c2b37b634",
-                            ConcurrencyStamp = "94459d6b-2b79-466e-b113-6e2aad932414",
+                            Id = "cfca3dac-e77f-46ef-b720-72494df08f62",
+                            ConcurrencyStamp = "b2fd87bb-9ec4-4869-ab77-6a0f13cb5a95",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "0b1c6815-a61d-4a6a-b418-fc5adf1618c4",
-                            ConcurrencyStamp = "039c0974-d4b1-4832-bdfb-4acccb48dfad",
+                            Id = "c674eca3-6b26-4840-b76f-0403d136a2e5",
+                            ConcurrencyStamp = "52ccb179-41e3-45f0-b7cc-112d47ba692c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -163,23 +163,18 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "7f9d80ae-6de1-4000-aed7-0bff629569b3",
-                            RoleId = "0b1c6815-a61d-4a6a-b418-fc5adf1618c4"
+                            UserId = "93c890cb-8693-4321-8073-6483f59cb28d",
+                            RoleId = "c674eca3-6b26-4840-b76f-0403d136a2e5"
                         },
                         new
                         {
-                            UserId = "d39e0a79-81a8-452c-a661-9c5c2d356e77",
-                            RoleId = "795f1789-d547-4049-a3a6-f36c2b37b634"
+                            UserId = "9e148492-0392-44ed-a1f7-91239d86b406",
+                            RoleId = "cfca3dac-e77f-46ef-b720-72494df08f62"
                         },
                         new
                         {
-                            UserId = "3c1f6f95-f964-4cac-a304-13745015c28a",
-                            RoleId = "00779b1d-a5b9-4157-8738-426f4772dc01"
-                        },
-                        new
-                        {
-                            UserId = "b48e2be9-bbd2-47dc-a4cc-8990b48a38e5",
-                            RoleId = "00779b1d-a5b9-4157-8738-426f4772dc01"
+                            UserId = "b24fd563-79b5-4d27-abed-bb34d1756a5f",
+                            RoleId = "27402d78-a987-438f-a4df-3884633b951a"
                         });
                 });
 
@@ -213,7 +208,6 @@ namespace MiGuachincheWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Apelllidos")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -235,7 +229,6 @@ namespace MiGuachincheWeb.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
@@ -260,7 +253,6 @@ namespace MiGuachincheWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
@@ -291,19 +283,19 @@ namespace MiGuachincheWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7f9d80ae-6de1-4000-aed7-0bff629569b3",
+                            Id = "93c890cb-8693-4321-8073-6483f59cb28d",
                             AccessFailedCount = 0,
                             Apelllidos = "Bartolome Navarro",
-                            ConcurrencyStamp = "320a961e-9616-4d51-88e8-6c6097ff61c4",
+                            ConcurrencyStamp = "4c2ee536-5c55-43b7-9375-a658ff48b8da",
                             Email = "Admin@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "Cesar",
                             NormalizedEmail = "ADMIN@GUACHINCHE.COM",
                             NormalizedUserName = "ADMIN@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB491q/O8dkFxx53S48B0dOLRcPMdQeK2jbtuUs3e/fmljEVSea5hAF06XOb7dK5sQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL5p7Rz0WbGe0HeO7JT/SDm8gnafR5WQv6RHZqGl7cnCBk4j0NyUNOGCp1uSR8C0OQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d22f184-18d8-4bee-81da-c7bfeac2a5dd",
+                            SecurityStamp = "48607bc9-67bc-4e55-ad80-ac871ec42187",
                             Telefono = "922111333",
                             TwoFactorEnabled = false,
                             UserName = "Admin@guachinche.com",
@@ -311,19 +303,19 @@ namespace MiGuachincheWeb.Migrations
                         },
                         new
                         {
-                            Id = "d39e0a79-81a8-452c-a661-9c5c2d356e77",
+                            Id = "9e148492-0392-44ed-a1f7-91239d86b406",
                             AccessFailedCount = 0,
                             Apelllidos = "Guachinche",
-                            ConcurrencyStamp = "f04bf3bd-5bda-4ec2-b2e9-6626b01942a3",
+                            ConcurrencyStamp = "a3226d5a-2d35-4b90-9e1c-908428f4f2fa",
                             Email = "Manager@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "Manager",
                             NormalizedEmail = "MANAGER@GUACHINCHE.COM",
                             NormalizedUserName = "MANAGER@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEzKJGzNDbvG6rC196rnIWHDeGxfDPbOWqRB1uu+jVQNnZg1x7R15FwySlfpnYjHdA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEqYdw6NGKargh/nFC9SMwRgJ5bUNJ43wGDB5xE8rijxOVu69tj5kDoR24qvjnOe/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ddacf5a4-7114-4199-b672-91481dbc5837",
+                            SecurityStamp = "ee101bec-f15b-469d-a500-30bb2c49f8cd",
                             Telefono = "922000111",
                             TwoFactorEnabled = false,
                             UserName = "Manager@guachinche.com",
@@ -331,42 +323,22 @@ namespace MiGuachincheWeb.Migrations
                         },
                         new
                         {
-                            Id = "3c1f6f95-f964-4cac-a304-13745015c28a",
+                            Id = "b24fd563-79b5-4d27-abed-bb34d1756a5f",
                             AccessFailedCount = 0,
                             Apelllidos = "Guachinche",
-                            ConcurrencyStamp = "c0bdc75f-43f5-478e-8ff2-815092ba34ef",
+                            ConcurrencyStamp = "084c57f0-5fea-4347-a3c8-0736e918d3ca",
                             Email = "User@guachinche.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nombre = "User",
                             NormalizedEmail = "USER@GUACHINCHE.COM",
                             NormalizedUserName = "USER@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB4+7jBCuuzuDSSN8tvQoMCKLBC05jq/9nVsaaptkzNHwP/iRDYvu7EKWcSyeJMvXA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIKv+Qt1TaiV5pTqo+aC12Jex47aCvuZWPQvXmLSqGMB2LBTx0p8R3ERP3+6NxwmAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "332f5ef0-2c25-452c-99d0-e25eb6c1c2de",
+                            SecurityStamp = "2c99be1e-6bbc-4592-ba97-d0be42d0f8c2",
                             Telefono = "922456789",
                             TwoFactorEnabled = false,
                             UserName = "User@guachinche.com",
-                            isActive = true
-                        },
-                        new
-                        {
-                            Id = "b48e2be9-bbd2-47dc-a4cc-8990b48a38e5",
-                            AccessFailedCount = 0,
-                            Apelllidos = "Guachinche",
-                            ConcurrencyStamp = "b5cebe83-bc83-4611-9d8a-ac2db32b8e4d",
-                            Email = "User2@guachinche.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Nombre = "User2",
-                            NormalizedEmail = "USER2@GUACHINCHE.COM",
-                            NormalizedUserName = "USER2@GUACHINCHE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED2cAGqiUVPR1tX/o+Uv9ZIEvfvKU1UBqq54V3guznpJgnStFaMMyzzXk0Mg5hhC0Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b2bc47b3-fbcf-4ffd-aa4a-1f5af1ff15ea",
-                            Telefono = "1111111",
-                            TwoFactorEnabled = false,
-                            UserName = "Use2@guachinche.com",
                             isActive = true
                         });
                 });
@@ -380,7 +352,6 @@ namespace MiGuachincheWeb.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -405,7 +376,7 @@ namespace MiGuachincheWeb.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.plato", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Plato", b =>
                 {
                     b.Property<int>("PlatoId")
                         .ValueGeneratedOnAdd()
@@ -434,13 +405,19 @@ namespace MiGuachincheWeb.Migrations
                     b.ToTable("plato", (string)null);
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.plato_restaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.PlatoRestaurante", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int?>("PlatoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RestauranteId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -456,11 +433,11 @@ namespace MiGuachincheWeb.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("plato_Id");
+                    b.HasIndex("PlatoId");
 
-                    b.HasIndex("restaurante_Id");
+                    b.HasIndex("RestauranteId");
 
-                    b.ToTable("plato_restaurante", (string)null);
+                    b.ToTable("plato_restaurantes");
                 });
 
             modelBuilder.Entity("MiGuachincheWeb.Models.Reserva", b =>
@@ -471,31 +448,31 @@ namespace MiGuachincheWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CustomUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("FechaReserva")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RestauranteId")
+                    b.Property<string>("customerUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("estadoReservaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("estadoId")
+                    b.Property<int>("restauranteId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomUserId");
+                    b.HasIndex("customerUserId");
 
-                    b.HasIndex("RestauranteId");
+                    b.HasIndex("estadoReservaId");
 
-                    b.HasIndex("estadoId");
+                    b.HasIndex("restauranteId");
 
                     b.ToTable("Reservas");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.restaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Restaurante", b =>
                 {
                     b.Property<int>("RestauranteId")
                         .ValueGeneratedOnAdd()
@@ -538,7 +515,7 @@ namespace MiGuachincheWeb.Migrations
                     b.ToTable("restaurante", (string)null);
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.tipo", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Tipo", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -557,7 +534,7 @@ namespace MiGuachincheWeb.Migrations
                     b.ToTable("tipo", (string)null);
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.tipoRestaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.TipoRestaurante", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -576,7 +553,65 @@ namespace MiGuachincheWeb.Migrations
                     b.ToTable("tipoRestaurante", (string)null);
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.zona", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.UserPlatoRestaurante", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("custom_userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("plato_restaurante_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("plato_restauranteid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("usuario_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("custom_userId");
+
+                    b.HasIndex("plato_restauranteid");
+
+                    b.ToTable("userPlatoRestaurante");
+                });
+
+            modelBuilder.Entity("MiGuachincheWeb.Models.UserRestaurante", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int?>("RestauranteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("customUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("restaurante_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("usuario_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("RestauranteId");
+
+                    b.HasIndex("customUserId");
+
+                    b.ToTable("userRestaurantes");
+                });
+
+            modelBuilder.Entity("MiGuachincheWeb.Models.Zona", b =>
                 {
                     b.Property<int>("Zona_id")
                         .ValueGeneratedOnAdd()
@@ -652,9 +687,9 @@ namespace MiGuachincheWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.plato", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Plato", b =>
                 {
-                    b.HasOne("MiGuachincheWeb.Models.tipo", "tipo")
+                    b.HasOne("MiGuachincheWeb.Models.Tipo", "tipo")
                         .WithMany("platos")
                         .HasForeignKey("tipoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -664,21 +699,15 @@ namespace MiGuachincheWeb.Migrations
                     b.Navigation("tipo");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.plato_restaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.PlatoRestaurante", b =>
                 {
-                    b.HasOne("MiGuachincheWeb.Models.plato", "plato")
-                        .WithMany("plato_restaurantes")
-                        .HasForeignKey("plato_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_plato");
+                    b.HasOne("MiGuachincheWeb.Models.Plato", "plato")
+                        .WithMany()
+                        .HasForeignKey("PlatoId");
 
-                    b.HasOne("MiGuachincheWeb.Models.restaurante", "restaurante")
-                        .WithMany("plato_restaurantes")
-                        .HasForeignKey("restaurante_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_restaurante");
+                    b.HasOne("MiGuachincheWeb.Models.Restaurante", "restaurante")
+                        .WithMany()
+                        .HasForeignKey("RestauranteId");
 
                     b.Navigation("plato");
 
@@ -689,21 +718,24 @@ namespace MiGuachincheWeb.Migrations
                 {
                     b.HasOne("MiGuachincheWeb.Models.CustomUser", "CustomUser")
                         .WithMany("reservas")
-                        .HasForeignKey("CustomUserId")
+                        .HasForeignKey("customerUserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MiGuachincheWeb.Models.restaurante", "restaurante")
-                        .WithMany("reservas")
-                        .HasForeignKey("RestauranteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_reservas");
 
                     b.HasOne("MiGuachincheWeb.Models.EstadoReserva", "estado")
-                        .WithMany()
-                        .HasForeignKey("estadoId")
+                        .WithMany("listaReservas")
+                        .HasForeignKey("estadoReservaId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_estado_reserva");
+
+                    b.HasOne("MiGuachincheWeb.Models.Restaurante", "restaurante")
+                        .WithMany("reservas")
+                        .HasForeignKey("restauranteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_reserva_restaurante");
 
                     b.Navigation("CustomUser");
 
@@ -712,16 +744,16 @@ namespace MiGuachincheWeb.Migrations
                     b.Navigation("restaurante");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.restaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Restaurante", b =>
                 {
-                    b.HasOne("MiGuachincheWeb.Models.tipoRestaurante", "Id_tipoNavigation")
+                    b.HasOne("MiGuachincheWeb.Models.TipoRestaurante", "Id_tipoNavigation")
                         .WithMany("restaurantes")
                         .HasForeignKey("Id_tipo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_tipoRest");
 
-                    b.HasOne("MiGuachincheWeb.Models.zona", "zona")
+                    b.HasOne("MiGuachincheWeb.Models.Zona", "zona")
                         .WithMany("restaurantes")
                         .HasForeignKey("zonaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -733,34 +765,62 @@ namespace MiGuachincheWeb.Migrations
                     b.Navigation("zona");
                 });
 
+            modelBuilder.Entity("MiGuachincheWeb.Models.UserPlatoRestaurante", b =>
+                {
+                    b.HasOne("MiGuachincheWeb.Models.CustomUser", "custom_user")
+                        .WithMany()
+                        .HasForeignKey("custom_userId");
+
+                    b.HasOne("MiGuachincheWeb.Models.PlatoRestaurante", "plato_restaurante")
+                        .WithMany()
+                        .HasForeignKey("plato_restauranteid");
+
+                    b.Navigation("custom_user");
+
+                    b.Navigation("plato_restaurante");
+                });
+
+            modelBuilder.Entity("MiGuachincheWeb.Models.UserRestaurante", b =>
+                {
+                    b.HasOne("MiGuachincheWeb.Models.Restaurante", "restaurante")
+                        .WithMany()
+                        .HasForeignKey("RestauranteId");
+
+                    b.HasOne("MiGuachincheWeb.Models.CustomUser", "customUser")
+                        .WithMany()
+                        .HasForeignKey("customUserId");
+
+                    b.Navigation("customUser");
+
+                    b.Navigation("restaurante");
+                });
+
             modelBuilder.Entity("MiGuachincheWeb.Models.CustomUser", b =>
                 {
                     b.Navigation("reservas");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.plato", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.EstadoReserva", b =>
                 {
-                    b.Navigation("plato_restaurantes");
+                    b.Navigation("listaReservas");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.restaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Restaurante", b =>
                 {
-                    b.Navigation("plato_restaurantes");
-
                     b.Navigation("reservas");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.tipo", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Tipo", b =>
                 {
                     b.Navigation("platos");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.tipoRestaurante", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.TipoRestaurante", b =>
                 {
                     b.Navigation("restaurantes");
                 });
 
-            modelBuilder.Entity("MiGuachincheWeb.Models.zona", b =>
+            modelBuilder.Entity("MiGuachincheWeb.Models.Zona", b =>
                 {
                     b.Navigation("restaurantes");
                 });

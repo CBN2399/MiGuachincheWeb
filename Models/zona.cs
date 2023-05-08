@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class zona
+    public partial class Zona
     {
-        public zona()
+        public Zona()
         {
-            restaurantes = new HashSet<restaurante>();
+            restaurantes = new HashSet<Restaurante>();
         }
 
         public int Zona_id { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
 
-        public virtual ICollection<restaurante> restaurantes { get; set; }
+        public virtual ICollection<Restaurante> restaurantes { get; set; }
     }
 }

@@ -21,23 +21,23 @@ namespace MiGuachincheWeb.Data
         {
         }
 
-        public virtual DbSet<plato> platos { get; set; }
-        public virtual DbSet<plato_restaurante> plato_restaurantes { get; set; }
-        public virtual DbSet<restaurante> restaurantes { get; set; }
-        public virtual DbSet<tipo> tipos { get; set; }
-        public virtual DbSet<tipoRestaurante> tipoRestaurantes { get; set; }
-        public virtual DbSet<zona> zonas { get; set; }
+        public virtual DbSet<Plato> platos { get; set; }
+        public virtual DbSet<PlatoRestaurante> plato_restaurantes { get; set; }
+        public virtual DbSet<Restaurante> restaurantes { get; set; }
+        public virtual DbSet<Tipo> tipos { get; set; }
+        public virtual DbSet<TipoRestaurante> tipoRestaurantes { get; set; }
+        public virtual DbSet<Zona> zonas { get; set; }
         public virtual DbSet<CustomUser> custom_users { get; set; }
         public virtual DbSet<Reserva> reservas { get; set; }
         public virtual DbSet<EstadoReserva> estadoReservas { get; set; }
-        public virtual DbSet<user_restaurante> userRestaurantes {get; set; }
-        public virtual DbSet<user_plato_restaurante> userPlatoRestaurante { get; set; }
+        public virtual DbSet<UserRestaurante> userRestaurantes {get; set; }
+        public virtual DbSet<UserPlatoRestaurante> userPlatoRestaurante { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<plato>(entity =>
+            modelBuilder.Entity<Plato>(entity =>
             {
                 entity.ToTable("plato");
 
@@ -58,14 +58,14 @@ namespace MiGuachincheWeb.Data
                     .HasConstraintName("fk_tipo");
 
                 entity.HasMany(m => m.restaurantes)
-                .WithMany(p => p.platos).UsingEntity<plato_restaurante>(
+                .WithMany(p => p.platos).UsingEntity<PlatoRestaurante>(
                         
                     j => j.HasOne(e => e.restaurante).WithMany(),
                     j => j.HasOne(e => e.plato).WithMany()
                     );
             });
 
-            modelBuilder.Entity<restaurante>(entity =>
+            modelBuilder.Entity<Restaurante>(entity =>
             {
                 entity.ToTable("restaurante");
 
@@ -98,7 +98,7 @@ namespace MiGuachincheWeb.Data
                     .HasConstraintName("fk_zona");
             });
 
-            modelBuilder.Entity<tipo>(entity =>
+            modelBuilder.Entity<Tipo>(entity =>
             {
                 entity.ToTable("tipo");
 
@@ -108,7 +108,7 @@ namespace MiGuachincheWeb.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<tipoRestaurante>(entity =>
+            modelBuilder.Entity<TipoRestaurante>(entity =>
             {
                 entity.ToTable("tipoRestaurante");
 
@@ -118,7 +118,7 @@ namespace MiGuachincheWeb.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<zona>(entity =>
+            modelBuilder.Entity<Zona>(entity =>
             {
                 entity.HasKey(e => e.Zona_id)
                     .HasName("PK__zona__CD7EA2967C6981B9");
@@ -135,10 +135,10 @@ namespace MiGuachincheWeb.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<plato_restaurante>(entity =>
+            modelBuilder.Entity<PlatoRestaurante>(entity =>
             {
                 entity.HasMany(l => l.listaUsers)
-                .WithMany(p => p.platos).UsingEntity<user_plato_restaurante>(
+                .WithMany(p => p.platos).UsingEntity<UserPlatoRestaurante>(
                         j => j.HasOne( u => u.custom_user).WithMany(),
                         j => j.HasOne( c => c.plato_restaurante).WithMany()
                     );
@@ -154,9 +154,9 @@ namespace MiGuachincheWeb.Data
                 e.Property(p => p.Telefono).HasMaxLength(9);
 
 
-                e.HasMany(r => restaurantes)
-                .WithMany(u => custom_users)
-                .UsingEntity<user_restaurante>(
+                e.HasMany(r => r.restaurantes)
+                .WithMany(u => u.usuarios)
+                .UsingEntity<UserRestaurante>(
                     j => j.HasOne(r => r.restaurante).WithMany(),
                     j => j.HasOne(c => c.customUser).WithMany()
                 );
@@ -168,14 +168,19 @@ namespace MiGuachincheWeb.Data
             {
                 entity.HasOne(c => c.CustomUser)
                 .WithMany(r => r.reservas)
-                .HasForeignKey()
+                .HasForeignKey(e => e.customerUserId)
                 .HasConstraintName("fk_user_reservas");
 
 
                 entity.HasOne(e => e.estado)
                 .WithMany(r => r.listaReservas)
-                .HasForeignKey()
+                .HasForeignKey(e => e.estadoReservaId)
                 .HasConstraintName("fk_estado_reserva");
+
+                entity.HasOne(r => r.restaurante)
+                .WithMany(r => r.reservas)
+                .HasForeignKey(e => e.restauranteId)
+                .HasConstraintName("fk_reserva_restaurante");
             });
            
 

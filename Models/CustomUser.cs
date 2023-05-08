@@ -14,11 +14,18 @@ namespace MiGuachincheWeb.Models
 
         public bool? isActive { get; set; }
 
-        public virtual ICollection<restaurante> restaurantes { get; set; } 
+        public virtual ICollection<Restaurante> restaurantes { get; set; } 
 
-        public virtual ICollection<plato_restaurante> platos { get; set; }
+        public virtual ICollection<PlatoRestaurante> platos { get; set; }
 
         public virtual ICollection<Reserva> reservas { get; set; } 
+
+        public CustomUser() 
+        {
+            this.restaurantes = new HashSet<Restaurante>();
+            this.platos = new HashSet<PlatoRestaurante>();
+            this.reservas = new HashSet<Reserva>();
+        }
 
     }
 }

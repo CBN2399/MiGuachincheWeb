@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class plato
+    public partial class Plato
     {
-        public plato()
-        {
-            restaurantes = new HashSet<restaurante>();
-        }
-
         public int PlatoId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public int tipoId { get; set; }
 
-        public virtual tipo tipo { get; set; }
-        public virtual ICollection<restaurante> restaurantes { get; set; }
+        public virtual Tipo tipo { get; set; }
+        public virtual ICollection<Restaurante> restaurantes { get; set; }
+
+        public Plato()
+        {
+            this.restaurantes = new HashSet<Restaurante>();
+        }
     }
 }

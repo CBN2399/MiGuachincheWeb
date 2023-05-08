@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class tipo
+    public partial class Tipo
     {
-        public tipo()
-        {
-            platos = new HashSet<plato>();
-        }
-
         public int id { get; set; }
         public string nombre { get; set; }
 
-        public virtual ICollection<plato> platos { get; set; }
+        public virtual ICollection<Plato> platos { get; set; }
+
+        public Tipo()
+        {
+            platos = new HashSet<Plato>();
+        }
     }
 }

@@ -92,7 +92,7 @@ namespace MiGuachincheWeb.Controllers
                 return BadRequest();
             }
 
-            List<restaurante> restList = user.restaurantes.ToList();
+            List<Restaurante> restList = user.restaurantes.ToList();
 
             return View(restList);
         }
@@ -116,7 +116,7 @@ namespace MiGuachincheWeb.Controllers
                 return BadRequest();
             }
 
-            List<plato_restaurante> platos = user.platos.ToList();
+            List<PlatoRestaurante> platos = user.platos.ToList();
 
             return View(platos);
         }
@@ -141,7 +141,7 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            user_restaurante rest = new user_restaurante();
+            UserRestaurante rest = new UserRestaurante();
             
             rest.restaurante_Id = restaurante.RestauranteId;
             rest.usuario_Id = user.Id;

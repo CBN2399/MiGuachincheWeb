@@ -28,7 +28,7 @@ namespace MiGuachincheWeb.Controllers
             ViewData["CurrentFilter"] = searchString;
 
 
-            var platos = (IQueryable<plato>)_context.platos.Include(p => p.tipo);
+            var platos = (IQueryable<Plato>)_context.platos.Include(p => p.tipo);
 
             if(tipoPlato.Count() == 0)
             {
@@ -117,7 +117,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlatoId,Nombre,Descripcion,tipoId")] plato plato)
+        public async Task<IActionResult> Create([Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (ModelState.IsValid)
             {
@@ -151,7 +151,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] plato plato)
+        public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (id != plato.PlatoId)
             {

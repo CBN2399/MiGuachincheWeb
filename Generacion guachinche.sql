@@ -144,22 +144,22 @@ insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) valu
 
 --informacion de platosRestaurantes
 
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (2,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (3,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (4,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (5,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,2,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,3,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,4,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (8,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (9,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (10,6,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,14,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,3,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (1,2,3,1);
-insert into plato_restaurante(plato_Id,restaurante_Id,valoracion,activo) values (12,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (2,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (3,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (4,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (5,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,2,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,3,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,4,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (8,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (9,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (10,6,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,14,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,3,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (1,2,3,1);
+insert into plato_restaurantes(plato_Id,restaurante_Id,valoracion,activo) values (12,6,3,1);
 go
 
 --parte nueva

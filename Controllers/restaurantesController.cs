@@ -28,7 +28,7 @@ namespace MiGuachincheWeb.Controllers
             ViewData["ValSortParm"] = sortOrder == "Val" ? "Val_asc" : "Val";
             ViewData["CurrentFilter"] = searchString;
 
-            var restaurantes = (IQueryable<restaurante>)_context.restaurantes.Include(r => r.Id_tipoNavigation).Include(r => r.zona);
+            var restaurantes = (IQueryable<Restaurante>)_context.restaurantes.Include(r => r.Id_tipoNavigation).Include(r => r.zona);
 
             if(restaurantes.Count() != 0)
             {
@@ -118,7 +118,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] restaurante restaurante)
+        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
         {
             if (ModelState.IsValid)
             {
@@ -154,7 +154,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] restaurante restaurante)
+        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
         {
             if (id != restaurante.RestauranteId)
             {

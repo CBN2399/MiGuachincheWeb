@@ -56,7 +56,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nombre")] tipo tipo)
+        public async Task<IActionResult> Create([Bind("id,nombre")] Tipo tipo)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nombre")] tipo tipo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nombre")] Tipo tipo)
         {
             if (id != tipo.id)
             {

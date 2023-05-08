@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class plato_restaurante
+    public partial class PlatoRestaurante
     {
         public int id { get; set; }
         public int plato_Id { get; set; }
@@ -13,8 +13,13 @@ namespace MiGuachincheWeb.Models
         public int? valoracion { get; set; }
         public bool activo { get; set; }
 
-        public virtual plato plato { get; set; }
-        public virtual restaurante restaurante { get; set; }
+        public virtual Plato plato { get; set; }
+        public virtual Restaurante restaurante { get; set; }
         public virtual ICollection<CustomUser> listaUsers { get; set; }
+
+        public PlatoRestaurante()
+        {
+            this.listaUsers = new HashSet<CustomUser>();
+        }
     }
 }

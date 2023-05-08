@@ -56,7 +56,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Zona_id,nombre,descripcion")] zona zona)
+        public async Task<IActionResult> Create([Bind("Zona_id,nombre,descripcion")] Zona zona)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Zona_id,nombre,descripcion")] zona zona)
+        public async Task<IActionResult> Edit(int id, [Bind("Zona_id,nombre,descripcion")] Zona zona)
         {
             if (id != zona.Zona_id)
             {

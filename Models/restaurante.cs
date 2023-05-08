@@ -5,14 +5,8 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class restaurante
+    public partial class Restaurante
     {
-        public restaurante()
-        {
-            platos = new HashSet<plato>();
-            usuarios = new HashSet<CustomUser>();
-        }
-
         public int RestauranteId { get; set; }
         public string Nombre { get; set; }
         public string Rest_Url { get; set; }
@@ -21,9 +15,19 @@ namespace MiGuachincheWeb.Models
         public int Id_tipo { get; set; }
         public int zonaId { get; set; }
 
-        public virtual tipoRestaurante Id_tipoNavigation { get; set; }
-        public virtual zona zona { get; set; }
-        public virtual ICollection<plato> platos { get; set; }
+        public virtual TipoRestaurante Id_tipoNavigation { get; set; }
+        public virtual Zona zona { get; set; }
+        public virtual ICollection<Plato> platos { get; set; }
         public virtual ICollection<CustomUser> usuarios { get; set; }
+
+        public virtual ICollection<Reserva> reservas { get; set; }
+
+        public Restaurante()
+        {
+            this.platos = new HashSet<Plato>();
+            this.usuarios = new HashSet<CustomUser>();
+            this.reservas = new HashSet<Reserva>();
+        }
+
     }
 }

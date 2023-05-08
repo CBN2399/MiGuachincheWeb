@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace MiGuachincheWeb.Models
 {
-    public partial class tipoRestaurante
+    public partial class TipoRestaurante
     {
-        public tipoRestaurante()
+        public TipoRestaurante()
         {
-            restaurantes = new HashSet<restaurante>();
+            restaurantes = new HashSet<Restaurante>();
         }
 
         public int id { get; set; }
         public string nombre { get; set; }
 
-        public virtual ICollection<restaurante> restaurantes { get; set; }
+        public virtual ICollection<Restaurante> restaurantes { get; set; }
     }
 }
