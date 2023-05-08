@@ -141,15 +141,9 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            UserRestaurante rest = new UserRestaurante();
+            user.restaurantes.Add(restaurante);
             
-            rest.restaurante_Id = restaurante.RestauranteId;
-            rest.usuario_Id = user.Id;
-            rest.restaurante = restaurante;
-            rest.customUser = user;
-            
-
-            _guachincheContext.Add(rest);
+            _guachincheContext.Update(user);
             await _guachincheContext.SaveChangesAsync();
             return RedirectToAction("RestList");
 
