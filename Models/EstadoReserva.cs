@@ -9,5 +9,7 @@ namespace MiGuachincheWeb.Models
 
         
         public string? Name { get; set; }
+
+        public virtual ICollection<Reserva> listaReservas { get; set; }
     }
 }

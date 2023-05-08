@@ -9,7 +9,7 @@ namespace MiGuachincheWeb.Models
     {
         public plato()
         {
-            plato_restaurantes = new HashSet<plato_restaurante>();
+            restaurantes = new HashSet<restaurante>();
         }
 
         public int PlatoId { get; set; }
@@ -18,6 +18,6 @@ namespace MiGuachincheWeb.Models
         public int tipoId { get; set; }
 
         public virtual tipo tipo { get; set; }
-        public virtual ICollection<plato_restaurante> plato_restaurantes { get; set; }
+        public virtual ICollection<restaurante> restaurantes { get; set; }
     }
 }

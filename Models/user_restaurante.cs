@@ -15,12 +15,5 @@ namespace MiGuachincheWeb.Models
 
         public virtual CustomUser customUser { get; set; }
 
-        public virtual ICollection<user_restaurante> userRestaurante { get; set; }
-
-
-        public user_restaurante()
-        {
-            this.userRestaurante = new HashSet<user_restaurante>();
-        }
     }
 }

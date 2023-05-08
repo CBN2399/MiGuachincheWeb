@@ -13,7 +13,7 @@
         if (User.IsInRole("Default"))
         {
             <li class="nav-item">
-                <a class="nav-link text-white" asp-controller="user" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)!">Mi perfil</a>
+                <a class="nav-link text-white" asp-controller="user" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Mi perfil</a>
             </li>
         }
         

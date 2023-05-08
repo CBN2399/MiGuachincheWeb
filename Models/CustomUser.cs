@@ -20,16 +20,5 @@ namespace MiGuachincheWeb.Models
 
         public virtual ICollection<Reserva> reservas { get; set; } 
 
-
-        public CustomUser() 
-        { 
-            this.restaurantes = new HashSet<restaurante>();
-            this.platos = new HashSet<plato_restaurante>();
-            this.reservas = new HashSet<Reserva>();
-        
-        }
-
-
-
     }
 }

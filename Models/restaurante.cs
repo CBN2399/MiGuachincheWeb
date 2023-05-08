@@ -9,8 +9,8 @@ namespace MiGuachincheWeb.Models
     {
         public restaurante()
         {
-            plato_restaurantes = new HashSet<plato_restaurante>();
-            user_restaurantes = new HashSet<user_restaurante>();
+            platos = new HashSet<plato>();
+            usuarios = new HashSet<CustomUser>();
         }
 
         public int RestauranteId { get; set; }
@@ -23,7 +23,7 @@ namespace MiGuachincheWeb.Models
 
         public virtual tipoRestaurante Id_tipoNavigation { get; set; }
         public virtual zona zona { get; set; }
-        public virtual ICollection<plato_restaurante> plato_restaurantes { get; set; }
-        public virtual ICollection<user_restaurante> user_restaurantes { get; set; }
+        public virtual ICollection<plato> platos { get; set; }
+        public virtual ICollection<CustomUser> usuarios { get; set; }
     }
 }

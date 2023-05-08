@@ -45,10 +45,10 @@
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li>
-                                            <a class="nav-link text-white" href="#">Restaurantes</a>
+                                            <a class="nav-link text-white" asp-controller="user" asp-action="RestList" asp-route-id="@UserManager.GetUserId(User)">Restaurantes</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link text-white" href="#">Platos</a>
+                                            <a class="nav-link text-white" asp-controller="user" asp-action="PlatoList" asp-route-id="@UserManager.GetUserId(User)">Platos</a>
                                         </li>
                                         
                                     </ul>  

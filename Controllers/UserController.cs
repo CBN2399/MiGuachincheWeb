@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
 using System.Data;
+using System.Linq;
 
 namespace MiGuachincheWeb.Controllers
 {
-    [Authorize(Roles = "Default")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly guachincheContext _guachincheContext;
@@ -29,6 +30,7 @@ namespace MiGuachincheWeb.Controllers
             return View(users);
         }
 
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> Details(String? id)
         {
             if (id == null || _guachincheContext.Users == null)
@@ -36,32 +38,23 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            var currentUser =  _userManager.GetUserAsync(HttpContext.User);
-            CustomUser user = currentUser.Result;
+            var user = await _guachincheContext.custom_users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            return View(user);
-        }
-
-        public async Task<IActionResult> Edit(String? id)
-        {
-            if (id == null || _guachincheContext.Users == null)
-            {
-                return NotFound();
-            }
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            CustomUser user = currentUser.Result;
-            if (user == null)
+            if (!user.Id.Equals(currentUser.Result.Id))
             {
-                return NotFound();
+                return BadRequest();
             }
+
             return View(user);
         }
 
-        public async Task<IActionResult> restList(String? id)
+        [Authorize(Roles = "Default")]
+        public async Task<IActionResult> Edit(String? id)
         {
             if (id == null || _guachincheContext.Users == null)
             {
@@ -72,9 +65,94 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
+
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            if (!user.Id.Equals(currentUser.Result.Id))
+            {
+                return BadRequest();
+            }
+            return View(user);
+        }
+
+        [Authorize(Roles = "Default")]
+        public async Task<IActionResult> RestList(String? id)
+        {
+            if (id == null || _guachincheContext.Users == null)
+            {
+                return NotFound();
+            }
+            var user = await _guachincheContext.custom_users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            if(!user.Id.Equals(currentUser.Result.Id)) 
+            {
+                return BadRequest();
+            }
+
             List<restaurante> restList = user.restaurantes.ToList();
 
             return View(restList);
+        }
+
+        [Authorize(Roles = "Default")]
+        public async Task<IActionResult> PlatoList(String? id)
+        {
+            if (id == null || _guachincheContext.Users == null)
+            {
+                return NotFound();
+            }
+            var user = await _guachincheContext.custom_users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            if (!user.Id.Equals(currentUser.Result.Id))
+            {
+                return BadRequest();
+            }
+
+            List<plato_restaurante> platos = user.platos.ToList();
+
+            return View(platos);
+        }
+
+        public async Task<IActionResult> AddRestaurante(int? id)
+        {
+            if (id == null || _guachincheContext.restaurantes == null)
+            {
+                return NotFound();
+            }
+
+            var restaurante =  await _guachincheContext.restaurantes.FindAsync(id);
+            if (restaurante == null)
+            {
+                return NotFound();
+            }
+
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var user =  await _guachincheContext.custom_users.FindAsync(currentUser.Result.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user_restaurante rest = new user_restaurante();
+            
+            rest.restaurante_Id = restaurante.RestauranteId;
+            rest.usuario_Id = user.Id;
+            rest.restaurante = restaurante;
+            rest.customUser = user;
+            
+
+            _guachincheContext.Add(rest);
+            await _guachincheContext.SaveChangesAsync();
+            return RedirectToAction("RestList");
+
         }
     }
 }

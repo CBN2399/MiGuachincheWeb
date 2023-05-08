@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MiGuachincheWeb.Models.plato_restaurante>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Mis platos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plato.Nombre)
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>Restaurante</th>
+            <th>
+                @Html.DisplayNameFor(model => model.valoracion)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.plato.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.plato.tipo.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valoracion)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
