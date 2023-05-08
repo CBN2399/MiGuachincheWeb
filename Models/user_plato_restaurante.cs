@@ -12,5 +12,7 @@ namespace MiGuachincheWeb.Models
         public int plato_restaurante_Id { get; set; }
 
         public virtual plato_restaurante plato_restaurante { get; set; }
+
+        public virtual CustomUser custom_user { get; set; }
     }
 }

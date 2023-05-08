@@ -72,7 +72,7 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
-            List<restaurante> restList = user.restaurantesFavoritos.ToList();
+            List<restaurante> restList = user.restaurantes.ToList();
 
             return View(restList);
         }

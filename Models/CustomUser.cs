@@ -6,14 +6,28 @@ namespace MiGuachincheWeb.Models
     [Table("CustomUser")]
     public partial class CustomUser : IdentityUser
     {
-        public String Nombre { get; set; }
+        public String? Nombre { get; set; }
 
-        public String Apelllidos { get; set; }
+        public String? Apelllidos { get; set; }
 
-        public String Telefono { get; set; }
+        public String? Telefono { get; set; }
 
         public bool? isActive { get; set; }
-        public ICollection<Reserva>? reservas { get; set; }
+
+        public virtual ICollection<restaurante> restaurantes { get; set; } 
+
+        public virtual ICollection<plato_restaurante> platos { get; set; }
+
+        public virtual ICollection<Reserva> reservas { get; set; } 
+
+
+        public CustomUser() 
+        { 
+            this.restaurantes = new HashSet<restaurante>();
+            this.platos = new HashSet<plato_restaurante>();
+            this.reservas = new HashSet<Reserva>();
+        
+        }
 
 
 

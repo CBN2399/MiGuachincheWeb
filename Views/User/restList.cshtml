@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MiGuachincheWeb.Models.restaurante>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Mis Restaurantes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rest_Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valoracion)
+            </th>
+            <th>Especialidad</th>
+            <th>
+                @Html.DisplayNameFor(model => model.zona)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rest_Url)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valoracion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_tipoNavigation.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zona.nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RestauranteId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RestauranteId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RestauranteId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

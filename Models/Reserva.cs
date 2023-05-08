@@ -9,10 +9,10 @@ namespace MiGuachincheWeb.Models
 
         public DateTime FechaReserva { get; set; }
 
-        public CustomUser CustomUser { get; set; }
+        public CustomUser? CustomUser { get; set; }
 
-        public restaurante restaurante { get; set; }
+        public restaurante? restaurante { get; set; }
 
-        public EstadoReserva estado { get; set; }
+        public EstadoReserva? estado { get; set; }
     }
 }

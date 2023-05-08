@@ -12,5 +12,15 @@ namespace MiGuachincheWeb.Models
         public int restaurante_Id { get; set; }
 
         public virtual restaurante restaurante { get; set; }
+
+        public virtual CustomUser customUser { get; set; }
+
+        public virtual ICollection<user_restaurante> userRestaurante { get; set; }
+
+
+        public user_restaurante()
+        {
+            this.userRestaurante = new HashSet<user_restaurante>();
+        }
     }
 }

@@ -129,11 +129,7 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.platosFavoritos = new List<plato_restaurante>();
-                user.restaurantesFavoritos = new List<restaurante>();
-                user.reservas = new List<Reserva>();
                 user.isActive = true;
-
                 user.Nombre = Input.Nombre;
                 user.Apelllidos = Input.Apellidos;
                 user.Telefono = Input.Telefono;
