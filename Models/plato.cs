@@ -15,9 +15,5 @@ namespace MiGuachincheWeb.Models
         public virtual Tipo tipo { get; set; }
         public virtual ICollection<Restaurante> restaurantes { get; set; }
 
-        public Plato()
-        {
-            this.restaurantes = new HashSet<Restaurante>();
-        }
     }
 }

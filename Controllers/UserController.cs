@@ -77,7 +77,7 @@ namespace MiGuachincheWeb.Controllers
         [Authorize(Roles = "Default")]
         public async Task<IActionResult> RestList(String? id)
         {
-            if (id == null || _guachincheContext.Users == null)
+            if (id == null || _guachincheContext.custom_users == null)
             {
                 return NotFound();
             }
@@ -107,11 +107,11 @@ namespace MiGuachincheWeb.Controllers
         [Authorize(Roles = "Default")]
         public async Task<IActionResult> PlatoList(String? id)
         {
-            if (id == null || _guachincheContext.Users == null)
+            if (id == null || _guachincheContext.custom_users == null)
             {
                 return NotFound();
             }
-            var user = await _guachincheContext.custom_users.FindAsync(id);
+            var user = await _guachincheContext.custom_users.Include(r => r.platos).FirstOrDefaultAsync(i => i.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -123,7 +123,11 @@ namespace MiGuachincheWeb.Controllers
                 return BadRequest();
             }
 
-            List<PlatoRestaurante> platos = user.platos.ToList();
+            List<PlatoRestaurante> platos = new List<PlatoRestaurante>();
+            if(user.platos != null)
+            {
+                platos = user.platos.ToList();
+            }
 
             return View(platos);
         }

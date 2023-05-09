@@ -62,7 +62,7 @@ namespace MiGuachincheWeb.Data
                         
                     j => j.HasOne(e => e.restaurante).WithMany(),
                     j => j.HasOne(e => e.plato).WithMany()
-                    );
+                );
             });
 
             modelBuilder.Entity<Restaurante>(entity =>

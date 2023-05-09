@@ -96,6 +96,7 @@ namespace MiGuachincheWeb.Controllers
             var restaurante = await _context.restaurantes
                 .Include(r => r.Id_tipoNavigation)
                 .Include(r => r.zona)
+                .Include(p => p.platos)
                 .FirstOrDefaultAsync(m => m.RestauranteId == id);
             if (restaurante == null)
             {

@@ -12,9 +12,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.plato.Nombre)
             </th>
-            <th>
-                Tipo
-            </th>
             <th>Restaurante</th>
             <th>
                 @Html.DisplayNameFor(model => model.valoracion)
@@ -28,9 +25,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.plato.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.plato.tipo.nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.restaurante.Nombre)

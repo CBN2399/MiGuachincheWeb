@@ -303,7 +303,8 @@ namespace MiGuachincheWeb.Migrations
                     FechaReserva = table.Column<DateTime>(type: "datetime2", nullable: false),
                     customerUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     restauranteId = table.Column<int>(type: "int", nullable: false),
-                    estadoReservaId = table.Column<int>(type: "int", nullable: false)
+                    estadoReservaId = table.Column<int>(type: "int", nullable: false),
+                    numeroComensales = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
