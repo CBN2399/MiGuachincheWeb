@@ -81,7 +81,11 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
-            var user = await _guachincheContext.custom_users.FindAsync(id);
+            var user = await _guachincheContext.custom_users
+                .Include(r => r.restaurantes)
+                .ThenInclude(i => i.Id_tipoNavigation)
+                .Include(e => e.restaurantes)
+                .ThenInclude(i => i.zona).FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -92,9 +96,12 @@ namespace MiGuachincheWeb.Controllers
                 return BadRequest();
             }
 
-            List<Restaurante> restList = user.restaurantes.ToList();
-
-            return View(restList);
+            List<Restaurante> restaurantes = new List<Restaurante>();
+            if(user.restaurantes != null)
+            {
+                restaurantes = user.restaurantes.ToList();
+            }
+            return View(restaurantes);
         }
 
         [Authorize(Roles = "Default")]
@@ -135,18 +142,61 @@ namespace MiGuachincheWeb.Controllers
             }
 
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            var user =  await _guachincheContext.custom_users.FindAsync(currentUser.Result.Id);
+            var user =  await _guachincheContext.custom_users.Include(r => r.restaurantes).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            user.restaurantes.Add(restaurante);
+
+            UserRestaurante userRest = new UserRestaurante();
+            if (user.restaurantes != null)
+            {
+                if (!user.restaurantes.Contains(restaurante))
+                {
+                    userRest.restaurante = restaurante;
+                    userRest.customUser = user;
+                    userRest.usuario_Id = user.Id;
+                    userRest.restaurante_Id = restaurante.RestauranteId;
+                }
+            }
             
-            _guachincheContext.Update(user);
+            _guachincheContext.Add(userRest);
             await _guachincheContext.SaveChangesAsync();
-            return RedirectToAction("RestList");
+            return NoContent();
 
         }
+
+        public async Task<IActionResult> DeleteRestaurante(int? id)
+        {
+            if (id == null || _guachincheContext.restaurantes == null)
+            {
+                return NotFound();
+            }
+
+            var restaurante = await _guachincheContext.restaurantes.FindAsync(id);
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var user = await _guachincheContext.custom_users.Include(r => r.restaurantes).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            if ((user == null) || (restaurante == null))
+            {
+                return NotFound();
+            }
+
+            if(user.restaurantes != null)
+            {
+                if (!user.restaurantes.Contains(restaurante))
+                {
+                    return BadRequest();
+                }
+
+                user.restaurantes.Remove(restaurante);
+                await _guachincheContext.SaveChangesAsync();
+
+            }
+
+            return RedirectToAction("RestList","User", new { id = user.Id});
+        }
+
+
     }
 }
