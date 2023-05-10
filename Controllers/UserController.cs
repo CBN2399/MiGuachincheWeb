@@ -84,8 +84,9 @@ namespace MiGuachincheWeb.Controllers
             var user = await _guachincheContext.custom_users
                 .Include(r => r.restaurantes)
                 .ThenInclude(i => i.Id_tipoNavigation)
-                .Include(e => e.restaurantes)
-                .ThenInclude(i => i.zona).FirstOrDefaultAsync(u => u.Id == id);
+                .Include(r => r.restaurantes)
+                .ThenInclude(i => i.zona)
+                .FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -111,7 +112,12 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
-            var user = await _guachincheContext.custom_users.Include(r => r.platos).FirstOrDefaultAsync(i => i.Id == id);
+            var user = await _guachincheContext.custom_users
+                .Include(r => r.platos)
+                .ThenInclude(e => e.restaurante)
+                .Include(r => r.platos)
+                .ThenInclude(e => e.plato)
+                .FirstOrDefaultAsync(i => i.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -201,6 +207,60 @@ namespace MiGuachincheWeb.Controllers
             return RedirectToAction("RestList","User", new { id = user.Id});
         }
 
+        public async Task<IActionResult> AddPlato(int? id)
+        {
+            if (id == null || _guachincheContext.plato_restaurantes == null)
+            {
+                return NotFound();
+            }
+
+            var platoRest = await _guachincheContext.plato_restaurantes.FindAsync(id);
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var user = await _guachincheContext.custom_users.Include(p => p.platos).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            if ((platoRest == null) || (user == null))
+            {
+                return NotFound();
+            }
+
+            if(user.platos == null)
+            {
+                user.platos = new List<PlatoRestaurante>();
+            }
+
+            if(!user.platos.Contains(platoRest))
+            {
+                user.platos.Add(platoRest);
+                await _guachincheContext.SaveChangesAsync();
+            }
+            return NoContent();
+        }
+
+        public async Task<IActionResult> DeletePLato(int? id)
+        {
+            if (id == null || _guachincheContext.plato_restaurantes == null)
+            {
+                return NotFound();
+            }
+
+            var platoRest = await _guachincheContext.plato_restaurantes.FindAsync(id);
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var user = await _guachincheContext.custom_users.Include(p => p.platos).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            if ((platoRest == null) || (user == null))
+            {
+                return NotFound();
+            }
+
+            if(user.platos != null) 
+            {
+                if (!user.platos.Contains(platoRest))
+                {
+                    return BadRequest();
+                }
+                user.platos.Remove(platoRest);
+                await _guachincheContext.SaveChangesAsync();
+            }
+            return RedirectToAction("PlatoList", "User", new { id = user.Id });
+        }
 
     }
 }

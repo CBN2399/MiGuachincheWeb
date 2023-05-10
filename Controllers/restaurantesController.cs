@@ -93,16 +93,26 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            var restaurante = await _context.restaurantes
-                .Include(r => r.Id_tipoNavigation)
-                .Include(r => r.zona)
-                .Include(p => p.platos)
-                .FirstOrDefaultAsync(m => m.RestauranteId == id);
+            var restaurante = await _context.restaurantes.Include(p => p.platos).ThenInclude(i => i.tipo)
+                .Include(e => e.zona).Include(e => e.Id_tipoNavigation).FirstOrDefaultAsync(i => i.RestauranteId == id);
+           
             if (restaurante == null)
             {
                 return NotFound();
             }
 
+            var platorest = from a in _context.plato_restaurantes
+                            where a.restaurante_Id == id
+                            select a;
+            List<PlatoRestaurante> platos = new List<PlatoRestaurante>();
+            if(platorest != null)
+            {
+                foreach (var a in platorest)
+                {
+                    platos.Add(a);
+                }
+            }
+            ViewBag.PlatoRest = platos;
             return View(restaurante);
         }
 
