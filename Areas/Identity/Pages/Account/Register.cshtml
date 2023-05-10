@@ -11,37 +11,37 @@
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <!--Parte nueva a adaptar en el front-->
-            <div class="form-group my-5">
+            <div class="form-group my-3">
                 <label class="mb-3 text-white fw-bolder" asp-for="Input.Nombre"></label>
                 <input asp-for="Input.Nombre" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Nombre" class="text-danger"></span>
             </div>
 
-            <div class="form-group my-5">
+            <div class="form-group mb-3">
                 <label class="mb-3 text-white fw-bolder" asp-for="Input.Apellidos"></label>
                 <input asp-for="Input.Apellidos" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
             </div>
 
-            <div class="form-group my-5">
+            <div class="form-group mb-3">
                 <label class="mb-3 text-white fw-bolder" asp-for="Input.Telefono"></label>
                 <input asp-for="Input.Telefono" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Telefono" class="text-danger"></span>
             </div>
 
 
-            <div class="form-group my-5">
+            <div class="form-group mb-3">
                 <label class="mb-3 text-white fw-bolder" asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group my-5">
-                <label class="mb-3 fw-bolder" asp-for="Input.Password"></label>
+            <div class="form-group mb-3">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-group my-5">
-                <label class="mb-3 text-white" asp-for="Input.ConfirmPassword"></label>
+            <div class="form-group mb-3">
+                <label class="mb-3 text-white fw-bolder" asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
@@ -52,7 +52,7 @@
         <div class="card" style="width:100%;">
             <img src="~/img/guachinche.jpg" class="card-img-top" alt="foto tipico guachinche canario">
             <div class="card-body">
-                <h5 class="card-title text-center fs-1 fw-bold">Guachinches</h5>
+                <h5 class="card-title text-center fs-1 fw-bold my-3">Guachinches</h5>
                 <p class="card-text justificado">Convertidos en un estandarte de la cultura gastronómica canaria, los 'guachinches' de Tenerife son esos restaurantes de campo donde quedar con los amigos para probar el vino de la cosecha. El menú, sencillo, sabroso y de la tierra, está diseñado para acompañar estas catas informales.</p>
             </div>
         </div>
