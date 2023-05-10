@@ -413,9 +413,11 @@ namespace MiGuachincheWeb.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 3, "Finalizada" },
-                    { 2, "Cancelada" },
-                    { 1, "Activa" }
+                    { 5,"Finalizada"},
+                    { 4,"Rechazada"},
+                    { 3,"Cancelada"},
+                    { 2,"Pendiente"},
+                    { 1,"Activa" }
                 });
 
             migrationBuilder.InsertData(

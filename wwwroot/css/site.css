@@ -209,3 +209,15 @@ p {
         font-size: 28px;
     }
 }
+
+/*Parte para el menu desplegable*/
+.desp ul{
+    height:0;
+    overflow:hidden;
+    transition: all 0.40s ease;
+    list-style: none;
+}
+
+.desp:hover  ul{
+    height:120px;
+}

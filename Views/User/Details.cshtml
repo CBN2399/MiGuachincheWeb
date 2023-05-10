@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
 @model MiGuachincheWeb.Models.CustomUser
 
 @{
@@ -21,6 +23,15 @@
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Apelllidos)
         </dd>
+        @if (User.IsInRole("Manager"))
+        {
+            <dt class="col-sm-3">
+                Dueño del restaurante
+            </dt>
+            <dd class="col-sm-9">
+                
+            </dd>
+        }
         <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Email)
         </dt>

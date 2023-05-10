@@ -17,8 +17,8 @@
 <body>
    
         <header>
-            <nav class="navbar navbar-expand-xxl navbar-dark bg-dark text-white border-bottom box-shadow mb-3">
-                <div class="container-fluid mx-5">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white border-bottom box-shadow mb-3" id="barra">
+                <div class="container-fluid mx-5 ">
                     <div>
                         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/img/logo.png" height="60px" width="60px" title="logo principal de la pagina">
@@ -29,6 +29,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="menu">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="restaurantes" asp-action="Index">Restaurantes</a>
                             </li>
@@ -36,37 +38,58 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="platos" asp-action="Index">Platos</a>
                             </li>
 
-                            @if (SignInManager.IsSignedIn(User)){
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="zonas" asp-action="Index">Zonas</a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (User.IsInRole("Manager"))
+                            {
+                                <a class="nav-link text-white" asp-controller="Manager" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Getionar restaurante</a>
 
-                                if(User.IsInRole("Default"))
+                                <a class="nav-link text-white" asp-controller="Reservas" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Getionar reservas</a>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="restaurantes" asp-action="Index">Restaurantes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="platos" asp-action="Index">Platos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="zonas" asp-action="Index">Zonas</a>
+                                </li>
+                                if (User.IsInRole("Default"))
                                 {
-                                    <li class="nav-item dropdown">
-                                        <span class="nav-link dropdown-toggle"id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <li class="nav-item dropdown desp">
+                                        <span class="nav-link text-white dropdown-toggle">
                                             Favoritos
                                         </span>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li>
+                                        <ul class="bg-dark p-0 oculto">
+                                            <li class="nav-item">
                                                 <a class="nav-link text-white" asp-controller="user" asp-action="RestList" asp-route-id="@UserManager.GetUserId(User)">Restaurantes</a>
                                             </li>
-                                            <li>
+                                            <li class="nav-item">
                                                 <a class="nav-link text-white" asp-controller="user" asp-action="PlatoList" asp-route-id="@UserManager.GetUserId(User)">Platos</a>
                                             </li>
-                                        
-                                        </ul>  
+                                        </ul>
                                     </li>
-                               
+
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="restaurantes" asp-action="Index">Reservas</a>
                                     </li>
                                 }
-                                if (User.IsInRole("Admin"))
+                                else
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
                                     </li>
                                 }
-
                             }
+                        } 
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>
@@ -128,9 +151,9 @@
                 &copy; 2023 - MiGuachincheWeb
             </div>
         </footer>
-  
-   
 
+
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

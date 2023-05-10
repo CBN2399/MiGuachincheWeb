@@ -269,8 +269,10 @@ namespace MiGuachincheWeb.Data
 
             List<EstadoReserva> estados = new List<EstadoReserva>();
             estados.Add(new EstadoReserva { Id = -1, Name= "Activa"});
-            estados.Add(new EstadoReserva { Id = -2, Name = "Cancelada" });
-            estados.Add(new EstadoReserva { Id = -3, Name = "Finalizada" });
+            estados.Add(new EstadoReserva { Id = -2, Name = "Pendiente" });
+            estados.Add(new EstadoReserva { Id = -3, Name = "Cancelada" });
+            estados.Add(new EstadoReserva { Id = -4, Name = "Rechazada" });
+            estados.Add(new EstadoReserva { Id = -5, Name = "Finalizada" });
 
             modelBuilder.Entity<EstadoReserva>().HasData(estados);
         }

@@ -31,7 +31,7 @@ namespace MiGuachincheWeb.Controllers
             return View(users);
         }
 
-        [Authorize(Roles = "Default")]
+        [Authorize(Roles = "Default,Manager")]
         public async Task<IActionResult> Details(String? id)
         {
             if (id == null || _guachincheContext.Users == null)
@@ -54,7 +54,7 @@ namespace MiGuachincheWeb.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "Default")]
+        [Authorize(Roles = "Default,Manager")]
         public async Task<IActionResult> Edit(String? id)
         {
             if (id == null || _guachincheContext.custom_users == null)
@@ -79,6 +79,7 @@ namespace MiGuachincheWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Default,Manager")]
         public async Task<IActionResult> Edit(String? id, [Bind("Id,Nombre,Apellidos,Telefono")] CustomUserDTO user)
         {
             if (id != user.Id)
