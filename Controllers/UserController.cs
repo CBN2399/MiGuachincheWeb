@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -56,7 +57,7 @@ namespace MiGuachincheWeb.Controllers
         [Authorize(Roles = "Default")]
         public async Task<IActionResult> Edit(String? id)
         {
-            if (id == null || _guachincheContext.Users == null)
+            if (id == null || _guachincheContext.custom_users == null)
             {
                 return NotFound();
             }
@@ -71,8 +72,78 @@ namespace MiGuachincheWeb.Controllers
             {
                 return BadRequest();
             }
+            CustomUserDTO userDTO = new CustomUserDTO(user.Id,user.Nombre,user.Apelllidos,user.Telefono,user.Email);
+
+            return View(userDTO);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(String? id, [Bind("Id,Nombre,Apellidos,Telefono")] CustomUserDTO user)
+        {
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
+
+            var userSelected = await _guachincheContext.custom_users.FindAsync(id);
+            if (userSelected == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+               
+                try
+                {
+                    userSelected.Nombre = user.Nombre;
+                    userSelected.Apelllidos = user.Apellidos;
+                    userSelected.Telefono = user.Telefono;
+                    _guachincheContext.Update(userSelected);
+                    await _guachincheContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(userSelected.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details","User", new{ id = user.Id });
+            }
             return View(user);
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(String? id)
+        {
+            if (id == null || _guachincheContext.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _guachincheContext.custom_users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var adminUser = _userManager.GetUserAsync(HttpContext.User);
+            if (user.Id.Equals(adminUser.Result.Id))
+            {
+                return BadRequest();
+            }
+            _guachincheContext.custom_users.Remove(user);
+            await _guachincheContext.SaveChangesAsync();
+
+            return RedirectToAction("Index","User");
+        }
+
+
+
 
         [Authorize(Roles = "Default")]
         public async Task<IActionResult> RestList(String? id)
@@ -260,6 +331,11 @@ namespace MiGuachincheWeb.Controllers
                 await _guachincheContext.SaveChangesAsync();
             }
             return RedirectToAction("PlatoList", "User", new { id = user.Id });
+        }
+
+        private bool UserExists(String id)
+        {
+            return (_guachincheContext.custom_users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
     }
