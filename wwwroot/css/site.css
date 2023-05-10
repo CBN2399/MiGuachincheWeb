@@ -73,7 +73,7 @@ p {
 
 .word {
     position: absolute;
-    width: 100%;
+    width: 40%;
     left: 42%;
     opacity: 0;
     margin: 0 auto;
@@ -187,7 +187,7 @@ p {
 @media screen and (max-width: 500px) {
     .word {
         left: 35%;
-        font-size: 40px;
+        font-size: 35px;
     }
 }
 
@@ -195,11 +195,17 @@ p {
     body {
         padding-bottom: 450px;
     }
+    
+    .word {
+        left: 35%;
+        font-size: 30px;
+        
+    }
 }
 
 @media screen and (max-width: 350px) and (min-width:285px) {
     .word {
         left: 30%;
-        font-size: 40px;
+        font-size: 28px;
     }
 }
