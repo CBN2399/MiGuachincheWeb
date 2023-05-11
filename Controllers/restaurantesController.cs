@@ -148,7 +148,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: restaurantes/Edit/5
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.restaurantes == null)
@@ -171,7 +171,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
         {
             if (id != restaurante.RestauranteId)

@@ -138,7 +138,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Edit/5
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.platos == null)
@@ -160,7 +160,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (id != plato.PlatoId)
