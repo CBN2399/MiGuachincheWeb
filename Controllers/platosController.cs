@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -11,6 +12,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
+    [Authorize]
     public class platosController : Controller
     {
         private readonly guachincheContext _context;
@@ -106,6 +108,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["tipoId"] = new SelectList(_context.tipos, "id", "nombre");
@@ -117,6 +120,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (ModelState.IsValid)
@@ -130,6 +134,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.platos == null)
@@ -151,6 +156,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (id != plato.PlatoId)
@@ -183,6 +189,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.platos == null)
@@ -204,6 +211,7 @@ namespace MiGuachincheWeb.Controllers
         // POST: platos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.platos == null)

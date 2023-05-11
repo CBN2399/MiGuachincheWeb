@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -12,6 +14,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
+    [Authorize]
     public class restaurantesController : Controller
     {
         private readonly guachincheContext _context;
@@ -106,6 +109,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: restaurantes/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre");
@@ -118,6 +122,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
         {
             if (ModelState.IsValid)
@@ -132,6 +137,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: restaurantes/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.restaurantes == null)
@@ -154,6 +160,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
         {
             if (id != restaurante.RestauranteId)
@@ -187,6 +194,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: restaurantes/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.restaurantes == null)
@@ -209,6 +217,7 @@ namespace MiGuachincheWeb.Controllers
         // POST: restaurantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.restaurantes == null)

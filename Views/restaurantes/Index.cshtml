@@ -1,15 +1,20 @@
 ﻿@model IEnumerable<MiGuachincheWeb.Models.Restaurante>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <fieldset>
     <form asp-action="Index" method="get">
         <div class="form-actions no-color">
@@ -67,9 +72,16 @@
                 @Html.DisplayFor(modelItem => item.zona.nombre)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.RestauranteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RestauranteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RestauranteId">Delete</a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.RestauranteId">Edit</a> <span>|</span>
+                }
+                <a asp-action="Details" asp-route-id="@item.RestauranteId">Details</a> 
+                @if (User.IsInRole("Admin"))
+                {
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.RestauranteId">Delete</a>
+                }
             </td>
         </tr>
 }
