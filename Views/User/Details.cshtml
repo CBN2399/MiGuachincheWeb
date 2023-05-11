@@ -23,15 +23,6 @@
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Apelllidos)
         </dd>
-        @if (User.IsInRole("Manager"))
-        {
-            <dt class="col-sm-3">
-                Dueño del restaurante
-            </dt>
-            <dd class="col-sm-9">
-                
-            </dd>
-        }
         <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
@@ -44,16 +35,18 @@
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Telefono)
         </dd>
-        <dt class="col-sm-3">Restaurantes Favoritos</dt>
-        <dd class="col-sm-9">
-            <a class="nav-link text-secondary m-0 p-0" asp-controller="user" asp-action="RestList" asp-route-id="@Model.Id">Ir a la lista</a>
-        </dd>
-        <dt class="col-sm-3">Platos Favoritos</dt>
-        <dd class="col-sm-9">
-            <a class="nav-link text-secondary m-0 p-0" asp-controller="user" asp-action="PlatoList" asp-route-id="@Model.Id">Ir a la lista</a>
-        </dd>
+        @if (User.IsInRole("Default"))
+        {
+            <dt class="col-sm-3">Restaurantes Favoritos</dt>
+            <dd class="col-sm-9">
+                <a class="nav-link text-secondary m-0 p-0" asp-controller="user" asp-action="RestList" asp-route-id="@Model.Id">Ir a la lista</a>
+            </dd>
+            <dt class="col-sm-3">Platos Favoritos</dt>
+            <dd class="col-sm-9">
+                <a class="nav-link text-secondary m-0 p-0" asp-controller="user" asp-action="PlatoList" asp-route-id="@Model.Id">Ir a la lista</a>
+            </dd>
+        } 
     </dl>
-    
 </div>
 <div>
     <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> 

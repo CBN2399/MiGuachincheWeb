@@ -46,9 +46,9 @@
                         {
                             if (User.IsInRole("Manager"))
                             {
-                                <a class="nav-link text-white" asp-controller="Manager" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Getionar restaurante</a>
+                                <a class="nav-link text-white" asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Gestionar restaurantes</a>
 
-                                <a class="nav-link text-white" asp-controller="Reservas" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Getionar reservas</a>
+                                <a class="nav-link text-white" asp-controller="Reservas" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Gestionar reservas</a>
                             }
                             else
                             {
