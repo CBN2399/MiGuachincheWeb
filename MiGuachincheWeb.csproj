@@ -18,4 +18,9 @@
 	<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\restaurantes\" />
+    <Folder Include="wwwroot\img\platos\" />
+  </ItemGroup>
+
 </Project>

@@ -8,26 +8,34 @@
 <div>
     <h3>Detalles del plato</h3>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tipo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tipo.nombre)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-sm-5">
+            <!--Aqui va la foto del restaurante-->
+            <img src='~/@Html.DisplayFor(model => model.ImagenURL)' alt="Imagen del restaurante" width="400" height="300" />
+        </div>
+        <div class="col-sm-7 my-md-0 my-3">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.tipo)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.tipo.nombre)
+                </dd>
+            </dl>
+        </div>
+    </div>
     <div class="row my-3">
         <h6 class="fw-bold">Restaurantes donde se sirve</h6>
         <table class="table table-striped">

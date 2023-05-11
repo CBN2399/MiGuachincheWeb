@@ -91,6 +91,8 @@ namespace MiGuachincheWeb.Controllers
         // GET: restaurantes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+
             if (id == null || _context.restaurantes == null)
             {
                 return NotFound();
