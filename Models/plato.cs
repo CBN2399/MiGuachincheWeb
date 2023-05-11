@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MiGuachincheWeb.Models
 {
@@ -12,12 +13,10 @@ namespace MiGuachincheWeb.Models
         public string Descripcion { get; set; }
         public int tipoId { get; set; }
 
+        [AllowNull]
+        public string ImagenURL { get; set; }
         public virtual Tipo tipo { get; set; }
         public virtual ICollection<Restaurante> restaurantes { get; set; }
 
-        public Plato()
-        {
-            this.restaurantes = new HashSet<Restaurante>();
-        }
     }
 }

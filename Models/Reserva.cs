@@ -7,15 +7,14 @@ namespace MiGuachincheWeb.Models
     {
         public int Id { get; set; }
         public DateTime FechaReserva { get; set; }
-        public string customerUserId { get; set; }
+
+        public int numeroComensales { get; set; }
+        public string? customerUserId { get; set; }
         public int restauranteId { get; set; }
         public int estadoReservaId { get; set; }
 
         public CustomUser? CustomUser { get; set; }
         public Restaurante? restaurante { get; set; }
-
-        
-
         public EstadoReserva? estado { get; set; }
     }
 }

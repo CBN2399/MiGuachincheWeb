@@ -98,6 +98,10 @@ namespace MiGuachincheWeb.Controllers
 
             var plato = await _context.platos
                 .Include(p => p.tipo)
+                .Include(r => r.restaurantes)
+                .ThenInclude(e => e.zona)
+                .Include(r => r.restaurantes)
+                .ThenInclude(e => e.Id_tipoNavigation)
                 .FirstOrDefaultAsync(m => m.PlatoId == id);
             if (plato == null)
             {

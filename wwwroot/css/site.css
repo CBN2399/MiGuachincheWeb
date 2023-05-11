@@ -1,3 +1,9 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 html {
   font-size: 14px;
 }
@@ -67,7 +73,7 @@ p {
 
 .word {
     position: absolute;
-    width: 100%;
+    width: 40%;
     left: 42%;
     opacity: 0;
     margin: 0 auto;
@@ -123,14 +129,48 @@ p {
 
 .justificado{
     text-align:justify;
-    font-size:16px;
-    line-height:30px;
+    font-size:20px;
+    line-height:40px;
 }
 
 .fondo {
     background: #008B8B;
     padding: 35px;
     border-radius: 10px;
+}
+
+.contenedor {
+    background-color: #16a085;
+    border: 10px solid grey;
+    border-radius: 5px;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.formulario {
+    width: 100%;
+    color: white;
+    padding: 10px;
+}
+
+.imagen > img {
+    width: 50%;
+    height: 10%;
+    opacity: 0.8;
+    outline: none;
+}
+
+.contenedor_enlaces a{
+    color:white;
+    text-decoration:none;
+    background-color: black;
+    padding:5px;
+    border-radius:5px;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -147,7 +187,7 @@ p {
 @media screen and (max-width: 500px) {
     .word {
         left: 35%;
-        font-size: 40px;
+        font-size: 35px;
     }
 }
 
@@ -155,11 +195,29 @@ p {
     body {
         padding-bottom: 450px;
     }
+    
+    .word {
+        left: 35%;
+        font-size: 30px;
+        
+    }
 }
 
 @media screen and (max-width: 350px) and (min-width:285px) {
     .word {
         left: 30%;
-        font-size: 40px;
+        font-size: 28px;
     }
+}
+
+/*Parte para el menu desplegable*/
+.desp ul{
+    height:0;
+    overflow:hidden;
+    transition: all 0.40s ease;
+    list-style: none;
+}
+
+.desp:hover  ul{
+    height:120px;
 }

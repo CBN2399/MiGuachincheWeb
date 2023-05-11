@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>plato</h4>
+    <h3>Detalles del plato</h3>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -29,8 +28,40 @@
             @Html.DisplayFor(model => model.tipo.nombre)
         </dd>
     </dl>
+    <div class="row my-3">
+        <h6 class="fw-bold">Restaurantes donde se sirve</h6>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>zona</th>
+                    <th>Especialidad</th>
+                    <th>Valoracion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Restaurante restaurante in Model.restaurantes)
+                {
+                    <tr>
+                        <td>
+                            @restaurante.Nombre
+                        </td>
+                        <td>
+                            @restaurante.zona.nombre
+                        </td>
+                        <td>
+                            @restaurante.Id_tipoNavigation.nombre
+                        </td>
+                        <td>
+                            @restaurante.valoracion
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PlatoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary">Volver</a>
 </div>

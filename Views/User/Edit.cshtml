@@ -1,0 +1,50 @@
+﻿@model MiGuachincheWeb.Models.CustomUserDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Editar usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="User" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group my-3">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input type="text" asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input type="text" asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input type="tel" asp-for="Telefono" class="form-control"/>
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group my-3">
+                <label asp-for="Email" class="control-label"></label>
+                <input type="email" asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3">
+                <input type="submit" value="Guardar" class="btn btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="my-3">
+    <a asp-action="Index" class="btn btn-primary">Volver</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

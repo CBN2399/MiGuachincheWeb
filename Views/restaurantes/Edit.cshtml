@@ -1,57 +1,54 @@
-﻿@model MiGuachincheWeb.Models.Restaurante
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+
+@model MiGuachincheWeb.Models.Restaurante
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>restaurante</h4>
+<h2>Editar restaurante</h2>
 <hr />
 <div class="row">
+    <div class="col-md-5">
+        <!--Imagen del restaurante-->
+        <img src="~/img/Queso_asado.jpg" width="450" height="300" />
+    </div>
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RestauranteId" />
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Rest_Url" class="control-label"></label>
-                <input asp-for="Rest_Url" class="form-control" />
-                <span asp-validation-for="Rest_Url" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label asp-for="telefono" class="control-label"></label>
                 <input asp-for="telefono" class="form-control" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="valoracion" class="control-label"></label>
-                <input asp-for="valoracion" class="form-control" />
-                <span asp-validation-for="valoracion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Id_tipo" class="control-label"></label>
-                <select asp-for="Id_tipo" class="form-control" asp-items="ViewBag.Id_tipo"></select>
+            <div class="form-group my-3">
+                <label for="Id_tipo" class="control-label">Especialidad</label>
+                <select id="Id_tipo" class="form-control" asp-items="ViewBag.Id_tipo"></select>
                 <span asp-validation-for="Id_tipo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="zonaId" class="control-label"></label>
-                <select asp-for="zonaId" class="form-control" asp-items="ViewBag.zonaId"></select>
+            <div class="form-group my-3">
+                <label for="zonaId" class="control-label">Zona</label>
+                <select id="zonaId" class="form-control" asp-items="ViewBag.zonaId"></select>
                 <span asp-validation-for="zonaId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group my-3">
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div my-3>
+    <a class="btn btn-primary" asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
 </div>
 
 @section Scripts {
