@@ -108,38 +108,38 @@ insert into tipoRestaurante(nombre) values ('Platos variados');
 go
 
 --Informacion de los platos
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Papas arrugadas con mojo.','Papas cocidas con piel y sal, acompañadas de una salsa picante llamada mojo',6,'img/platos/papa_arrugadas_con_mojo.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Conejo en salmorejo','Guiso de conejo en una salsa de ajo, vinagre y especias',1,'img/platos/conejo_salmorejo.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Escaldón de gofio','Plato hecho con gofio, un tipo de harina de cereales, y caldo caliente',3,'img/platos/escaldon.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Potaje de berros','Guiso hecho con berros, papas, calabaza, garbanzos y carne de cerdo',5,'img/platos/Potaje_de_berros.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Bienmesabe','Postre hecho con almendras molidas, miel y huevo.',4,'img/platos/Bienmesabe.png');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Sancocho canario.','Guiso de pescado salado, papas, batata y cebolla',2,'img/platos/Sancocho.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Ropa vieja','Carne desmenuzada, papas, garbanzos y pimiento',1,'img/platos/ropa_vieja.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Puchero canario','Guiso hecho con carne, garbanzos, papas, batata, zanahoria y col',5,'img/platos/puchero.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Cherne en adobo','Pescado adobado con ajo, vinagre y pimiento',2,'img/platos/cherne.jpg');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Carajacas','Plato hecho con tripas de cerdo y salsa picante',1,'img/platos/carajacas.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Papas arrugadas con mojo.','Papas cocidas con piel y sal, acompañadas de una salsa picante llamada mojo',6,'papa_arrugadas_con_mojo.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Conejo en salmorejo','Guiso de conejo en una salsa de ajo, vinagre y especias',1,'conejo_salmorejo.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Escaldón de gofio','Plato hecho con gofio, un tipo de harina de cereales, y caldo caliente',3,'escaldon.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Potaje de berros','Guiso hecho con berros, papas, calabaza, garbanzos y carne de cerdo',5,'Potaje_de_berros.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Bienmesabe','Postre hecho con almendras molidas, miel y huevo.',4,'Bienmesabe.png');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Sancocho canario.','Guiso de pescado salado, papas, batata y cebolla',2,'Sancocho.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Ropa vieja','Carne desmenuzada, papas, garbanzos y pimiento',1,'ropa_vieja.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Puchero canario','Guiso hecho con carne, garbanzos, papas, batata, zanahoria y col',5,'puchero.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Cherne en adobo','Pescado adobado con ajo, vinagre y pimiento',2,'cherne.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Carajacas','Plato hecho con tripas de cerdo y salsa picante',1,'carajacas.jpg');
 insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Conejo en saltao','Guiso de conejo con papas, cebolla y pimiento',1,'');
-insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Escabeche de pescado','Pescado marinado con vinagre, cebolla, ajo y especias.',2,'img/platos/escabeche.jpg');
+insert into plato(Nombre,Descripcion,tipoId,ImagenUrl) values ('Escabeche de pescado','Pescado marinado con vinagre, cebolla, ajo y especias.',2,'escabeche.jpg');
 
 
 --Insertar restaurantes
 
 insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Los Rodeos','','922111333',3,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Los Toneles','img/restaurantes/Los_Toneles.jpg','92200232',2,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Casa Tomás','img/restaurantes/Casa_tomas.jpg','922111333',1,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Nervioso','img/restaurantes/EL_Nervioso.jpg','922111333',5,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'Rancho de Nino','img/restaurantes/Rancho_de_Nino.jpg','922111333',4,3);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Fonil','img/restaurantes/El_Fonil.jpg','922111333',1,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Moral','img/restaurantes/El_Moral.jpg','922111333',4,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(3,'La cuadra del Palmero','img/restaurantes/Cuadra_del_Palmero.jpg','922111333',5,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'El empedrado','img/restaurantes/el_empedrado.jpg','922111333',2,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'Los pinchitos','img/restaurantes/Los_Pinchitos.jpg','922111333',3,2);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Casa Lito','img/restaurantes/Casa_lito.jpg','922111333',2,3);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(3,'El regulo','img/restaurantes/El_regulo.jpg','922111333',5,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Los Toneles','Los_Toneles.jpg','92200232',2,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Casa Tomás','Casa_tomas.jpg','922111333',1,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Nervioso','EL_Nervioso.jpg','922111333',5,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'Rancho de Nino','Rancho_de_Nino.jpg','922111333',4,3);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Fonil','El_Fonil.jpg','922111333',1,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'El Moral','El_Moral.jpg','922111333',4,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(3,'La cuadra del Palmero','Cuadra_del_Palmero.jpg','922111333',5,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'El empedrado','el_empedrado.jpg','922111333',2,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'Los pinchitos','Los_Pinchitos.jpg','922111333',3,2);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(1,'Casa Lito','Casa_lito.jpg','922111333',2,3);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(3,'El regulo','El_regulo.jpg','922111333',5,1);
 insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(3,'Victor Fernandez gastrobar','','922111333',2,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'La Basilica','img/restaurantes/La_Basilica.jpg','922111333',3,1);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'La cofradia del Mar','img/restaurantes/Cofradia.jpg','922111333',4,2);
-insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'El rincon de Juan Carlos','img/restaurantes/Rincon_de_Juan.jpg','922111333',1,2);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'La Basilica','La_Basilica.jpg','922111333',3,1);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'La cofradia del Mar','Cofradia.jpg','922111333',4,2);
+insert into restaurante(zonaId,Nombre,Rest_Url,telefono,valoracion,Id_tipo) values(2,'El rincon de Juan Carlos','Rincon_de_Juan.jpg','922111333',1,2);
 
 
 --informacion de platosRestaurantes
