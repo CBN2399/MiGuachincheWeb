@@ -18,6 +18,12 @@ namespace MiGuachincheWeb.Migrations
                 type: "nvarchar(max)",
                 nullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "Descripcion",
+                table: "restaurante",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.AlterColumn<string>(
                 name: "customerUserId",
                 table: "Reservas",
