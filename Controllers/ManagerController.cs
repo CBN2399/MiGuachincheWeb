@@ -39,7 +39,8 @@ namespace MiGuachincheWeb.Controllers
             }
 
             ViewData["platos"] = new SelectList(_context.platos,"PlatoId","Nombre");
-            ManagerDTO datos = new ManagerDTO(manager.restaurantes.ToList());
+            ManagerDTO datos = new ManagerDTO();
+            datos.restaurantes = manager.restaurantes.ToList();
             return View(datos);
         }
 
@@ -64,7 +65,14 @@ namespace MiGuachincheWeb.Controllers
 
                 if (!restaurante.platos.Contains(platoSelected))
                 {
-                    restaurante.platos.Add(platoSelected);
+                    PlatoRestaurante platoRestaurante = new PlatoRestaurante();
+                    platoRestaurante.plato = platoSelected;
+                    platoRestaurante.restaurante = restaurante;
+                    platoRestaurante.plato_Id = platoSelected.PlatoId;
+                    platoRestaurante.restaurante_Id = restaurante.RestauranteId;
+                    platoRestaurante.valoracion = 1;
+                    platoRestaurante.activo = true;
+                    _context.Add(platoRestaurante);
                     await _context.SaveChangesAsync();
                 }   
             }

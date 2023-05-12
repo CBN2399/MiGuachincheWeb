@@ -80,7 +80,7 @@
     <div class="popup-content col-3">
         <h5>Añadir platos</h5>
         <form asp-controller="Manager" asp-action="AddPlato">
-            <input type="hidden" asp-for="restauranteId" name="valor" id="valor">
+            <input type="hidden" asp-for="restauranteId" id="valor" value="">
             <input type="hidden" asp-for="managerId" id="user "value="@UserManager.GetUserId(User)">
             <label for="platos" class="control-label"></label>
             <select asp-for=platoId id="platos" class="form-control mb-3" asp-items="ViewBag.platos">

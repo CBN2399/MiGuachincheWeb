@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MiGuachincheWeb.Models
 {
@@ -10,7 +11,10 @@ namespace MiGuachincheWeb.Models
         public int id { get; set; }
         public int plato_Id { get; set; }
         public int restaurante_Id { get; set; }
-        public int? valoracion { get; set; }
+
+
+        [Range(1,5,ErrorMessage ="La valoracion ha de ir de 1 a 5")]
+        public int valoracion { get; set; }
         public bool activo { get; set; }
 
         public virtual Plato plato { get; set; }

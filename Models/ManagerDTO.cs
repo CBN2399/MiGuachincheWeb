@@ -6,12 +6,11 @@
         public int? platoId { get; set;}
         public string? managerId { get; set;}
 
-        public List<Restaurante> restaurantes { get; set;}
+        public List<Restaurante>? restaurantes { get; set;}
 
 
-        public ManagerDTO(List<Restaurante> rest) 
+        public ManagerDTO() 
         {
-            restaurantes = rest.ToList();
         }
 
         public ManagerDTO(int restauranteId, int platoId, string managerId,List<Restaurante> rest)
