@@ -14,6 +14,7 @@ namespace MiGuachincheWeb.Models
         public int? valoracion { get; set; }
         public int Id_tipo { get; set; }
         public int zonaId { get; set; }
+        public string Descripcion { get; set; }
 
         public virtual TipoRestaurante Id_tipoNavigation { get; set; }
         public virtual Zona zona { get; set; }
