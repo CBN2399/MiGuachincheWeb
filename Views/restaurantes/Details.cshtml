@@ -66,6 +66,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if(Model.platos.Count != 0)
+                {
                     @foreach (Plato plato in Model.platos)
                     {
                         <tr>
@@ -77,7 +79,7 @@
                             </td>
                             <td>
                                 @ViewBag.PlatoRest[counter].valoracion
-                            </td>                          
+                            </td>
                             <td>
                                 @if (User.IsInRole("Default"))
                                 {
@@ -96,24 +98,22 @@
                                     </a>
                                 }
 
-                            </td>  
+                            </td>
                         </tr>
                         counter++;
                     }
+                }
+                
+                   
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-2 my-3 d-inline-flex justify-content-center align-items-center">
-            @if (User.IsInRole("Default"))
-            {
+        @if (User.IsInRole("Default"))
+        {
+            <div class="col-sm-2 my-3 d-inline-flex justify-content-center align-items-center"> 
                 <a class="btn btn-success" asp-controller="user" asp-action="MakeReservation" asp-route-id="@Model?.RestauranteId">Reservar</a>
-            }
-            else
-            {
-                <a class="btn btn-outline-info" asp-controller="user" asp-action="AgregatePlatos" asp-route-id="@Model?.RestauranteId"title="Añadir platos">Añadir platos</a>
-            }
-            
-        </div>
+            </div>
+        }
     </div>
 </div>
 <div>
@@ -123,7 +123,7 @@
     }
     else
     {
-        <a asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-primary my-3">Volver</a>
+        <a asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-primary my-3">Volver</a>
     }
 
 </div>

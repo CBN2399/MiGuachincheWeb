@@ -78,12 +78,27 @@ namespace MiGuachincheWeb.Controllers
             }
             return RedirectToAction("List","Manager", new {id = plato.managerId});
         }
-        
-
-       
-
-        
-
-       
+        public async Task<IActionResult> DeletePlato(int? id)
+        {
+            if((id == null) || (_context.plato_restaurantes == null))
+            {
+                return NotFound();
+            }
+            var plato = await _context.plato_restaurantes.FindAsync(id);
+            if (plato == null)
+            {
+                return NotFound();
+            }
+            var restaurante = await _context.restaurantes
+                .Include(e => e.platos)
+                .FirstOrDefaultAsync(e => e.RestauranteId == plato.restaurante_Id);
+            if (restaurante == null)
+            {
+                return NotFound();
+            }
+            restaurante.platos.Remove(plato.plato);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "restaurantes", new { id = plato.restaurante_Id });
+        }
     }
 }
