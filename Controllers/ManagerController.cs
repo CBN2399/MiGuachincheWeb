@@ -39,12 +39,12 @@ namespace MiGuachincheWeb.Controllers
             }
 
             ViewData["platos"] = new SelectList(_context.platos,"PlatoId","Nombre");
-            ViewData["platoDTO"] = new PlatoDTO();
-            return View(manager.restaurantes);
+            ManagerDTO datos = new ManagerDTO(manager.restaurantes.ToList());
+            return View(datos);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPlato([Bind("restauranteId,platoId,managerId")] PlatoDTO plato) 
+        public async Task<IActionResult> AddPlato([Bind("restauranteId,platoId,managerId")] ManagerDTO plato) 
         {
             if(ModelState.IsValid)
             {

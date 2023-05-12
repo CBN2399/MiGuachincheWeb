@@ -1,6 +1,6 @@
 ﻿namespace MiGuachincheWeb.Models
 {
-    public class PlatoDTO
+    public class ManagerDTO
     {
         public int? restauranteId {get; set;}
         public int? platoId { get; set;}
@@ -9,16 +9,17 @@
         public List<Restaurante> restaurantes { get; set;}
 
 
-        public PlatoDTO() 
+        public ManagerDTO(List<Restaurante> rest) 
         {
-            restaurantes = new List<Restaurante>();
+            restaurantes = rest.ToList();
         }
 
-        public PlatoDTO(int restauranteId, int platoId, string managerId)
+        public ManagerDTO(int restauranteId, int platoId, string managerId,List<Restaurante> rest)
         {
             this.restauranteId = restauranteId;
             this.platoId = platoId;
             this.managerId = managerId;
+            this. restaurantes = rest.ToList();
         }
     }
 }

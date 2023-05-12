@@ -3,7 +3,7 @@
 @inject SignInManager<CustomUser> SignInManager
 @inject UserManager<CustomUser> UserManager
 
-@model IEnumerable<MiGuachincheWeb.Models.Restaurante>
+@model ManagerDTO
 
 @{
     ViewData["Title"] = "Index";
@@ -16,23 +16,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.restaurantes.ToList()[0].Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.telefono)
+                @Html.DisplayNameFor(model => model.restaurantes.ToList()[0].telefono)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valoracion)
+                @Html.DisplayNameFor(model => model.restaurantes.ToList()[0].valoracion)
             </th>
             <th>Especialidad</th>
             <th>
-                @Html.DisplayNameFor(model => model.zona)
+                @Html.DisplayNameFor(model => model.restaurantes.ToList()[0].zona)
             </th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.restaurantes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -80,10 +80,10 @@
     <div class="popup-content col-3">
         <h5>Añadir platos</h5>
         <form asp-controller="Manager" asp-action="AddPlato">
-            <input type="hidden" asp-for="ViewBag.platoDTO.restauranteId" name="valor" id="valor">
-            <input type="hidden" id="user "value="@UserManager.GetUserId(User)">
+            <input type="hidden" asp-for="restauranteId" name="valor" id="valor">
+            <input type="hidden" asp-for="managerId" id="user "value="@UserManager.GetUserId(User)">
             <label for="platos" class="control-label"></label>
-            <select id="platos" class="form-control mb-3" asp-items="ViewBag.platos">
+            <select asp-for=platoId id="platos" class="form-control mb-3" asp-items="ViewBag.platos">
                 <option disabled selected>Selecciona un plato</option>
             </select>
             <button class="btn btn-primary" type="reset" onclick="cerrarFormulario()">Cerrar</button>
