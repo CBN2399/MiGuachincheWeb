@@ -14,7 +14,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
-    [Authorize]
+    
     public class restaurantesController : Controller
     {
         private readonly guachincheContext _context;

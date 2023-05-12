@@ -46,7 +46,7 @@
                         {
                             if (User.IsInRole("Manager"))
                             {
-                                <a class="nav-link text-white" asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Gestionar restaurantes</a>
+                                <a class="nav-link text-white" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Gestionar restaurantes</a>
 
                                 <a class="nav-link text-white" asp-controller="Reservas" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Gestionar reservas</a>
                             }
@@ -156,6 +156,7 @@
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/popup.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

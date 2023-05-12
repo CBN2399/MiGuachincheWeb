@@ -12,7 +12,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin,Default")]
     public class platosController : Controller
     {
         private readonly guachincheContext _context;
@@ -89,6 +89,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Details/5
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.platos == null)
@@ -138,7 +139,7 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: platos/Edit/5
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.platos == null)
@@ -160,7 +161,7 @@ namespace MiGuachincheWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
         {
             if (id != plato.PlatoId)

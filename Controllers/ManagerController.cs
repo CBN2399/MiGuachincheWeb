@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -20,7 +21,7 @@ namespace MiGuachincheWeb.Controllers
             _userManager = userManager;
         }
         // GET: ManagerController
-        public async Task<IActionResult> Index(String? id)
+        public async Task<IActionResult> List(String? id)
         {
             if((id == null) || (_context.custom_users == null))
             {
@@ -36,76 +37,45 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["platos"] = new SelectList(_context.platos,"PlatoId","Nombre");
+            ViewData["platoDTO"] = new PlatoDTO();
             return View(manager.restaurantes);
         }
 
-        // GET: ManagerController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ManagerController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ManagerController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> AddPlato([Bind("restauranteId,platoId,managerId")] PlatoDTO plato) 
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                var restaurante = await _context.restaurantes
+                    .Include(p => p.platos)
+                    .FirstOrDefaultAsync(e => e.RestauranteId== plato.restauranteId);
+                var platoSelected = await _context.platos.FindAsync(plato.platoId);
+                if((restaurante == null) ||(platoSelected == null))
+                {
+                    return NotFound();
+                }
 
-        // GET: ManagerController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+                if(restaurante.platos == null)
+                {
+                    restaurante.platos = new List<Plato>();
+                }
 
-        // POST: ManagerController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
+                if (!restaurante.platos.Contains(platoSelected))
+                {
+                    restaurante.platos.Add(platoSelected);
+                    await _context.SaveChangesAsync();
+                }   
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("List","Manager", new {id = plato.managerId});
         }
+        
 
-        // GET: ManagerController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
 
-        // POST: ManagerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
+
+       
     }
 }
