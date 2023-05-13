@@ -32,17 +32,17 @@
             </div>
         </div>
         <div>
-            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-dark">Log in</button>
+            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-dark">Entrar</button>
         </div>
-        <div class="contenedor_enlaces mt-3">
+        <div class="contenedor_enlaces my-5">
             <p>
-                <a id="forgot-password" asp-page="./ForgotPassword">Recordar</a>
+                <a class="p-3" id="forgot-password" asp-page="./ForgotPassword">Recordar</a>
             </p>
             <p>
-                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarse</a>
+                <a class="p-3" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarse</a>
             </p>
             <p>
-                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar correo electrónico de confirmación</a>
+                <a class="p-3" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Correo confirmación</a>
             </p>
         </div>
     </form>

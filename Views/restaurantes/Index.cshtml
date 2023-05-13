@@ -12,7 +12,7 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
+    <p class="mb-3">
         <a asp-action="Create" class="btn btn-primary my-2">Añadir restaurante</a>
     </p>
 }
@@ -21,22 +21,25 @@
 <fieldset>
     <form asp-action="Index" method="get">
         <div class="form-actions no-color">
-            <p>
-                <label for="filterText">Restaurante</label> 
-                <input id="filterText" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Introduce un nombre..."/>
-                @Html.DropDownList("restZone")
+            <div class="d-flex gap-3 ">
+                <label class="fs-2 fw-bold" for="filterText">Restaurante</label> 
+                <input class="p-1" id="filterText" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Introduce un nombre..."/>
+                <div class="dropList">
+                    @Html.DropDownList("restZone")
+                </div>
+                
                 <button class="btn btn-success" type="submit" value="Buscar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
                 </button>
                 <a class="btn btn-secondary" asp-action="Index" title="Reiniciar Búsqueda">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise fw-bold" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-clockwise fw-bold" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                         <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                     </svg>
                 </a>
-            </p>
+            </div>
         </div>
     </form>
 </fieldset>
@@ -47,14 +50,14 @@
             <th>
                 <a class="text-decoration-none text-dark" asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Nombre)</a>
             </th>
-            <th>
+            <th class="text-capitalize">
                 @Html.DisplayNameFor(model => model.telefono)
             </th>
-            <th>
+            <th class="text-capitalize ">
                 <a class="text-decoration-none text-dark" asp-action="Index" asp-route-sortOrder="@ViewData["ValSortParm"]">@Html.DisplayNameFor(model => model.valoracion)</a>
             </th>
             <th>Especialidad</th>
-            <th>
+            <th class="text-capitalize">
                 @Html.DisplayNameFor(model => model.zona)
             </th>
             <th>Acciones</th>
@@ -69,7 +72,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.telefono)
             </td>
-            <td>
+            <td class="ps-5">
                 @Html.DisplayFor(modelItem => item.valoracion)
             </td>
             <td>
@@ -79,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.zona.nombre)
             </td>
             <td>
-                    <a asp-action="Details" asp-route-id="@item.RestauranteId" class="btn btn-outline-success" title="Ver detalles del restaurante">
+                    <a asp-action="Details" asp-route-id="@item.RestauranteId" class="btn btn-outline-success me-3" title="Ver detalles del restaurante">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
