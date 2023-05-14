@@ -123,7 +123,7 @@ namespace MiGuachincheWeb.Controllers
 
         // GET: restaurantes/Create
         [Authorize(Roles = "Admin")]
-        public IActionResult Create()
+        public IActionResult Create(String? id)
         {
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre");
             ViewData["zonaId"] = new SelectList(_context.zonas, "Zona_id", "nombre");

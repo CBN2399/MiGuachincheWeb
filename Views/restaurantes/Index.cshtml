@@ -10,14 +10,6 @@
 
 <h1>Lista de restaurantes</h1>
 
-@if (User.IsInRole("Admin"))
-{
-    <p class="mb-3">
-        <a asp-action="Create" class="btn btn-primary my-2">Añadir restaurante</a>
-    </p>
-}
-
-
 <fieldset>
     <form asp-action="Index" method="get">
         <div class="form-actions no-color">

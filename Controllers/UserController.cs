@@ -28,7 +28,20 @@ namespace MiGuachincheWeb.Controllers
             var users = await _guachincheContext.Users.ToListAsync();
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
             users.RemoveAll(u => u.Id == currentUser.Result.Id);
-            return View(users);
+            List<CustomUserDTO> userList = new List<CustomUserDTO>();
+            foreach(CustomUser user in users)
+            {
+                var role = await _userManager.GetRolesAsync(user);
+                userList.Add(new CustomUserDTO
+                {
+                    Id = user.Id,
+                    Nombre = user.Nombre,
+                    Email = user.Email,
+                    Role = role[0].ToString()
+                });
+            }
+            
+            return View(userList);
         }
 
         [Authorize(Roles = "Default,Manager")]
