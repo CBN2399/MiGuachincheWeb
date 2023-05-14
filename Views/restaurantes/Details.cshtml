@@ -62,7 +62,10 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Valoración</th>
-                        <th>Acciones</th>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <th>Acciones</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -80,25 +83,30 @@
                             <td>
                                 @ViewBag.PlatoRest[counter].valoracion
                             </td>
-                            <td>
-                                @if (User.IsInRole("Default"))
+                                @if (!User.IsInRole("Admin"))
                                 {
-                                    <a asp-controller="User" asp-action="AddPlato" asp-route-id="@ViewBag.PlatoRest[counter].id" class="btn btn-outline-warning" title="Añadir plato a favoritos">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                        </svg>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a asp-controller="Manager" asp-action="DeletePlato" asp-route-id="@ViewBag.PlatoRest[counter].id" class="btn btn-outline-danger" title="Eliminar plato de la lista">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
-                                            <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z" />
-                                        </svg>
-                                    </a>
-                                }
+                                    <td>
+                                        @if (User.IsInRole("Default"))
+                                        {
+                                            <a asp-controller="User" asp-action="AddPlato" asp-route-id="@ViewBag.PlatoRest[counter].id" class="btn btn-outline-warning" title="Añadir plato a favoritos">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                                                </svg>
+                                            </a>
+                                        }
+                                        else
+                                        {
 
-                            </td>
+                                            <a asp-controller="Manager" asp-action="DeletePlato" asp-route-id="@ViewBag.PlatoRest[counter].id" class="btn btn-outline-danger" title="Eliminar plato de la lista">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                                                    <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z" />
+                                                </svg>
+                                            </a>
+                                        }
+
+                                    </td>
+                                }
+                                
                         </tr>
                         counter++;
                     }
