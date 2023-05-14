@@ -6,10 +6,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h3>Listado de Usuarios</h3>
-<table class="table">
+<h1 class="fw-bold">Listado de Usuarios</h1>
+<table class="table table-striped table-secondary table-hover my-3" ">
     <thead>
-        <tr>
+        <tr class="fs-3 fw-bold text-center">
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -22,7 +22,7 @@
     <tbody>
         @foreach (CustomUser user in Model)
         {
-            <tr>
+        <tr class="text-center">
                 <td>
                     @Html.DisplayFor(modelItem => user.Nombre)
                 </td>

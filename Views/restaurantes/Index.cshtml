@@ -46,14 +46,14 @@
 
 <table class="table table-striped table-secondary table-hover my-3">
     <thead>
-        <tr>
+        <tr class="fs-3 fw-bold text-center">
             <th>
                 <a class="text-decoration-none text-dark" asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Nombre)</a>
             </th>
             <th class="text-capitalize">
                 @Html.DisplayNameFor(model => model.telefono)
             </th>
-            <th class="text-capitalize ">
+            <th class="text-capitalize">
                 <a class="text-decoration-none text-dark" asp-action="Index" asp-route-sortOrder="@ViewData["ValSortParm"]">@Html.DisplayNameFor(model => model.valoracion)</a>
             </th>
             <th>Especialidad</th>
@@ -65,14 +65,14 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr class="text-center">
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.telefono)
             </td>
-            <td class="ps-5">
+            <td>
                 @Html.DisplayFor(modelItem => item.valoracion)
             </td>
             <td>
