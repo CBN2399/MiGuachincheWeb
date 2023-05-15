@@ -14,40 +14,40 @@
 <hr />
 <div>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-12 col-md-7 mb-5">
             <!--Aqui va la foto del restaurante-->
             <img src='~/img/restaurantes/@Html.DisplayFor(model => model.Rest_Url)' title="Imagen del restaurante" alt="@Html.DisplayFor(model => model.Descripcion)" width="400" height="300" />
         </div>
-        <div class="col-sm-7 my-md-0 my-3">
+        <div class="col-12 col-md-5">
             <dl class="row">
-                <dt class="col-sm-2 ">
+                <dt class="col-sm-3 ">
                     @Html.DisplayNameFor(model => model.Nombre)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.Nombre)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.telefono)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.telefono)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.valoracion)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.valoracion)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-3">
                     Especialidad
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.Id_tipoNavigation.nombre)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.zona)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.zona.nombre)
                 </dd>
             </dl>
