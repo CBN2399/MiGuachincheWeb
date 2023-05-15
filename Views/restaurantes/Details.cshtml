@@ -118,7 +118,7 @@
         @if (User.IsInRole("Default"))
         {
             <div class="col-sm-2 my-3 d-inline-flex justify-content-center align-items-center"> 
-                <a class="btn btn-success" asp-controller="user" asp-action="MakeReservation" asp-route-id="@Model?.RestauranteId">Reservar</a>
+                <a class="btn btn-success" asp-controller="Reservas" asp-action="Create" asp-route-id="@Model?.RestauranteId">Reservar</a>
             </div>
         }
     </div>

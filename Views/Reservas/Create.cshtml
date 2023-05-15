@@ -1,48 +1,44 @@
-﻿@model MiGuachincheWeb.Models.Reserva
+﻿@model MiGuachincheWeb.Models.ReservaDTO
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Reserva</h4>
+<h4>Hacer una Reserva</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FechaReserva" class="control-label"></label>
-                <input asp-for="FechaReserva" class="form-control" />
-                <span asp-validation-for="FechaReserva" class="text-danger"></span>
+            <div class="form-group my-3">
+                <label for="restaurante" class="control-label">Restaurante</label>
+                <input id="restaurante" asp-for="nombreRestaurante" class="form-control" readonly />
+                <span asp-validation-for="nombreRestaurante" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="numeroComensales" class="control-label"></label>
-                <input asp-for="numeroComensales" class="form-control" />
+            <div class="form-group my-3">
+                <label for="nombreUsuario" class="control-label">Nombre:</label>
+                <input id="nombreUsuario" asp-for="nombreUsuario" class="form-control" readonly />
+                <span asp-validation-for="nombreUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3">
+                <label for="cantidad" class="control-label">Número de comensales</label>
+                <input id="cantidad" asp-for="numeroComensales" class="form-control" />
                 <span asp-validation-for="numeroComensales" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="customerUserId" class="control-label"></label>
-                <select asp-for="customerUserId" class ="form-control" asp-items="ViewBag.customerUserId"></select>
+            <div class="form-group my-3">
+                <label for="fecha" class="control-label">Elige la fecha de la reserva</label>
+                <input id="fecha" asp-for="fechaReserva" class="form-control" />
+                <span asp-validation-for="fechaReserva" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="restauranteId" class="control-label"></label>
-                <select asp-for="restauranteId" class ="form-control" asp-items="ViewBag.restauranteId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="estadoReservaId" class="control-label"></label>
-                <select asp-for="estadoReservaId" class ="form-control" asp-items="ViewBag.estadoReservaId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group my-3">
+                <input type="submit" value="Confirmar" class="btn btn-outline-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-controller="restaurantes" asp-action="Index">Volver</a>
 </div>
 
 @section Scripts {

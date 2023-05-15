@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace MiGuachincheWeb.Controllers
     public class ReservasController : Controller
     {
         private readonly guachincheContext _context;
+        private readonly UserManager<CustomUser> _userManager;
 
-        public ReservasController(guachincheContext context)
+        public ReservasController(guachincheContext context, UserManager<CustomUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Reservas
@@ -48,12 +51,26 @@ namespace MiGuachincheWeb.Controllers
         }
 
         // GET: Reservas/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? id)
         {
-            ViewData["customerUserId"] = new SelectList(_context.custom_users, "Id", "Id");
-            ViewData["estadoReservaId"] = new SelectList(_context.estadoReservas, "Id", "Id");
-            ViewData["restauranteId"] = new SelectList(_context.restaurantes, "RestauranteId", "Descripcion");
-            return View();
+            if((id == null || _context.restaurantes == null))
+            {
+                return NotFound();
+
+            }
+            var restaurante = await _context.restaurantes.FindAsync(id);
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            if((restaurante == null) || (currentUser.Result == null))
+            {
+                return NotFound();
+            }
+            if(currentUser.Result.Nombre == null)
+            {
+                return BadRequest();
+            }
+            ReservaDTO reserva = new ReservaDTO(currentUser.Result.Nombre,restaurante.Nombre);
+            
+            return View(reserva);
         }
 
         // POST: Reservas/Create
