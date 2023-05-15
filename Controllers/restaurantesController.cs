@@ -129,6 +129,7 @@ namespace MiGuachincheWeb.Controllers
         {
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre");
             ViewData["zonaId"] = new SelectList(_context.zonas, "Zona_id", "nombre");
+            ViewData["managerId"] = id;
             return View();
         }
 
@@ -138,8 +139,18 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
+        public async Task<IActionResult> Create(String? id,[Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
+            if((id == null) || (_context.custom_users == null))
+            {
+                return NotFound();
+            }
+            var manager = await _context.custom_users
+                .Include(e => e.restaurantes).FirstOrDefaultAsync(i => i.Id == id);
+            if(manager == null)
+            {
+                return NotFound();
+            }
             string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
             string restPath = Path.Combine(filePath, "restaurantes");
             if (ModelState.IsValid && Image != null)
@@ -153,6 +164,13 @@ namespace MiGuachincheWeb.Controllers
                 }
                 restaurante.Rest_Url = Image.FileName;
                 _context.Add(restaurante);
+
+                UserRestaurante userRest=new UserRestaurante();
+                userRest.usuario_Id = id;
+                userRest.restaurante_Id = restaurante.RestauranteId;
+                userRest.restaurante = restaurante;
+                userRest.customUser = manager;
+                _context.Add(userRest);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
