@@ -16,6 +16,7 @@ namespace MiGuachincheWeb.Models
         public string Rest_Url { get; set; }
 
         [Required(ErrorMessage = "El campo 'Telefono' es requerido")]
+        [StringLength(9)]
         [DisplayName("Telefono")]
         public string telefono { get; set; }
 

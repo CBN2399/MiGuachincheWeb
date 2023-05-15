@@ -138,7 +138,7 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
+        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
             string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
             string restPath = Path.Combine(filePath, "restaurantes");
@@ -191,17 +191,29 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")]
-        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
+        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
             if (id != restaurante.RestauranteId)
             {
                 return NotFound();
             }
 
+            string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
+            string restPath = Path.Combine(filePath, "restaurantes");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (Directory.Exists(restPath) && Image != null)
+                    {
+                        using (Stream fileStream = new FileStream(Path.Combine(restPath, Image.FileName), FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileStream);
+                        }
+                        restaurante.Rest_Url = Image.FileName;
+                    }
+                    
                     _context.Update(restaurante);
                     await _context.SaveChangesAsync();
                 }
