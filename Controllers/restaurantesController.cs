@@ -18,10 +18,12 @@ namespace MiGuachincheWeb.Controllers
     public class restaurantesController : Controller
     {
         private readonly guachincheContext _context;
+        private readonly IWebHostEnvironment _webEnvironment;
 
-        public restaurantesController(guachincheContext context)
+        public restaurantesController(guachincheContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _webEnvironment = environment;
         }
 
         // GET: restaurantes
@@ -136,16 +138,31 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
+        public async Task<IActionResult> Create([Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
-            if (ModelState.IsValid)
+            string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
+            string restPath = Path.Combine(filePath, "restaurantes");
+            if (ModelState.IsValid && Image != null)
             {
+                if (Directory.Exists(restPath))
+                {
+                    using (Stream fileStream = new FileStream(Path.Combine(restPath, Image.FileName), FileMode.Create))
+                    {
+                        await Image.CopyToAsync(fileStream);
+                    }
+                }
+                restaurante.Rest_Url = Image.FileName;
                 _context.Add(restaurante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                ViewData["error"] = "No se ha subido la imagen del restaurante";
+            }
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre", restaurante.Id_tipo);
             ViewData["zonaId"] = new SelectList(_context.zonas, "Zona_id", "nombre", restaurante.zonaId);
+
             return View(restaurante);
         }
 
@@ -174,17 +191,29 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")]
-        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,Rest_Url,telefono,valoracion,Id_tipo,zonaId")] Restaurante restaurante)
+        public async Task<IActionResult> Edit(int id, [Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
             if (id != restaurante.RestauranteId)
             {
                 return NotFound();
             }
 
+            string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
+            string restPath = Path.Combine(filePath, "restaurantes");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (Directory.Exists(restPath) && Image != null)
+                    {
+                        using (Stream fileStream = new FileStream(Path.Combine(restPath, Image.FileName), FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileStream);
+                        }
+                        restaurante.Rest_Url = Image.FileName;
+                    }
+                    
                     _context.Update(restaurante);
                     await _context.SaveChangesAsync();
                 }

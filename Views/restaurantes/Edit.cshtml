@@ -14,16 +14,27 @@
 <div class="row">
     <div class="col-md-5">
         <!--Imagen del restaurante-->
-        <img src="~/img/Queso_asado.jpg" width="450" height="300" />
+        <img src='~/img/restaurantes/@Model.Rest_Url' width="450" height="300" />
     </div>
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RestauranteId" />
+            <input type="hidden" asp-for="valoracion" />
             <div class="form-group my-3">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Image" class="control-label">Seleccione la imagen: </label>
+                <input type="file" accept="image/*" name="Image" id="Image" class="form-control" />
+                <span class="text-danger">@ViewBag?.error</span>
             </div>
             <div class="form-group my-3">
                 <label asp-for="telefono" class="control-label"></label>
@@ -31,14 +42,12 @@
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label for="Id_tipo" class="control-label">Especialidad</label>
-                <select id="Id_tipo" class="form-control" asp-items="ViewBag.Id_tipo"></select>
-                <span asp-validation-for="Id_tipo" class="text-danger"></span>
+                <label asp-for="Id_tipo" class="control-label"></label>
+                <select asp-for="Id_tipo" class="form-control" asp-items="ViewBag.Id_tipo"></select>
             </div>
             <div class="form-group my-3">
-                <label for="zonaId" class="control-label">Zona</label>
-                <select id="zonaId" class="form-control" asp-items="ViewBag.zonaId"></select>
-                <span asp-validation-for="zonaId" class="text-danger"></span>
+                <label asp-for="zonaId" class="control-label"></label>
+                <select asp-for="zonaId" class="form-control" asp-items="ViewBag.zonaId"></select>
             </div>
             <div class="form-group my-3">
                 <input type="submit" value="Guardar" class="btn btn-success" />
