@@ -12,53 +12,54 @@
 <h2>Editar restaurante</h2>
 <hr />
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-12 col-md-5 mb-5">
         <!--Imagen del restaurante-->
         <img src='~/img/restaurantes/@Model.Rest_Url' width="450" height="300" />
     </div>
-    <div class="col-md-4">
+    <div class="col-12 col-md-7">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RestauranteId" />
             <input type="hidden" asp-for="valoracion" />
             <div class="form-group my-3">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+                <label asp-for="Nombre" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="Nombre" class="form-control mt-3" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
+                <label asp-for="Descripcion" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="Descripcion" class="form-control mt-3" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="Image" class="control-label">Seleccione la imagen: </label>
-                <input type="file" accept="image/*" name="Image" id="Image" class="form-control" />
+                <label for="Image" class="control-label mt-3 fw-bold">Seleccione la imagen: </label>
+                <input type="file" accept="image/*" name="Image" id="Image" class="form-control mt-3" />
                 <span class="text-danger">@ViewBag?.error</span>
             </div>
             <div class="form-group my-3">
-                <label asp-for="telefono" class="control-label"></label>
-                <input asp-for="telefono" class="form-control" />
+                <label asp-for="telefono" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="telefono" class="form-control mt-3" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label asp-for="Id_tipo" class="control-label"></label>
-                <select asp-for="Id_tipo" class="form-control" asp-items="ViewBag.Id_tipo"></select>
+                <label asp-for="Id_tipo" class="control-label mt-3 fw-bold"></label>
+                <select asp-for="Id_tipo" class="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
             </div>
             <div class="form-group my-3">
-                <label asp-for="zonaId" class="control-label"></label>
-                <select asp-for="zonaId" class="form-control" asp-items="ViewBag.zonaId"></select>
+                <label asp-for="zonaId" class="control-label mt-3 fw-bold"></label>
+                <select asp-for="zonaId" class="form-control mt-3" asp-items="ViewBag.zonaId"></select>
             </div>
             <div class="form-group my-3">
-                <input type="submit" value="Guardar" class="btn btn-success" />
+                <input type="submit" value="Guardar" class="btn btn-primary d-block" />
             </div>
         </form>
+        <div>
+            <a class="btn btn-info mt-5" asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
+        </div>
     </div>
 </div>
 
-<div my-3>
-    <a class="btn btn-primary" asp-controller="Manager" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
