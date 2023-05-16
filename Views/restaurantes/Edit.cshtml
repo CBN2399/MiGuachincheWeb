@@ -9,9 +9,11 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Editar restaurante</h2>
-<hr />
 <div class="row">
+
+    <h1 class="text-center">Editar Restaurante</h1>
+    <hr />
+    <h4>Restaurante</h4>
     <div class="col-12 col-md-5 mb-5">
         <!--Imagen del restaurante-->
         <img src='~/img/restaurantes/@Model.Rest_Url' width="450" height="300" />
@@ -49,13 +51,11 @@
                 <label asp-for="zonaId" class="control-label mt-3 fw-bold"></label>
                 <select asp-for="zonaId" class="form-control mt-3" asp-items="ViewBag.zonaId"></select>
             </div>
-            <div class="form-group my-3">
-                <input type="submit" value="Guardar" class="btn btn-primary d-block" />
+            <div class="form-group mt-3">
+                <input type="submit" value="Guardar" class="btn btn-primary me-5" />
+                <a class="btn btn-info mt-5" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
             </div>
         </form>
-        <div>
-            <a class="btn btn-info mt-5" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
-        </div>
     </div>
 </div>
 

@@ -4,57 +4,56 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>restaurante</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-12 col-md-8">
+        <h1 class="text-center">Crear Restaurante</h1>
+        <h4>Restaurante</h4>
+        <hr />
         <form asp-action="Create" asp-route-id="@ViewBag?.managerId" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+                <label asp-for="Nombre" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="Nombre" class="form-control mt-3" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
+                <label asp-for="Descripcion" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="Descripcion" class="form-control mt-3" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="Image" class="control-label">Seleccione la imagen: </label>
-                <input type="file" accept="image/*" name="Image" id="Image" class="form-control" />
+                <label for="Image" class="control-label mt-3 fw-bold">Seleccione la imagen: </label>
+                <input type="file" accept="image/*" name="Image" id="Image" class="form-control mt-3" />
                 <span class="text-danger">@ViewBag?.error</span>
             </div>
             <div class="form-group">
-                <label asp-for="telefono" class="control-label"></label>
-                <input asp-for="telefono" class="form-control" />
+                <label asp-for="telefono" class="control-label mt-3 fw-bold"></label>
+                <input asp-for="telefono" class="form-control mt-3" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="valoracion" class="control-label"></label>
-                <input asp-for="valoracion" class="form-control" />
+                <label asp-for="valoracion" class="control-label mt-3 fw-bold text-capitalize"></label>
+                <input asp-for="valoracion" class="form-control mt-3" />
                 <span asp-validation-for="valoracion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id_tipo" class="control-label"></label>
-                <select asp-for="Id_tipo" class ="form-control" asp-items="ViewBag.Id_tipo"></select>
+                <label asp-for="Id_tipo" class="control-label mt-3 fw-bold">Tipo</label>
+                <select asp-for="Id_tipo" class ="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
             </div>
             <div class="form-group">
-                <label asp-for="zonaId" class="control-label"></label>
-                <select asp-for="zonaId" class ="form-control" asp-items="ViewBag.zonaId"></select>
+                <label asp-for="zonaId" class="control-label mt-3 fw-bold">Zona</label>
+                <select asp-for="zonaId" class ="form-control mt-3" asp-items="ViewBag.zonaId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-3">
+                <input type="submit" value="Crear" class="btn btn-primary me-5" />
+                <a class="btn btn-info" asp-action="Index">Volver</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
