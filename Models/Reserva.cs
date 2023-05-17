@@ -13,8 +13,8 @@ namespace MiGuachincheWeb.Models
         public int restauranteId { get; set; }
         public int estadoReservaId { get; set; }
 
-        public CustomUser? CustomUser { get; set; }
-        public Restaurante? restaurante { get; set; }
-        public EstadoReserva? estado { get; set; }
+        public virtual CustomUser CustomUser { get; set; }
+        public virtual Restaurante restaurante { get; set; }
+        public virtual EstadoReserva estado { get; set; }
     }
 }

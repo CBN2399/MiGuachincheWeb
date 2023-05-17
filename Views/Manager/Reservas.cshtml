@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MiGuachincheWeb.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center mb-5">Lista de reservas</h2>
+<hr/>
+<h4>Reservas pendientes</h4>
+<table class="table table-hover table-striped table-info">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Comensales</th>
+            <th class="text-capitalize">Restaurante</th>
+            <th class="text-capitalize">Nombre de la reserva</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.estado.Name.Equals("Pendiente"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numeroComensales)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
+                    </td>
+                    <td>
+                    </td>
+                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <a asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                            Confirmar
+                        </a>
+
+                        <a asp-controller="restaurantes" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success" title="Ver detalles del restaurante">
+                            Rechazar
+                        </a>
+
+                        
+                    </td>
+                </tr>
+            }
+            
+        }
+    </tbody>
+</table>
+
+

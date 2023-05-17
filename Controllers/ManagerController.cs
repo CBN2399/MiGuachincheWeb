@@ -100,5 +100,16 @@ namespace MiGuachincheWeb.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", "restaurantes", new { id = plato.restaurante_Id });
         }
+
+        public async Task<IActionResult> Reservas()
+        {
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var manager = await _context.custom_users.Include(e => e.reservas).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            if (manager == null)
+            {
+                return BadRequest();
+            }
+            return View(manager.reservas);
+        }
     }
 }

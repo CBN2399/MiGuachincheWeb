@@ -13,11 +13,13 @@
             <div class="form-group my-3">
                 <label for="restaurante" class="control-label">Restaurante</label>
                 <input id="restaurante" asp-for="nombreRestaurante" class="form-control" readonly />
+                <input type="hidden" asp-for="restId" />
                 <span asp-validation-for="nombreRestaurante" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
                 <label for="nombreUsuario" class="control-label">Nombre:</label>
                 <input id="nombreUsuario" asp-for="nombreUsuario" class="form-control" readonly />
+                <input  type="hidden" asp-for="userId"/>
                 <span asp-validation-for="nombreUsuario" class="text-danger"></span>
             </div>
             <div class="form-group my-3">

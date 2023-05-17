@@ -68,27 +68,46 @@ namespace MiGuachincheWeb.Controllers
             {
                 return BadRequest();
             }
-            ReservaDTO reserva = new ReservaDTO(currentUser.Result.Nombre,restaurante.Nombre);
+            ReservaDTO reserva = new ReservaDTO(currentUser.Result.Id,restaurante.RestauranteId,currentUser.Result.Nombre,restaurante.Nombre);
             
             return View(reserva);
         }
 
-        // POST: Reservas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaReserva,numeroComensales,customerUserId,restauranteId,estadoReservaId")] Reserva reserva)
+        public async Task<IActionResult> Create([Bind("numeroComensales,fechaReserva,nombreUsuario,nombreRestauranteId,userId,restId")] ReservaDTO reserva)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reserva);
+                if((reserva.userId == null) || (_context.reservas == null))
+                {
+                    return NotFound();
+                }
+
+                var user = _context.custom_users.FirstOrDefaultAsync(e => e.Id == reserva.userId);
+                var restaurante = _context.restaurantes.FirstOrDefaultAsync(e => e.RestauranteId == reserva.restId);
+                var estado = _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
+                if((user == null) || (restaurante == null) || (estado == null))
+                {
+                    return NotFound();
+                }
+
+                Reserva reservation = new Reserva();
+                reservation.numeroComensales = reserva.numeroComensales;
+                reservation.FechaReserva = reserva.fechaReserva;
+                reservation.restauranteId = reserva.restId;
+                reservation.restaurante = restaurante.Result;
+                reservation.customerUserId = reserva.userId;
+                reservation.CustomUser = user.Result;
+                reservation.estado = estado.Result;
+                reservation.estadoReservaId = estado.Result.Id;
+
+                _context.Add(reservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","restaurantes");
             }
-            ViewData["customerUserId"] = new SelectList(_context.custom_users, "Id", "Id", reserva.customerUserId);
-            ViewData["estadoReservaId"] = new SelectList(_context.estadoReservas, "Id", "Id", reserva.estadoReservaId);
-            ViewData["restauranteId"] = new SelectList(_context.restaurantes, "RestauranteId", "Descripcion", reserva.restauranteId);
+            
             return View(reserva);
         }
 

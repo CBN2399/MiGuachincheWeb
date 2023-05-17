@@ -48,7 +48,7 @@
                             {
                                 <a class="nav-link text-white" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Gestionar restaurantes</a>
 
-                                <a class="nav-link text-white" asp-controller="Reservas" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)">Gestionar reservas</a>
+                                <a class="nav-link text-white" asp-controller="Manager" asp-action="Reservas" asp-route-id="@UserManager.GetUserId(User)">Gestionar reservas</a>
                             }
                             else
                             {
