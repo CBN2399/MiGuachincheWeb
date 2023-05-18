@@ -352,5 +352,21 @@ namespace MiGuachincheWeb.Controllers
             return (_guachincheContext.custom_users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+
+        public async Task<IActionResult> Reserva()
+        {
+            var currentUser = _userManager.GetUserAsync(HttpContext.User);
+            var user = await _guachincheContext.custom_users
+                .Include(e => e.reservas)
+                .ThenInclude(e => e.restaurante)
+                .Include(e => e.reservas)
+                .ThenInclude(e => e.estado)
+                .FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            if((user == null) || (user.reservas == null)) 
+            { 
+                return NotFound(); 
+            }
+            return View(user.reservas);
+        }
     }
 }
