@@ -22,6 +22,7 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RestauranteId" />
+            <input type="hidden" asp-for="Rest_Url" />
             <input type="hidden" asp-for="valoracion" />
             <div class="form-group my-3">
                 <label asp-for="Nombre" class="control-label mt-3 fw-bold"></label>

@@ -219,6 +219,10 @@ namespace MiGuachincheWeb.Controllers
             string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
             string restPath = Path.Combine(filePath, "restaurantes");
 
+
+
+            ModelState.Remove("Image");
+
             if (ModelState.IsValid)
             {
                 try
@@ -230,6 +234,11 @@ namespace MiGuachincheWeb.Controllers
                             await Image.CopyToAsync(fileStream);
                         }
                         restaurante.Rest_Url = Image.FileName;
+                    }
+                    else
+                    {
+                        Restaurante rest = _context.restaurantes.Find(restaurante.RestauranteId);
+                        restaurante.Rest_Url = rest.Rest_Url;
                     }
                     
                     _context.Update(restaurante);
