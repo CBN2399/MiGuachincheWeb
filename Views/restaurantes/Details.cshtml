@@ -129,7 +129,7 @@
         <div>
             @if (User.IsInRole("Default"))
             {
-                <a class="btn btn-success" asp-controller="Reservas" asp-action="Create" asp-route-id="@Model?.RestauranteId">Reservar</a>             
+                <a class="btn btn-success me-5" asp-controller="Reservas" asp-action="Create" asp-route-id="@Model?.RestauranteId">Reservar</a>             
             }
             @if (User.IsInRole("Default") || User.IsInRole("Admin"))
             {
