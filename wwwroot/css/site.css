@@ -24,9 +24,10 @@ html {
 }
 
 body {
-  position:relative;
-  padding-bottom:350px;
-  min-height:100vh;
+    position: relative;
+    padding-bottom: 350px;
+    min-height: 100vh;
+    background-color: #FFFCCF;
 }
 
 .stroke {
