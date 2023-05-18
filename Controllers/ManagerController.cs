@@ -104,12 +104,32 @@ namespace MiGuachincheWeb.Controllers
         public async Task<IActionResult> Reservas()
         {
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            var manager = await _context.custom_users.Include(e => e.reservas).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            var manager = await _context.custom_users.Include(e => e.restaurantes)
+                .ThenInclude(i => i.reservas)
+                .ThenInclude(f => f.estado)
+                .Include(e => e.restaurantes)
+                .ThenInclude(i => i.reservas)
+                .ThenInclude(f => f.CustomUser)
+                .FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id); 
             if (manager == null)
             {
                 return BadRequest();
             }
-            return View(manager.reservas);
+            List<Reserva> reservas = new List<Reserva>();
+            if(manager.restaurantes != null)
+            {
+                foreach (Restaurante rest in manager.restaurantes)
+                {
+                    if(rest.reservas != null)
+                    {
+                        foreach (Reserva reserva in rest.reservas)
+                        {
+                            reservas.Add(reserva);
+                        }
+                    } 
+                }
+            }
+            return View(reservas);
         }
     }
 }

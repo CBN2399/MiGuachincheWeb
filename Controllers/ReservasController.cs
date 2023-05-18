@@ -76,7 +76,7 @@ namespace MiGuachincheWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("numeroComensales,fechaReserva,nombreUsuario,nombreRestauranteId,userId,restId")] ReservaDTO reserva)
+        public async Task<IActionResult> Create([Bind("numeroComensales,fechaReserva,nombreUsuario,nombreRestaurante,userId,restId")] ReservaDTO reserva)
         {
             if (ModelState.IsValid)
             {

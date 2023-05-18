@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MiGuachincheWeb.Models.Reserva>
+﻿@model List<MiGuachincheWeb.Models.Reserva>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,53 +6,132 @@
 
 <h2 class="text-center fw-bold mb-5">Lista de reservas</h2>
 <hr/>
-
-<div class="table-responsive">
-
-    <h4>Reservas pendientes</h4>
-    <table class="table table-hover table-striped table-info mt-3">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Comensales</th>
-                <th class="text-capitalize">Restaurante</th>
-                <th class="text-capitalize">Nombre de la reserva</th>
-                <th class="text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+<h4>Reservas pendientes</h4>
+<table class="table table-hover table-striped table-info mt-3">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Comensales</th>
+            <th class="text-capitalize">Restaurante</th>
+            <th class="text-capitalize">Nombre de la reserva</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.estado.Name.Equals("Pendiente"))
             {
-                if (item.estado.Name.Equals("Pendiente"))
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaReserva)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.numeroComensales)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.restaurante.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
-                        </td>
-                        <td>
-                        </td>
-                        <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                            <a class="btn btn-info" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
-                                Confirmar
-                            </a>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numeroComensales)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
+                    </td>
+                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <a class="btn btn-success" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                            Confirmar
+                        </a>
 
-                            <a class="btn btn-danger" asp-controller="restaurantes" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success" title="Ver detalles del restaurante">
-                                Rechazar
-                            </a>                       
-                        </td>
-                    </tr>
-                }           
+                        <a class="btn btn-danger" asp-controller="restaurantes" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success" title="Ver detalles del restaurante">
+                            Rechazar
+                        </a>                       
+                    </td>
+                </tr>
+            }           
+        }
+    </tbody>
+</table>
+
+<hr/>
+<h4>Reservas activas</h4>
+<table class="table table-hover table-striped table-secondary mt-3">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Comensales</th>
+            <th class="text-capitalize">Restaurante</th>
+            <th class="text-capitalize">Nombre de la reserva</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.estado.Name.Equals("Activa"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numeroComensales)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
+                    </td>
+                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <a class="btn btn-success" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                            Confirmar
+                        </a>
+                    </td>
+                </tr>
             }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Reservas Finalizadas</h4>
+<table class="table table-hover table-striped table-dark mt-3">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Comensales</th>
+            <th class="text-capitalize">Restaurante</th>
+            <th class="text-capitalize">Nombre de la reserva</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.estado.Name.Equals("Finalizada"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numeroComensales)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
+                    </td>
+                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <a class="btn btn-success" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                            Confirmar
+                        </a>
+                        <a class="btn btn-danger" asp-controller="restaurantes" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success" title="Ver detalles del restaurante">
+                            Rechazar
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
 

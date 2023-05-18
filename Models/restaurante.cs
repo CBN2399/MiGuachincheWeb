@@ -11,7 +11,7 @@ namespace MiGuachincheWeb.Models
     {
         public int RestauranteId { get; set; }
 
-        [Required(ErrorMessage = "El campo 'Nombre' es requerido")]
+        
         public string Nombre { get; set; }
         public string Rest_Url { get; set; }
 
