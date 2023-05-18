@@ -45,20 +45,19 @@
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label asp-for="Id_tipo" class="control-label mt-3 fw-bold"></label>
-                <select asp-for="Id_tipo" class="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
-            </div>
-            <div class="form-group my-3">
-                <label asp-for="zonaId" class="control-label mt-3 fw-bold"></label>
-                <select asp-for="zonaId" class="form-control mt-3" asp-items="ViewBag.zonaId"></select>
+                <label for="Id_tipo" class="control-label mt-3 fw-bold">Especialidad</label>
+                <select id="Id_tipo" asp-for="Id_tipo" class="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Guardar" class="btn btn-primary me-5" />
-                <a class="btn btn-info mt-5" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
+            </div>
+            <div class="my-3">
+                <a class="btn btn-info" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
             </div>
         </form>
     </div>
 </div>
+
 
 
 

@@ -5,6 +5,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -19,11 +20,13 @@ namespace MiGuachincheWeb.Controllers
     {
         private readonly guachincheContext _context;
         private readonly IWebHostEnvironment _webEnvironment;
+        private readonly UserManager<CustomUser> _userManager;
 
-        public restaurantesController(guachincheContext context, IWebHostEnvironment environment)
+        public restaurantesController(guachincheContext context, IWebHostEnvironment environment, UserManager<CustomUser> userManager)
         {
             _context = context;
             _webEnvironment = environment;
+            _userManager = userManager;
         }
 
         // GET: restaurantes
@@ -203,9 +206,7 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        // POST: restaurantes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")]
@@ -225,6 +226,11 @@ namespace MiGuachincheWeb.Controllers
 
             if (ModelState.IsValid)
             {
+                var restaurant = await _context.restaurantes.FirstOrDefaultAsync(e => e.RestauranteId == restaurante.RestauranteId);
+                if (restaurant == null)
+                {
+                    return NotFound();
+                }
                 try
                 {
                     if (Directory.Exists(restPath) && Image != null)
@@ -233,29 +239,23 @@ namespace MiGuachincheWeb.Controllers
                         {
                             await Image.CopyToAsync(fileStream);
                         }
-                        restaurante.Rest_Url = Image.FileName;
+                        restaurant.Rest_Url = Image.FileName;
                     }
-                    else
-                    {
-                        Restaurante rest = _context.restaurantes.Find(restaurante.RestauranteId);
-                        restaurante.Rest_Url = rest.Rest_Url;
-                    }
+                    restaurant.Descripcion = restaurante.Descripcion;
+                    restaurant.Nombre = restaurante.Nombre;
+                    restaurant.telefono = restaurante.telefono;
+                    restaurant.Id_tipoNavigation = restaurante.Id_tipoNavigation;
+                    restaurant.Id_tipo = restaurante.Id_tipo;
                     
-                    _context.Update(restaurante);
+                    _context.Update(restaurant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!restauranteExists(restaurante.RestauranteId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+                var currentUser = _userManager.GetUserAsync(HttpContext.User);
+                return RedirectToAction("List","Manager", new {id = currentUser.Result.Id});
             }
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre", restaurante.Id_tipo);
             ViewData["zonaId"] = new SelectList(_context.zonas, "Zona_id", "nombre", restaurante.zonaId);
