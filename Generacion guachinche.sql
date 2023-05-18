@@ -88,7 +88,7 @@ go
 
 --Informacion de las zonas
 insert into zona(nombre,descripcion,ImagenURL) values('Zona Norte','Esta es una de las mejores partes de la isla para comer platos tipicos canarios','norte.jpg');
-insert into zona(nombre,descripcion,ImagenURL) values('Zona Sur','Esra zona de la isla se caracteriza por su variedad en pescados','sur.jpg');
+insert into zona(nombre,descripcion,ImagenURL) values('Zona Sur','Esta zona de la isla se caracteriza por su variedad en pescados','sur.jpg');
 insert into zona(nombre,descripcion,ImagenURL) values('Zona Metropolitana','Zona perteneciente a la capital de la isla y sus medianias','metropolitana.jpg');
 go
 
