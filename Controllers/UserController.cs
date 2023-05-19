@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
-using System.Data;
-using System.Linq;
 
 namespace MiGuachincheWeb.Controllers
 {
@@ -29,7 +26,7 @@ namespace MiGuachincheWeb.Controllers
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
             users.RemoveAll(u => u.Id == currentUser.Result.Id);
             List<CustomUserDTO> userList = new List<CustomUserDTO>();
-            foreach(CustomUser user in users)
+            foreach (CustomUser user in users)
             {
                 var role = await _userManager.GetRolesAsync(user);
                 userList.Add(new CustomUserDTO
@@ -40,7 +37,7 @@ namespace MiGuachincheWeb.Controllers
                     Role = role[0].ToString()
                 });
             }
-            
+
             return View(userList);
         }
 
@@ -85,7 +82,7 @@ namespace MiGuachincheWeb.Controllers
             {
                 return BadRequest();
             }
-            CustomUserDTO userDTO = new CustomUserDTO(user.Id,user.Nombre,user.Apelllidos,user.Telefono,user.Email);
+            CustomUserDTO userDTO = new CustomUserDTO(user.Id, user.Nombre, user.Apelllidos, user.Telefono, user.Email);
 
             return View(userDTO);
         }
@@ -107,7 +104,7 @@ namespace MiGuachincheWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-               
+
                 try
                 {
                     userSelected.Nombre = user.Nombre;
@@ -127,7 +124,7 @@ namespace MiGuachincheWeb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details","User", new{ id = user.Id });
+                return RedirectToAction("Details", "User", new { id = user.Id });
             }
             return View(user);
         }
@@ -153,7 +150,7 @@ namespace MiGuachincheWeb.Controllers
             _guachincheContext.custom_users.Remove(user);
             await _guachincheContext.SaveChangesAsync();
 
-            return RedirectToAction("Index","User");
+            return RedirectToAction("Index", "User");
         }
 
 
@@ -177,13 +174,13 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            if(!user.Id.Equals(currentUser.Result.Id)) 
+            if (!user.Id.Equals(currentUser.Result.Id))
             {
                 return BadRequest();
             }
 
             List<Restaurante> restaurantes = new List<Restaurante>();
-            if(user.restaurantes != null)
+            if (user.restaurantes != null)
             {
                 restaurantes = user.restaurantes.ToList();
             }
@@ -215,7 +212,7 @@ namespace MiGuachincheWeb.Controllers
             }
 
             List<PlatoRestaurante> platos = new List<PlatoRestaurante>();
-            if(user.platos != null)
+            if (user.platos != null)
             {
                 platos = user.platos.ToList();
             }
@@ -230,14 +227,14 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            var restaurante =  await _guachincheContext.restaurantes.FindAsync(id);
+            var restaurante = await _guachincheContext.restaurantes.FindAsync(id);
             if (restaurante == null)
             {
                 return NotFound();
             }
 
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            var user =  await _guachincheContext.custom_users.Include(r => r.restaurantes).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
+            var user = await _guachincheContext.custom_users.Include(r => r.restaurantes).FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
             if (user == null)
             {
                 return NotFound();
@@ -255,7 +252,7 @@ namespace MiGuachincheWeb.Controllers
                     userRest.restaurante_Id = restaurante.RestauranteId;
                 }
             }
-            
+
             _guachincheContext.Add(userRest);
             await _guachincheContext.SaveChangesAsync();
             return NoContent();
@@ -277,7 +274,7 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            if(user.restaurantes != null)
+            if (user.restaurantes != null)
             {
                 if (!user.restaurantes.Contains(restaurante))
                 {
@@ -289,7 +286,7 @@ namespace MiGuachincheWeb.Controllers
 
             }
 
-            return RedirectToAction("RestList","User", new { id = user.Id});
+            return RedirectToAction("RestList", "User", new { id = user.Id });
         }
 
         public async Task<IActionResult> AddPlato(int? id)
@@ -307,12 +304,12 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            if(user.platos == null)
+            if (user.platos == null)
             {
                 user.platos = new List<PlatoRestaurante>();
             }
 
-            if(!user.platos.Contains(platoRest))
+            if (!user.platos.Contains(platoRest))
             {
                 user.platos.Add(platoRest);
                 await _guachincheContext.SaveChangesAsync();
@@ -335,7 +332,7 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            if(user.platos != null) 
+            if (user.platos != null)
             {
                 if (!user.platos.Contains(platoRest))
                 {
@@ -362,9 +359,9 @@ namespace MiGuachincheWeb.Controllers
                 .Include(e => e.reservas)
                 .ThenInclude(e => e.estado)
                 .FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
-            if((user == null) || (user.reservas == null)) 
-            { 
-                return NotFound(); 
+            if ((user == null) || (user.reservas == null))
+            {
+                return NotFound();
             }
             return View(user.reservas);
         }

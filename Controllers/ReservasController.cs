@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -53,34 +49,34 @@ namespace MiGuachincheWeb.Controllers
         // GET: Reservas/Create
         public async Task<IActionResult> Create(int? id)
         {
-            if((id == null || _context.restaurantes == null))
+            if ((id == null || _context.restaurantes == null))
             {
                 return NotFound();
 
             }
             var restaurante = await _context.restaurantes.FindAsync(id);
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
-            if((restaurante == null) || (currentUser.Result == null))
+            if ((restaurante == null) || (currentUser.Result == null))
             {
                 return NotFound();
             }
-            if(currentUser.Result.Nombre == null)
+            if (currentUser.Result.Nombre == null)
             {
                 return BadRequest();
             }
-            ReservaDTO reserva = new ReservaDTO(currentUser.Result.Id,restaurante.RestauranteId,currentUser.Result.Nombre,restaurante.Nombre);
-            
+            ReservaDTO reserva = new ReservaDTO(currentUser.Result.Id, restaurante.RestauranteId, currentUser.Result.Nombre, restaurante.Nombre);
+
             return View(reserva);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("numeroComensales,fechaReserva,nombreUsuario,nombreRestaurante,userId,restId")] ReservaDTO reserva)
         {
             if (ModelState.IsValid)
             {
-                if((reserva.userId == null) || (_context.reservas == null))
+                if ((reserva.userId == null) || (_context.reservas == null))
                 {
                     return NotFound();
                 }
@@ -88,7 +84,7 @@ namespace MiGuachincheWeb.Controllers
                 var user = _context.custom_users.FirstOrDefaultAsync(e => e.Id == reserva.userId);
                 var restaurante = _context.restaurantes.FirstOrDefaultAsync(e => e.RestauranteId == reserva.restId);
                 var estado = _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
-                if((user == null) || (restaurante == null) || (estado == null))
+                if ((user == null) || (restaurante == null) || (estado == null))
                 {
                     return NotFound();
                 }
@@ -105,9 +101,9 @@ namespace MiGuachincheWeb.Controllers
 
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index","restaurantes");
+                return RedirectToAction("Index", "restaurantes");
             }
-            
+
             return View(reserva);
         }
 
@@ -203,14 +199,14 @@ namespace MiGuachincheWeb.Controllers
             {
                 _context.reservas.Remove(reserva);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReservaExists(int id)
         {
-          return (_context.reservas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.reservas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

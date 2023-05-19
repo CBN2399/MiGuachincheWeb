@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Server;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,7 +8,7 @@ using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
-    [Authorize (Roles = "Manager")]
+    [Authorize(Roles = "Manager")]
     public class ManagerController : Controller
     {
         private readonly guachincheContext _context;
@@ -24,7 +22,7 @@ namespace MiGuachincheWeb.Controllers
         // GET: ManagerController
         public async Task<IActionResult> List(String? id)
         {
-            if((id == null) || (_context.custom_users == null))
+            if ((id == null) || (_context.custom_users == null))
             {
                 return NotFound();
             }
@@ -34,32 +32,32 @@ namespace MiGuachincheWeb.Controllers
                 .Include(e => e.restaurantes)
                 .ThenInclude(e => e.Id_tipoNavigation)
                 .FirstOrDefaultAsync(e => e.Id == id);
-            if(manager == null)
+            if (manager == null)
             {
                 return NotFound();
             }
 
-            ViewData["platos"] = new SelectList(_context.platos,"PlatoId","Nombre");
+            ViewData["platos"] = new SelectList(_context.platos, "PlatoId", "Nombre");
             ManagerDTO datos = new ManagerDTO();
             datos.restaurantes = manager.restaurantes.ToList();
             return View(datos);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPlato([Bind("restauranteId,platoId,managerId")] ManagerDTO plato) 
+        public async Task<IActionResult> AddPlato([Bind("restauranteId,platoId,managerId")] ManagerDTO plato)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var restaurante = await _context.restaurantes
                     .Include(p => p.platos)
-                    .FirstOrDefaultAsync(e => e.RestauranteId== plato.restauranteId);
+                    .FirstOrDefaultAsync(e => e.RestauranteId == plato.restauranteId);
                 var platoSelected = await _context.platos.FindAsync(plato.platoId);
-                if((restaurante == null) ||(platoSelected == null))
+                if ((restaurante == null) || (platoSelected == null))
                 {
                     return NotFound();
                 }
 
-                if(restaurante.platos == null)
+                if (restaurante.platos == null)
                 {
                     restaurante.platos = new List<Plato>();
                 }
@@ -75,13 +73,13 @@ namespace MiGuachincheWeb.Controllers
                     platoRestaurante.activo = true;
                     _context.Add(platoRestaurante);
                     await _context.SaveChangesAsync();
-                }   
+                }
             }
-            return RedirectToAction("List","Manager", new {id = plato.managerId});
+            return RedirectToAction("List", "Manager", new { id = plato.managerId });
         }
         public async Task<IActionResult> DeletePlato(int? id)
         {
-            if((id == null) || (_context.plato_restaurantes == null))
+            if ((id == null) || (_context.plato_restaurantes == null))
             {
                 return NotFound();
             }
@@ -111,23 +109,23 @@ namespace MiGuachincheWeb.Controllers
                 .Include(e => e.restaurantes)
                 .ThenInclude(i => i.reservas)
                 .ThenInclude(f => f.CustomUser)
-                .FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id); 
+                .FirstOrDefaultAsync(e => e.Id == currentUser.Result.Id);
             if (manager == null)
             {
                 return BadRequest();
             }
             List<Reserva> reservas = new List<Reserva>();
-            if(manager.restaurantes != null)
+            if (manager.restaurantes != null)
             {
                 foreach (Restaurante rest in manager.restaurantes)
                 {
-                    if(rest.reservas != null)
+                    if (rest.reservas != null)
                     {
                         foreach (Reserva reserva in rest.reservas)
                         {
                             reservas.Add(reserva);
                         }
-                    } 
+                    }
                 }
             }
             return View(reservas);

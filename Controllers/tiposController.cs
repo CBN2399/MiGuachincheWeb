@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -22,9 +17,9 @@ namespace MiGuachincheWeb.Controllers
         // GET: tipos
         public async Task<IActionResult> Index()
         {
-              return _context.tipos != null ? 
-                          View(await _context.tipos.ToListAsync()) :
-                          Problem("Entity set 'guachincheContext.tipos'  is null.");
+            return _context.tipos != null ?
+                        View(await _context.tipos.ToListAsync()) :
+                        Problem("Entity set 'guachincheContext.tipos'  is null.");
         }
 
         // GET: tipos/Details/5
@@ -150,14 +145,14 @@ namespace MiGuachincheWeb.Controllers
             {
                 _context.tipos.Remove(tipo);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool tipoExists(int id)
         {
-          return (_context.tipos?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.tipos?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

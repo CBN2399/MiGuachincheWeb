@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
 
@@ -10,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<guachincheContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MiGuachincheContext") ?? throw new InvalidOperationException("Connection string 'MiGuachincheContext' not found.")));
 
-builder.Services.AddDefaultIdentity<CustomUser>(options => 
+builder.Services.AddDefaultIdentity<CustomUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequiredLength = 4;

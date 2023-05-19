@@ -10,13 +10,13 @@
         public int restId { get; set; }
         public string nombreUsuario { get; set; }
 
-        
+
 
         public string nombreRestaurante { get; set; }
 
         public ReservaDTO() { }
 
-        public ReservaDTO(int numeroComensales, DateTime fechaReserva, string nombreUsuario, string? nombreRestaurante,string userId,int restId)
+        public ReservaDTO(int numeroComensales, DateTime fechaReserva, string nombreUsuario, string? nombreRestaurante, string userId, int restId)
         {
             this.numeroComensales = numeroComensales;
             this.fechaReserva = fechaReserva;

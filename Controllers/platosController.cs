@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
 
 namespace MiGuachincheWeb.Controllers
 {
-    [Authorize(Roles ="Admin,Default")]
+    [Authorize(Roles = "Admin,Default")]
     public class platosController : Controller
     {
         private readonly guachincheContext _context;
@@ -32,7 +27,7 @@ namespace MiGuachincheWeb.Controllers
 
             var platos = (IQueryable<Plato>)_context.platos.Include(p => p.tipo);
 
-            if(tipoPlato.Count() == 0)
+            if (tipoPlato.Count() == 0)
             {
                 if (plateType == null || plateType == "Todos")
                 {
@@ -55,13 +50,13 @@ namespace MiGuachincheWeb.Controllers
                     }
                 }
             }
-            
+
             ViewBag.plateType = tipoPlato;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 platos = platos.Where(s => s.Nombre.Contains(searchString));
-                
+
             }
 
             if (!String.IsNullOrEmpty(plateType) && !plateType.Equals("Todos"))
@@ -228,14 +223,14 @@ namespace MiGuachincheWeb.Controllers
             {
                 _context.platos.Remove(plato);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool platoExists(int id)
         {
-          return (_context.platos?.Any(e => e.PlatoId == id)).GetValueOrDefault();
+            return (_context.platos?.Any(e => e.PlatoId == id)).GetValueOrDefault();
         }
     }
 }

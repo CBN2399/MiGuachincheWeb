@@ -14,13 +14,13 @@ namespace MiGuachincheWeb.Models
 
         public bool? isActive { get; set; }
 
-        public virtual ICollection<Restaurante> restaurantes { get; set; } 
+        public virtual ICollection<Restaurante> restaurantes { get; set; }
 
         public virtual ICollection<PlatoRestaurante> platos { get; set; }
 
-        public virtual ICollection<Reserva> reservas { get; set; } 
+        public virtual ICollection<Reserva> reservas { get; set; }
 
-        
+
 
     }
 }

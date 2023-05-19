@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -312,7 +311,7 @@ namespace MiGuachincheWeb.Migrations
                     FechaReserva = table.Column<DateTime>(type: "datetime2", nullable: false),
                     customerUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     restauranteId = table.Column<int>(type: "int", nullable: false),
-                    estadoReservaId = table.Column<int>(type: "int", nullable: false)  
+                    estadoReservaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -361,13 +360,13 @@ namespace MiGuachincheWeb.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade,
                         onUpdate: ReferentialAction.Cascade);
-            table.ForeignKey(
-                        name: "FK_userRestaurantes_restaurante_RestauranteId",
-                        column: x => x.RestauranteId,
-                        principalTable: "restaurante",
-                        principalColumn: "RestauranteId",
-                        onDelete: ReferentialAction.Cascade,
-                        onUpdate: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                                name: "FK_userRestaurantes_restaurante_RestauranteId",
+                                column: x => x.RestauranteId,
+                                principalTable: "restaurante",
+                                principalColumn: "RestauranteId",
+                                onDelete: ReferentialAction.Cascade,
+                                onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

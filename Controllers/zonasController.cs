@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
@@ -24,9 +19,9 @@ namespace MiGuachincheWeb.Controllers
         // GET: zonas
         public async Task<IActionResult> Index()
         {
-              return _context.zonas != null ? 
-                          View(await _context.zonas.ToListAsync()) :
-                          Problem("Entity set 'guachincheContext.zonas'  is null.");
+            return _context.zonas != null ?
+                        View(await _context.zonas.ToListAsync()) :
+                        Problem("Entity set 'guachincheContext.zonas'  is null.");
         }
 
         // GET: zonas/Details/5
@@ -40,8 +35,8 @@ namespace MiGuachincheWeb.Controllers
             }
 
             var zona = await _context.zonas
-                .Include(e=> e.restaurantes)
-                .ThenInclude(i =>i.Id_tipoNavigation)
+                .Include(e => e.restaurantes)
+                .ThenInclude(i => i.Id_tipoNavigation)
                 .FirstOrDefaultAsync(m => m.Zona_id == id);
             if (zona == null)
             {
@@ -162,14 +157,14 @@ namespace MiGuachincheWeb.Controllers
             {
                 _context.zonas.Remove(zona);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool zonaExists(int id)
         {
-          return (_context.zonas?.Any(e => e.Zona_id == id)).GetValueOrDefault();
+            return (_context.zonas?.Any(e => e.Zona_id == id)).GetValueOrDefault();
         }
     }
 }

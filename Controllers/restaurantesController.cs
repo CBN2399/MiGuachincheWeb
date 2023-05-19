@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
+using System.Data;
 
 namespace MiGuachincheWeb.Controllers
 {
-    
+
     public class restaurantesController : Controller
     {
         private readonly guachincheContext _context;
@@ -38,7 +32,7 @@ namespace MiGuachincheWeb.Controllers
 
             var restaurantes = (IQueryable<Restaurante>)_context.restaurantes.Include(r => r.Id_tipoNavigation).Include(r => r.zona);
 
-            if(restaurantes.Count() != 0)
+            if (restaurantes.Count() != 0)
             {
                 if (restZone == null || restZone == "Todos")
                 {
@@ -105,7 +99,7 @@ namespace MiGuachincheWeb.Controllers
 
             var restaurante = await _context.restaurantes.Include(p => p.platos).ThenInclude(i => i.tipo)
                 .Include(e => e.zona).Include(e => e.Id_tipoNavigation).FirstOrDefaultAsync(i => i.RestauranteId == id);
-           
+
             if (restaurante == null)
             {
                 return NotFound();
@@ -115,7 +109,7 @@ namespace MiGuachincheWeb.Controllers
                             where a.restaurante_Id == id
                             select a;
             List<PlatoRestaurante> platos = new List<PlatoRestaurante>();
-            if(platorest != null)
+            if (platorest != null)
             {
                 foreach (var a in platorest)
                 {
@@ -142,15 +136,15 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(String? id,[Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
+        public async Task<IActionResult> Create(String? id, [Bind("RestauranteId,Nombre,telefono,valoracion,Descripcion,Id_tipo,zonaId")] Restaurante restaurante, [FromForm] IFormFile Image)
         {
-            if((id == null) || (_context.custom_users == null))
+            if ((id == null) || (_context.custom_users == null))
             {
                 return NotFound();
             }
             var manager = await _context.custom_users
                 .Include(e => e.restaurantes).FirstOrDefaultAsync(i => i.Id == id);
-            if(manager == null)
+            if (manager == null)
             {
                 return NotFound();
             }
@@ -168,7 +162,7 @@ namespace MiGuachincheWeb.Controllers
                 restaurante.Rest_Url = Image.FileName;
                 _context.Add(restaurante);
 
-                UserRestaurante userRest=new UserRestaurante();
+                UserRestaurante userRest = new UserRestaurante();
                 userRest.usuario_Id = id;
                 userRest.restaurante_Id = restaurante.RestauranteId;
                 userRest.restaurante = restaurante;
@@ -206,7 +200,7 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")]
@@ -246,16 +240,16 @@ namespace MiGuachincheWeb.Controllers
                     restaurant.telefono = restaurante.telefono;
                     restaurant.Id_tipoNavigation = restaurante.Id_tipoNavigation;
                     restaurant.Id_tipo = restaurante.Id_tipo;
-                    
+
                     _context.Update(restaurant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                     throw;
+                    throw;
                 }
                 var currentUser = _userManager.GetUserAsync(HttpContext.User);
-                return RedirectToAction("List","Manager", new {id = currentUser.Result.Id});
+                return RedirectToAction("List", "Manager", new { id = currentUser.Result.Id });
             }
             ViewData["Id_tipo"] = new SelectList(_context.tipoRestaurantes, "id", "nombre", restaurante.Id_tipo);
             ViewData["zonaId"] = new SelectList(_context.zonas, "Zona_id", "nombre", restaurante.zonaId);
@@ -298,14 +292,14 @@ namespace MiGuachincheWeb.Controllers
             {
                 _context.restaurantes.Remove(restaurante);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool restauranteExists(int id)
         {
-          return (_context.restaurantes?.Any(e => e.RestauranteId == id)).GetValueOrDefault();
+            return (_context.restaurantes?.Any(e => e.RestauranteId == id)).GetValueOrDefault();
         }
     }
 }

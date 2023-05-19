@@ -6,14 +6,16 @@
 
 <h2 class="text-center fw-bold mb-5">Mis reservas</h2>
 <hr />
+<article class="row">
+
+
 <h4>Reservas pendientes</h4>
-<table class="table table-hover table-striped table-info mt-3">
+<table class="table table-hover table-striped table-info mt-3 col-8">
     <thead>
         <tr>
-            <th>Fecha</th>
+            <th>Fecha de reserva</th>
             <th>Comensales</th>
             <th class="text-capitalize">Restaurante</th>
-            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -31,100 +33,105 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.restaurante.Nombre)
                     </td>
-                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                        <a class="btn btn-danger" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
-                            Cancelar
-                        </a>
-                    </td>
                 </tr>
             }
         }
     </tbody>
 </table>
 
-<hr />
-<h4>Reservas activas</h4>
-<table class="table table-hover table-striped table-secondary mt-3">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Comensales</th>
-            <th class="text-capitalize">Restaurante</th>
-            <th class="text-capitalize">Nombre de la reserva</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.estado.Name.Equals("Activa"))
-            {
+    <hr />
+    <div class="col-10">
+        <h4>Reservas activas</h4>
+        <table class="table table-hover table-striped table-secondary mt-3">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaReserva)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.numeroComensales)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
-                    </td>
-                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                        <a class="btn btn-success" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
-                            Confirmar
-                        </a>
-                    </td>
+                    <th>Fecha de reserva</th>
+                    <th>Comensales</th>
+                    <th class="text-capitalize">Restaurante</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.estado.Name.Equals("Activa"))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaReserva)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numeroComensales)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                            </td>
+                            <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                                <a class="btn btn-success" asp-controller="Reservas" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info" title="Editar reserva">
+                                    Editar
+                                </a>
+                                <a class="btn btn-danger" asp-controller="User" asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-outline-info" title="Cancelar reserva">
+                                    Cancelar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 
-<hr />
-<h4>Reservas finalizadas</h4>
-<table class="table table-hover table-striped table-dark mt-3">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Comensales</th>
-            <th class="text-capitalize">Restaurante</th>
-            <th class="text-capitalize">Nombre de la reserva</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.estado.Name.Equals("Finalizada"))
-            {
+    <div class="my-3">
+        <button id="ManagerButton" class="btn btn-primary" title="Lista de reservas finalizadas">Reservas finalizadas</button>
+    </div>
+
+    <div id="historial" class=" my-2 oculto col-10">
+        <h4>Reservas finalizadas</h4>
+        <table class="table table-hover table-striped table-dark mt-3">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaReserva)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.numeroComensales)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
-                    </td>
-                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                        <a class="btn btn-success" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
-                            Confirmar
-                        </a>
-                        <a class="btn btn-danger" asp-controller="restaurantes" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-success" title="Ver detalles del restaurante">
-                            Rechazar
-                        </a>
-                    </td>
+                    <th>Fecha de la reserva</th>
+                    <th>Comensales</th>
+                    <th class="text-capitalize">Restaurante</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.estado.Name.Equals("Finalizada"))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaReserva)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numeroComensales)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                            </td>
+                            <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                                <a class="btn btn-info" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                                    Valorar restaurante
+                                </a>
+                                <a class="btn btn-info" asp-controller="Reservas" asp-action="MakeReservation" asp-route-id="@item.Id" class="btn btn-outline-info" title="Hacer reserva">
+                                    Valorar menú
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</article>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_HistoryButtonPartial");
+    }
+}
 
 
