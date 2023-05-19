@@ -270,3 +270,7 @@ p {
     background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
     background-repeat: no-repeat;
 }
+/*Parte para el boton de historial*/
+.oculto{
+    display:none;
+}

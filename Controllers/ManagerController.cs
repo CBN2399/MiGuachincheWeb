@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -130,6 +131,51 @@ namespace MiGuachincheWeb.Controllers
                 }
             }
             return View(reservas);
+        }
+
+        public async Task<IActionResult> Confirm(int id)
+        {
+            var reserva = await _context.reservas.Include(e => e.estado).FirstOrDefaultAsync(e => e.Id == id);
+            var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Activa");
+            if ((reserva == null) || (estado == null))
+            {
+                return NotFound();
+            }
+            reserva.estado = estado;
+            reserva.estadoReservaId = estado.Id;
+            _context.Update(reserva);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Reservas));
+        }
+
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var reserva = await _context.reservas.Include(e => e.estado).FirstOrDefaultAsync(e => e.Id == id);
+            var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Cancelada");
+            if ((reserva == null) || (estado == null))
+            {
+                return NotFound();
+            }
+            reserva.estado = estado;
+            reserva.estadoReservaId = estado.Id;
+            _context.Update(reserva);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Reservas));
+        }
+
+        public async Task<IActionResult> Finalizar(int id)
+        {
+            var reserva = await _context.reservas.Include(e => e.estado).FirstOrDefaultAsync(e => e.Id == id);
+            var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Finalizada");
+            if ((reserva == null) || (estado == null))
+            {
+                return NotFound();
+            }
+            reserva.estado = estado;
+            reserva.estadoReservaId = estado.Id;
+            _context.Update(reserva);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Reservas));
         }
     }
 }
