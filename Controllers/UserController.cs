@@ -365,5 +365,20 @@ namespace MiGuachincheWeb.Controllers
             }
             return View(user.reservas);
         }
+
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var reserva = await _guachincheContext.reservas.Include(e => e.estado).FirstOrDefaultAsync(e => e.Id == id);
+            var estado = await _guachincheContext.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Cancelada");
+            if ((reserva == null) || (estado == null))
+            {
+                return NotFound();
+            }
+            reserva.estado = estado;
+            reserva.estadoReservaId = estado.Id;
+            _guachincheContext.Update(reserva);
+            await _guachincheContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Reserva));
+        }
     }
 }

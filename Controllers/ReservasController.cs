@@ -81,9 +81,9 @@ namespace MiGuachincheWeb.Controllers
                     return NotFound();
                 }
 
-                var user = _context.custom_users.FirstOrDefaultAsync(e => e.Id == reserva.userId);
-                var restaurante = _context.restaurantes.FirstOrDefaultAsync(e => e.RestauranteId == reserva.restId);
-                var estado = _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
+                var user = await _context.custom_users.FirstOrDefaultAsync(e => e.Id == reserva.userId);
+                var restaurante =  await _context.restaurantes.FirstOrDefaultAsync(e => e.RestauranteId == reserva.restId);
+                var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
                 if ((user == null) || (restaurante == null) || (estado == null))
                 {
                     return NotFound();
@@ -93,11 +93,11 @@ namespace MiGuachincheWeb.Controllers
                 reservation.numeroComensales = reserva.numeroComensales;
                 reservation.FechaReserva = reserva.fechaReserva;
                 reservation.restauranteId = reserva.restId;
-                reservation.restaurante = restaurante.Result;
+                reservation.restaurante = restaurante;
                 reservation.customerUserId = reserva.userId;
-                reservation.CustomUser = user.Result;
-                reservation.estado = estado.Result;
-                reservation.estadoReservaId = estado.Result.Id;
+                reservation.CustomUser = user;
+                reservation.estado = estado;
+                reservation.estadoReservaId = estado.Id;
 
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
@@ -120,18 +120,12 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["customerUserId"] = new SelectList(_context.custom_users, "Id", "Id", reserva.customerUserId);
-            ViewData["estadoReservaId"] = new SelectList(_context.estadoReservas, "Id", "Id", reserva.estadoReservaId);
-            ViewData["restauranteId"] = new SelectList(_context.restaurantes, "RestauranteId", "Descripcion", reserva.restauranteId);
             return View(reserva);
         }
-
-        // POST: Reservas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaReserva,numeroComensales,customerUserId,restauranteId,estadoReservaId")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaReserva,numeroComensales")] Reserva reserva)
         {
             if (id != reserva.Id)
             {
@@ -142,6 +136,13 @@ namespace MiGuachincheWeb.Controllers
             {
                 try
                 {
+                    var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
+                    if (estado == null)
+                    {
+                        return BadRequest();
+                    }
+                    reserva.estado = estado;
+                    reserva.estadoReservaId = estado.Id;
                     _context.Update(reserva);
                     await _context.SaveChangesAsync();
                 }
@@ -158,9 +159,6 @@ namespace MiGuachincheWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["customerUserId"] = new SelectList(_context.custom_users, "Id", "Id", reserva.customerUserId);
-            ViewData["estadoReservaId"] = new SelectList(_context.estadoReservas, "Id", "Id", reserva.estadoReservaId);
-            ViewData["restauranteId"] = new SelectList(_context.restaurantes, "RestauranteId", "Descripcion", reserva.restauranteId);
             return View(reserva);
         }
 
