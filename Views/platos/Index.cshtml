@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center fw-bold">Lista de platos</h1>
+<h1 class="text-center fw-bold mb-5">Lista de platos</h1>
 
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="Create" class="btn btn-primary my-2">Añadir Plato</a>
+        <a asp-action="Create" class="btn btn-primary mb-5">Añadir Plato</a>
     </p>
 }
 
@@ -41,8 +41,8 @@
     </fieldset>
 }
 
-<div class="table-responsive">
-    <table class="table table-striped table-secondary table-hover my-3">
+<div class="table-responsive p-5">
+    <table class="table table-striped table-secondary table-hover fondo_tablas">
         <thead>
             <tr class="fs-3 fw-bold text-center">
                 <th>
