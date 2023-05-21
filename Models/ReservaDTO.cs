@@ -2,21 +2,18 @@
 {
     public class ReservaDTO
     {
+        public int reservaId {get;set;}
         public int numeroComensales { get; set; }
         public DateTime fechaReserva { get; set; }
-
         public string? userId { get; set; }
-
         public int restId { get; set; }
-        public string nombreUsuario { get; set; }
+        public string? nombreUsuario { get; set; }
 
-
-
-        public string nombreRestaurante { get; set; }
+        public string? nombreRestaurante { get; set; }
 
         public ReservaDTO() { }
 
-        public ReservaDTO(int numeroComensales, DateTime fechaReserva, string nombreUsuario, string? nombreRestaurante, string userId, int restId)
+        public ReservaDTO(int numeroComensales, DateTime fechaReserva, string nombreUsuario, string nombreRestaurante, string userId, int restId)
         {
             this.numeroComensales = numeroComensales;
             this.fechaReserva = fechaReserva;
@@ -32,6 +29,14 @@
             this.nombreRestaurante = nombreRestaurante;
             this.userId = userId;
             this.restId = restId;
+        }
+
+        public ReservaDTO(int reservaId, int numeroComensales, DateTime fechaReserva, int rest)
+        {
+            this.reservaId = reservaId;
+            this.numeroComensales = numeroComensales;
+            this.fechaReserva = fechaReserva;
+            this.restId = rest;
         }
     }
 }
