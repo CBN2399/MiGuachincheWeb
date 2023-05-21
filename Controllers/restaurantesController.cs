@@ -301,5 +301,24 @@ namespace MiGuachincheWeb.Controllers
         {
             return (_context.restaurantes?.Any(e => e.RestauranteId == id)).GetValueOrDefault();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Valorate(int restauranteId, int rating)
+        {
+            var restaurante = await _context.restaurantes.FindAsync(restauranteId);
+            if (restaurante == null) 
+            {
+                return NotFound();
+            }
+            if (rating != 0) 
+            {
+                restaurante.valoracion = (restaurante.valoracion + rating)/2;
+                _context.Update(restaurante);
+                await _context.SaveChangesAsync();
+            }
+            
+            return RedirectToAction("Reserva", "user");
+        }
+        
     }
 }

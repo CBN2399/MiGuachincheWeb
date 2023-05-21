@@ -345,6 +345,36 @@ p {
         font-size: 30px;
     }
 }
+/*PopUp de valoracion*/
+.rating {
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    float: right;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.rating label:after {
+    content: "\2605";
+    padding: 5px;
+    font-size: 30px;
+}
+
+.rating input:checked ~ label {
+    color: #ffc107;
+}
+
+.rating label:hover, .rating label:hover ~ label {
+    color: #ffdb70;
+}
+  
+  
 
 
 
