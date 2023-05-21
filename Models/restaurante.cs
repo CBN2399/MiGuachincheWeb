@@ -11,21 +11,24 @@ namespace MiGuachincheWeb.Models
     {
         public int RestauranteId { get; set; }
 
-        
+        [Required(ErrorMessage = "El campo 'Nombre' es requerido")]
         public string Nombre { get; set; }
         public string Rest_Url { get; set; }
 
-        [Required(ErrorMessage = "El campo 'Telefono' es requerido")]
-        [StringLength(9)]
-        [DisplayName("Telefono")]
+        [Required(ErrorMessage = "El campo 'Teléfono' es requerido")]
+        [StringLength(9, ErrorMessage = "El campo 'Teléfono' debe contener 9 números")]
+        [DisplayName("Teléfono")]
         public string telefono { get; set; }
 
-        [Required(ErrorMessage = "El campo 'valoracion' es requerido")]
+        [DisplayName("Valoración")]
+        [Required(ErrorMessage = "El campo 'Valoración' es requerido")]
+        [Range(0, 5, ErrorMessage = "El campo 'Valoración' no puede ser menor que 0, y mayor que 5")]
         public int? valoracion { get; set; }
         public int Id_tipo { get; set; }
         public int zonaId { get; set; }
 
-        [Required(ErrorMessage = "El campo 'Descripcion' es requerido")]
+        [DisplayName("Descripción")]
+        [Required(ErrorMessage = "El campo 'Descripción' es requerido")]
         public string Descripcion { get; set; }
 
         [DisplayName("Especialidad")]

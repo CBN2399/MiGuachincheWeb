@@ -2,6 +2,8 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MiGuachincheWeb.Models
@@ -10,6 +12,8 @@ namespace MiGuachincheWeb.Models
     {
         public int PlatoId { get; set; }
         public string Nombre { get; set; }
+
+        [DisplayName("Descripción")]
         public string Descripcion { get; set; }
         public int tipoId { get; set; }
 
