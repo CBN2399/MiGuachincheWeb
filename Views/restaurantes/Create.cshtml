@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="telefono" class="control-label mt-3 fw-bold"></label>
-                <input asp-for="telefono" class="form-control mt-3" min="9" />
+                <input asp-for="telefono" class="form-control mt-3" pattern="[0-9]{9}" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="valoracion" value="0" class="form-control mt-3" />
