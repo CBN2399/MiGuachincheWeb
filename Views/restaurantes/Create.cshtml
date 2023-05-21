@@ -33,7 +33,7 @@
                 <input asp-for="telefono" class="form-control mt-3" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="valoracion" class="form-control mt-3" />
+            <input type="hidden" asp-for="valoracion" value="0" class="form-control mt-3" />
             <div class="form-group">
                 <label asp-for="Id_tipo" class="control-label mt-3 fw-bold">Tipo</label>
                 <select asp-for="Id_tipo" class ="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
