@@ -287,3 +287,64 @@ p {
     overflow-x: hidden;
 }
 
+.fondo_tablas_listas {
+    box-shadow: 10px 10px 5px 0px rgba(92,90,87,1);
+    border:none;
+    border-collapse:initial;
+}
+
+/*titulo login*/
+
+.titulo {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 40px;
+    letter-spacing: 1.2px;
+    word-spacing: 0px;
+    color: wheat;
+    font-weight: 700;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: capitalize;
+}
+
+/* Animation */
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+    .parallax > use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+    }
+
+
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+
+    100% {
+        transform: translate3d(85px,0,0);
+    }
+}
+/*Shrinking for mobile*/
+
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    .content {
+        height: 30vh;
+    }
+
+    .titulo {
+        font-size: 30px;
+    }
+}
+
+
+
