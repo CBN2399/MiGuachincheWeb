@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MiGuachincheWeb.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MiGuachincheWeb.Areas.Identity.Pages.Account
@@ -60,6 +61,7 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
+            [DisplayName("Correo")]
             public string Email { get; set; }
 
             /// <summary>
@@ -68,6 +70,7 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
+            [DisplayName("Contraseña")]
             public string Password { get; set; }
 
             /// <summary>
