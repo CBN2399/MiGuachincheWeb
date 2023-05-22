@@ -1,11 +1,13 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Acceso denegado";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-    <a ></a>
+<header class="d-flex flex-column justify-content-center align-items-center gap-4">
+    <h1 class="text-danger text-center m-5 fw-bold">@ViewData["Title"]</h1>
+    <h3 class="text-danger">No tienes acceso a este recurso</h3>
+    <img class="img-thumbnail" src="/img/denegado.jpg" title="Señal prohibido" width="700" height="500">
+    
 </header>
+<a class="btn btn-info mt-5" asp-action="Index">Volver</a>
