@@ -120,91 +120,44 @@ namespace MiGuachincheWeb.Controllers
             {
                 return NotFound();
             }
-            return View(reserva);
+            ReservaDTO res = new ReservaDTO(reserva.Id,reserva.numeroComensales,reserva.FechaReserva,reserva.restauranteId);
+            return View(res);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaReserva,numeroComensales")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id,[Bind("reservaId,fechaReserva,numeroComensales")] ReservaDTO reserva)
         {
-            if (id != reserva.Id)
+            if (id != reserva.reservaId)
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
+                var reserv = await _context.reservas.FindAsync(reserva.reservaId);
+                var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
+                if ((reserv == null) || (estado == null))
+                {
+                    return NotFound();
+                }
+
                 try
                 {
-                    var estado = await _context.estadoReservas.FirstOrDefaultAsync(e => e.Name == "Pendiente");
-                    if (estado == null)
-                    {
-                        return BadRequest();
-                    }
-                    reserva.estado = estado;
-                    reserva.estadoReservaId = estado.Id;
-                    _context.Update(reserva);
+                    reserv.estado = estado;
+                    reserv.estadoReservaId = estado.Id;
+                    reserv.numeroComensales = reserva.numeroComensales;
+                    reserv.FechaReserva = reserva.fechaReserva;
+                    _context.Update(reserv);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReservaExists(reserva.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;  
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Reserva","User");
             }
             return View(reserva);
-        }
-
-        // GET: Reservas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.reservas == null)
-            {
-                return NotFound();
-            }
-
-            var reserva = await _context.reservas
-                .Include(r => r.CustomUser)
-                .Include(r => r.estado)
-                .Include(r => r.restaurante)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (reserva == null)
-            {
-                return NotFound();
-            }
-
-            return View(reserva);
-        }
-
-        // POST: Reservas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.reservas == null)
-            {
-                return Problem("Entity set 'guachincheContext.reservas'  is null.");
-            }
-            var reserva = await _context.reservas.FindAsync(id);
-            if (reserva != null)
-            {
-                _context.reservas.Remove(reserva);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ReservaExists(int id)
-        {
-            return (_context.reservas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
