@@ -360,7 +360,7 @@ p {
     color: #ccc;
 }
 
-.rating label:after {
+.rating label:before {
     content: "\2605";
     padding: 5px;
     font-size: 30px;

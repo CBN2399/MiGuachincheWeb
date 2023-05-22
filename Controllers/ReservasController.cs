@@ -173,5 +173,37 @@ namespace MiGuachincheWeb.Controllers
             ViewData["restaurante"] = restaurante.RestauranteId;
             return View(restaurante.platos);
         }
+        [HttpPost]
+        public async Task<IActionResult> ValoratePlato(int platoId,int restauranteId, int rating)
+        {
+            var platorest = from a in _context.plato_restaurantes
+                            where a.restaurante_Id == restauranteId
+                            where a.plato_Id == platoId
+                            select a;
+            var plato = await _context.plato_restaurantes.FirstOrDefaultAsync(e => e.id == platorest.ToList()[0].id);
+            
+            if (plato == null)
+            {
+                return NotFound();
+            }
+            if (rating != 0)
+            {
+                if (plato.valoraciones == null)
+                {
+                    plato.valoraciones = new List<ValoracionPlato>();
+                }
+                plato.valoraciones.Add(new ValoracionPlato { valoracion = rating });
+                int total = 0;
+                foreach (ValoracionPlato val in plato.valoraciones)
+                {
+                    total += val.valoracion;
+                }
+                plato.valoracion = total / plato.valoraciones.Count;
+                _context.Update(plato);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Reserva", "user");
+        }
     }
 }
