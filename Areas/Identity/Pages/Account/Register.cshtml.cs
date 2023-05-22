@@ -67,24 +67,24 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "El Campo 'Nombre' es requerido")]
             [Display(Name = "Nombre")]
             public string Nombre { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "El Campo 'Apellidos' es requerido")]
             [Display(Name = "Apellidos")]
             public string Apellidos { get; set; }
 
-            [Required]
-            [Display(Name = "Telefono")]
+            [Required(ErrorMessage = "El Campo 'Teléfono' es requerido")]
+            [Display(Name = "Teléfono")]
             public string Telefono { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "El Campo 'Correo Electrónico' es requerido")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Correo Electrónico")]
             public string Email { get; set; }
 
             /// <summary>
@@ -92,9 +92,9 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} y un maximo de {1} caracteres de largo.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             /// <summary>
@@ -102,8 +102,8 @@ namespace MiGuachincheWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar contraseña")]
+            [Compare("Password", ErrorMessage = "La Contraseña y la confirmacion no son iguales..")]
             public string ConfirmPassword { get; set; }
         }
 
