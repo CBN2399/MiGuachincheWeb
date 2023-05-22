@@ -1,9 +1,16 @@
-﻿namespace MiGuachincheWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MiGuachincheWeb.Models
 {
     public class ReservaDTO
     {
         public int reservaId {get;set;}
+
+        [Required(ErrorMessage = "El Campo 'Comensales' es requerido")]
+        [Range(1, int.MaxValue, ErrorMessage = "El Campo 'Comensales' debe ser mayor que cero.")]
         public int numeroComensales { get; set; }
+
+        [Required(ErrorMessage = "El Campo 'fecha' es requerido")]
         public DateTime fechaReserva { get; set; }
         public string? userId { get; set; }
         public int restId { get; set; }

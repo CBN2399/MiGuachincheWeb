@@ -39,7 +39,7 @@
     @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaReserva)
+                    @Html.DisplayFor(modelItem => item.FechaReserva.ToLocalTime())
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.numeroComensales)

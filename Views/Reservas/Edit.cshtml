@@ -13,7 +13,7 @@
             <input type="hidden" asp-for="restId" />
             <div class="form-group my-2">
                 <label for="fecha" class="control-label">Fecha de la reserva</label>
-                <input id="fecha" asp-for="fechaReserva" class="form-control" />
+                <input id="fecha" asp-for="fechaReserva" class="form-control" pattern="\d{4}-\d{2}-\d{2}" title="La fecha debe ser posterior a la actual." required />
                 <span asp-validation-for="fechaReserva" class="text-danger"></span>
             </div>
             <div class="form-group my-2">
@@ -31,6 +31,23 @@
 <div>
     <a class="btn btn-primary"  asp-controller="User" asp-action="Reserva">Volver</a>
 </div>
+
+<script>
+    var fechaInput = document.getElementById("fecha");
+    var fechaActual = new Date().toISOString().split("T")[0];
+    fechaInput.setAttribute("min", fechaActual);
+
+    fechaInput.addEventListener("input", function (event) {
+        var fechaSeleccionada = event.target.value;
+        var fechaError = document.getElementById("fechaError");
+
+        if (fechaSeleccionada <= fechaActual) {
+            fechaError.style.display = "block";
+        } else {
+            fechaError.style.display = "none";
+        }
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
