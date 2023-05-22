@@ -41,7 +41,7 @@
             </div>
             <div class="form-group my-3">
                 <label asp-for="telefono" class="control-label mt-3 fw-bold"></label>
-                <input asp-for="telefono" class="form-control mt-3" />
+                <input asp-for="telefono" class="form-control mt-3" pattern="[0-9]{9}" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
