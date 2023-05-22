@@ -159,5 +159,19 @@ namespace MiGuachincheWeb.Controllers
             }
             return View(reserva);
         }
+
+        public async Task<IActionResult>ValoratePlatoRestaurante(int id)
+        {
+            var restaurante = await _context.restaurantes
+                .Include(e => e.platos)
+                .ThenInclude(e => e.tipo)
+                .FirstOrDefaultAsync(e => e.RestauranteId == id);
+            if (restaurante == null)
+            {
+                return NotFound();
+            }
+            ViewData["restaurante"] = restaurante.RestauranteId;
+            return View(restaurante.platos);
+        }
     }
 }
