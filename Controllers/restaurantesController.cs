@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
+using MiGuachincheWeb.Migrations;
 using MiGuachincheWeb.Models;
 using System.Data;
 
@@ -305,14 +306,24 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Valorate(int restauranteId, int rating)
         {
-            var restaurante = await _context.restaurantes.FindAsync(restauranteId);
+            var restaurante = await _context.restaurantes.Include(e => e.valoraciones).FirstOrDefaultAsync(i => i.RestauranteId == restauranteId);
             if (restaurante == null) 
             {
                 return NotFound();
             }
             if (rating != 0) 
             {
-                restaurante.valoracion = (restaurante.valoracion + rating)/2;
+                if(restaurante.valoraciones == null)
+                {
+                    restaurante.valoraciones = new List<ValoracionRestaurante>();
+                }
+                restaurante.valoraciones.Add(new ValoracionRestaurante { valoracion = rating });
+                int total = 0;
+                foreach(ValoracionRestaurante val in restaurante.valoraciones)
+                {
+                    total += val.valoracion;
+                }
+                restaurante.valoracion = total/restaurante.valoraciones.Count;
                 _context.Update(restaurante);
                 await _context.SaveChangesAsync();
             }

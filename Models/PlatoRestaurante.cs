@@ -8,6 +8,7 @@ namespace MiGuachincheWeb.Models
 {
     public partial class PlatoRestaurante
     {
+        [Key]
         public int id { get; set; }
         public int plato_Id { get; set; }
         public int restaurante_Id { get; set; }
@@ -20,6 +21,8 @@ namespace MiGuachincheWeb.Models
         public virtual Plato plato { get; set; }
         public virtual Restaurante restaurante { get; set; }
         public virtual ICollection<CustomUser> listaUsers { get; set; }
+
+        public ICollection<ValoracionPlato> valoraciones { get; set; }
 
         public PlatoRestaurante()
         {

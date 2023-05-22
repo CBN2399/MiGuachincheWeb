@@ -9,6 +9,7 @@ namespace MiGuachincheWeb.Models
 {
     public partial class Restaurante
     {
+        [Key]
         public int RestauranteId { get; set; }
 
         [Required(ErrorMessage = "El campo 'Nombre' es requerido")]
@@ -38,6 +39,8 @@ namespace MiGuachincheWeb.Models
         public virtual ICollection<CustomUser> usuarios { get; set; }
 
         public virtual ICollection<Reserva> reservas { get; set; }
+
+        public ICollection<ValoracionRestaurante> valoraciones { get; set; }
 
     }
 }
