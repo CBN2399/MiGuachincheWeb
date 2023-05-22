@@ -1,14 +1,24 @@
-﻿namespace MiGuachincheWeb.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace MiGuachincheWeb.Models
 {
     public class CustomUserDTO
     {
         public string? Id { get; set; }
+
+        [Required(ErrorMessage = "El Campo 'Nombre' es requerido")]
         public String? Nombre { get; set; }
 
+        [Required(ErrorMessage = "El Campo 'Apellidos' es requerido")]
         public String? Apellidos { get; set; }
 
+        [DisplayName("Teléfono")]
+        [Required(ErrorMessage = "El Campo 'Teléfono' es requerido")]
         public String? Telefono { get; set; }
 
+        [DisplayName("Correo Electrónico")]
+        [Required(ErrorMessage = "El Campo 'Correo Electrónico' es requerido")]
         public String? Email { get; set; }
 
         public String? Role { get; set; }
