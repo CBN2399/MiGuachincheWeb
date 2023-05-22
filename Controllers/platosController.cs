@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
+using System;
 
 namespace MiGuachincheWeb.Controllers
 {
@@ -11,9 +12,11 @@ namespace MiGuachincheWeb.Controllers
     public class platosController : Controller
     {
         private readonly guachincheContext _context;
+        private readonly IWebHostEnvironment _webEnvironment;
 
-        public platosController(guachincheContext context)
+        public platosController(guachincheContext context, IWebHostEnvironment environment)
         {
+            _webEnvironment = environment;
             _context = context;
         }
 
@@ -121,13 +124,28 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
+        public async Task<IActionResult> Create([Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato, [FromForm] IFormFile Image)
         {
-            if (ModelState.IsValid)
+            string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
+            string restPath = Path.Combine(filePath, "platos");
+
+            if (ModelState.IsValid && Image != null)
             {
+                if (Directory.Exists(restPath))
+                {
+                    using (Stream fileStream = new FileStream(Path.Combine(restPath, Image.FileName), FileMode.Create))
+                    {
+                        await Image.CopyToAsync(fileStream);
+                    }
+                }
+                plato.ImagenURL = Image.FileName;
                 _context.Add(plato);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["error"] = "No se ha subido la imagen del plato";
             }
             ViewData["tipoId"] = new SelectList(_context.tipos, "id", "nombre", plato.tipoId);
             return View(plato);
@@ -157,18 +175,42 @@ namespace MiGuachincheWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato)
+        public async Task<IActionResult> Edit(int id, [Bind("PlatoId,Nombre,Descripcion,tipoId")] Plato plato, [FromForm] IFormFile Image)
         {
             if (id != plato.PlatoId)
             {
                 return NotFound();
             }
 
+            string filePath = Path.Combine(_webEnvironment.WebRootPath, "img");
+            string restPath = Path.Combine(filePath, "restaurantes");
+
+            ModelState.Remove("Image");
+
             if (ModelState.IsValid)
             {
+                var plate = await _context.platos.FirstOrDefaultAsync(e => e.PlatoId == plato.PlatoId);
+                if (plate == null)
+                {
+                    return NotFound();
+                }
                 try
                 {
-                    _context.Update(plato);
+                    if (Directory.Exists(restPath) && Image != null)
+                    {
+                        using (Stream fileStream = new FileStream(Path.Combine(restPath, Image.FileName), FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileStream);
+                        }
+                        plate.ImagenURL = Image.FileName;
+                    }
+                    plate.Descripcion = plato.Descripcion;
+                    plate.Nombre = plato.Nombre;
+                    plate.tipoId = plato.tipoId;
+                    plate.tipo = plato.tipo;
+                    plate.restaurantes = plato.restaurantes;
+
+                    _context.Update(plate);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

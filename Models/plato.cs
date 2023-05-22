@@ -11,9 +11,12 @@ namespace MiGuachincheWeb.Models
     public partial class Plato
     {
         public int PlatoId { get; set; }
+
+        [Required(ErrorMessage = "El Campo 'Nombre' es requerido")]
         public string Nombre { get; set; }
 
         [DisplayName("Descripción")]
+        [Required(ErrorMessage = "El Campo 'Descripción' es requerido")]
         public string Descripcion { get; set; }
         public int tipoId { get; set; }
 
