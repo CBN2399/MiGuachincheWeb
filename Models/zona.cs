@@ -2,6 +2,8 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MiGuachincheWeb.Models
 {
@@ -13,7 +15,11 @@ namespace MiGuachincheWeb.Models
         }
 
         public int Zona_id { get; set; }
+        [DisplayName("Nombre")]
+        [Required(ErrorMessage = "El campo 'Nombre' es requerido")]
         public string nombre { get; set; }
+        [DisplayName("Descripción")]
+        [Required(ErrorMessage = "El campo 'Descripción' es requerido")]
         public string descripcion { get; set; }
 
         public string ImagenURL { get; set; }
