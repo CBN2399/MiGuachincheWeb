@@ -293,6 +293,11 @@ p {
     border-collapse:initial;
 }
 
+.fondo_tablas_reserva {
+    box-shadow: 10px 10px 5px 0px rgba(92,90,87,1);
+    border: 2px solid black;
+}
+
 /*titulo login*/
 
 .titulo {

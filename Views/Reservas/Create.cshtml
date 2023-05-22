@@ -4,32 +4,34 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>Hacer una Reserva</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-12 col-md-8">
+        <h1 class="text-center">Hacer una Reserva</h1>
+        <h4>Reserva</h4>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group my-3">
-                <label for="restaurante" class="control-label">Restaurante</label>
-                <input id="restaurante" asp-for="nombreRestaurante" class="form-control" readonly />
+                <label for="restaurante" class="control-label mt-3 fw-bold">Restaurante</label>
+                <input id="restaurante" asp-for="nombreRestaurante" class="form-control mt-3" readonly />
                 <input type="hidden" asp-for="restId" />
                 <span asp-validation-for="nombreRestaurante" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label for="nombreUsuario" class="control-label">Nombre:</label>
-                <input id="nombreUsuario" asp-for="nombreUsuario" class="form-control" readonly />
+                <label for="nombreUsuario" class="control-label mt-3 fw-bold">Nombre:</label>
+                <input id="nombreUsuario" asp-for="nombreUsuario" class="form-control mt-3" readonly />
                 <input type="hidden" asp-for="userId" />
                 <span asp-validation-for="nombreUsuario" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label for="cantidad" class="control-label">Número de comensales</label>
-                <input id="cantidad" asp-for="numeroComensales" class="form-control" />
+                <label for="cantidad" class="control-label mt-3 fw-bold">Número de comensales</label>
+                <input id="cantidad" asp-for="numeroComensales" class="form-control mt-3" />
                 <span asp-validation-for="numeroComensales" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label for="fecha" class="control-label">Elige la fecha de la reserva</label>
-                <input id="fecha" asp-for="fechaReserva" class="form-control" pattern="\d{4}-\d{2}-\d{2}" title="La fecha debe ser posterior a la actual." required />
+                <label for="fecha" class="control-label mt-3 fw-bold">Elige la fecha de la reserva</label>
+                <input id="fecha" asp-for="fechaReserva" class="form-control mt-3" pattern="\d{4}-\d{2}-\d{2}" title="La fecha debe ser posterior a la actual." required />
                 <span asp-validation-for="fechaReserva" class="text-danger"></span>
             </div>
             <div class="form-group my-3">

@@ -1,0 +1,51 @@
+﻿@model MiGuachincheWeb.Models.Reserva
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="fs-bold text-primary text-center">¿Estás seguro de borrar este restaurante?</h3>
+<hr />
+
+<div>
+    <h4>Reserva</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-12 col-md-5 mx-auto">
+            @Html.DisplayNameFor(model => model.FechaReserva)
+        </dt>
+        <dd class="col-12 col-md-5 mx-auto">
+            @Html.DisplayFor(model => model.FechaReserva)
+        </dd>
+        <dt class="col-12 col-md-5 mx-auto">
+            @Html.DisplayNameFor(model => model.numeroComensales)
+        </dt>
+        <dd class="col-12 col-md-5 mx-auto">
+            @Html.DisplayFor(model => model.numeroComensales)
+        </dd>
+        <dt class="col-12 col-md-5 mx-auto">
+            @Html.DisplayNameFor(model => model.CustomUser)
+        </dt>
+        <dd class="col-12 col-md-5 mx-auto">
+            @Html.DisplayFor(model => model.CustomUser.Id)
+        </dd>
+        <dt class="col-12 col-md-5 mx-auto">
+            @Html.DisplayNameFor(model => model.restaurante)
+        </dt>
+        <dd class="col-12 col-md-5 mx-auto">
+            @Html.DisplayFor(model => model.restaurante.Descripcion)
+        </dd>
+        <dt class="col-12 col-md-5 mx-auto">
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+        <dd class="col-12 col-md-5 mx-auto">
+            @Html.DisplayFor(model => model.estado.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Borrar" class="btn btn-danger me-5" /> |
+        <a class="btn btn-info" asp-action="Index">Volver</a>
+    </form>
+</div>

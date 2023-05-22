@@ -5,9 +5,12 @@
 }
 
 <h2 class="text-center fw-bold mb-5">Lista de reservas</h2>
-<hr/>
-<h4>Reservas pendientes</h4>
-<table class="table table-hover table-striped table-info mt-3">
+
+
+<div class="table responsive p-5">
+    <hr />
+    <h4>Reservas</h4>
+    <table class="table table-hover table-striped table-info mt-3 fondo_tablas_reserva text-center">
     <thead>
         <tr>
             <th>Fecha de reserva</th>
@@ -53,55 +56,61 @@
         }
     </tbody>
 </table>
-
-<hr/>
-<h4>Reservas activas</h4>
-<table class="table table-hover table-striped table-secondary mt-3">
-    <thead>
-        <tr>
-            <th>Fecha de reserva</th>
-            <th>Comensales</th>
-            <th class="text-capitalize">Restaurante</th>
-            <th class="text-capitalize">Nombre de la reserva</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.estado.Name.Equals("Activa"))
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaReserva)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.numeroComensales)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.restaurante.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
-                    </td>
-                    <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                        <a class="btn btn-dark" asp-controller="Manager" asp-action="Finalizar" asp-route-id="@item.Id" title="Marcar reserva como finalizada">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg>
-                        </a>
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-<div class="my-3">
-    <button id="ManagerButton" class="btn btn-primary" title="Motrar historial de reservas">Mostrar historial</button>
 </div>
-<div id="historial" class="my-2 oculto">
+
+
+<div class="table responsive p-5">
+    <hr/>
+    <h4>Reservas activas</h4>
+    <table class="table table-hover table-striped table-secondary mt-3 fondo_tablas_reserva text-center">
+        <thead>
+            <tr>
+                <th>Fecha de reserva</th>
+                <th>Comensales</th>
+                <th class="text-capitalize">Restaurante</th>
+                <th class="text-capitalize">Nombre de la reserva</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.estado.Name.Equals("Activa"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaReserva)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numeroComensales)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.restaurante.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomUser.Nombre)
+                        </td>
+                        <td class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                            <a class="btn btn-dark" asp-controller="Manager" asp-action="Finalizar" asp-route-id="@item.Id" title="Marcar reserva como finalizada">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="my-5">
+        <button id="ManagerButton" class="btn btn-primary" title="Motrar historial de reservas">Mostrar historial</button>
+    </div>
+</div>
+
+
+<div id="historial" class="my-2 oculto table responsive p-5">
     <h4>Reservas Finalizadas</h4>
-    <table class="table table-hover table-striped table-dark mt-3">
+    <table class="table table-hover table-striped table-dark mt-3 fondo_tablas_listas text-center">
         <thead>
             <tr>
                 <th>Fecha de reserva</th>
