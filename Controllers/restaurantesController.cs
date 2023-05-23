@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Identity;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Migrations;
 using MiGuachincheWeb.Models;
@@ -105,15 +106,25 @@ namespace MiGuachincheWeb.Controllers
                 return NotFound();
             }
 
-            var platorest = from a in _context.plato_restaurantes
-                            where a.restaurante_Id == id
-                            select a;
-            List<PlatoRestaurante> platos = new List<PlatoRestaurante>();
+            var platorest = from t1 in _context.plato_restaurantes
+                            join t2 in _context.platos on t1.plato_Id equals t2.PlatoId
+                            where t1.restaurante_Id == id
+                            select new PlatoDTO
+                            {
+                                id = t1.id,
+                                nombre = t2.Nombre,
+                                tipo = t2.tipo.nombre,
+                                valoracion = t1.valoracion
+                            };
+
+
+            List<PlatoDTO> platos = new List<PlatoDTO>();
             if (platorest != null)
             {
                 foreach (var a in platorest)
                 {
                     platos.Add(a);
+                    
                 }
             }
             ViewBag.PlatoRest = platos;
