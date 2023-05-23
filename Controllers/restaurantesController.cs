@@ -10,7 +10,7 @@ using System.Data;
 
 namespace MiGuachincheWeb.Controllers
 {
-
+    [Authorize]
     public class restaurantesController : Controller
     {
         private readonly guachincheContext _context;
@@ -24,7 +24,7 @@ namespace MiGuachincheWeb.Controllers
             _userManager = userManager;
         }
 
-        // GET: restaurantes
+        [Authorize(Roles = "Admin,Default")]
         public async Task<IActionResult> Index(string sortOrder, string searchString, string restZone, List<SelectListItem> zonaRest)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
@@ -88,7 +88,6 @@ namespace MiGuachincheWeb.Controllers
             return View(await restaurantes.AsNoTracking().ToListAsync());
         }
 
-        // GET: restaurantes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -121,7 +120,6 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        // GET: restaurantes/Create
         [Authorize(Roles = "Admin")]
         public IActionResult Create(String? id)
         {
@@ -131,9 +129,6 @@ namespace MiGuachincheWeb.Controllers
             return View();
         }
 
-        // POST: restaurantes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -182,7 +177,6 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        // GET: restaurantes/Edit/5
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -257,7 +251,6 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        // GET: restaurantes/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -278,7 +271,6 @@ namespace MiGuachincheWeb.Controllers
             return View(restaurante);
         }
 
-        // POST: restaurantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

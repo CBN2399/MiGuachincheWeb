@@ -220,6 +220,7 @@ namespace MiGuachincheWeb.Controllers
             return View(platos);
         }
 
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> AddRestaurante(int? id)
         {
             if (id == null || _guachincheContext.restaurantes == null)
@@ -259,6 +260,7 @@ namespace MiGuachincheWeb.Controllers
 
         }
 
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> DeleteRestaurante(int? id)
         {
             if (id == null || _guachincheContext.restaurantes == null)
@@ -288,7 +290,7 @@ namespace MiGuachincheWeb.Controllers
 
             return RedirectToAction("RestList", "User", new { id = user.Id });
         }
-
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> AddPlato(int? id)
         {
             if (id == null || _guachincheContext.plato_restaurantes == null)
@@ -316,7 +318,7 @@ namespace MiGuachincheWeb.Controllers
             }
             return NoContent();
         }
-
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> DeletePLato(int? id)
         {
             if (id == null || _guachincheContext.plato_restaurantes == null)
@@ -349,7 +351,7 @@ namespace MiGuachincheWeb.Controllers
             return (_guachincheContext.custom_users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> Reserva()
         {
             var currentUser = _userManager.GetUserAsync(HttpContext.User);
@@ -365,7 +367,7 @@ namespace MiGuachincheWeb.Controllers
             }
             return View(user.reservas);
         }
-
+        [Authorize(Roles = "Default")]
         public async Task<IActionResult> Cancel(int id)
         {
             var reserva = await _guachincheContext.reservas.Include(e => e.estado).FirstOrDefaultAsync(e => e.Id == id);

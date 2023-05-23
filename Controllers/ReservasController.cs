@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiGuachincheWeb.Data;
 using MiGuachincheWeb.Models;
+using System.Data;
 
 namespace MiGuachincheWeb.Controllers
 {
+    [Authorize(Roles = "Manager,Default")]
     public class ReservasController : Controller
     {
         private readonly guachincheContext _context;

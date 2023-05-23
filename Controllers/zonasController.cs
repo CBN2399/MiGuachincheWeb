@@ -16,7 +16,7 @@ namespace MiGuachincheWeb.Controllers
             _context = context;
         }
 
-        // GET: zonas
+     
         public async Task<IActionResult> Index()
         {
             return _context.zonas != null ?
@@ -24,7 +24,7 @@ namespace MiGuachincheWeb.Controllers
                         Problem("Entity set 'guachincheContext.zonas'  is null.");
         }
 
-        // GET: zonas/Details/5
+        
 
         [Authorize(Roles = "Default")]
         public async Task<IActionResult> Details(int? id)
@@ -46,16 +46,14 @@ namespace MiGuachincheWeb.Controllers
             return View(zona);
         }
 
-        // GET: zonas/Create
+        
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: zonas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -70,7 +68,7 @@ namespace MiGuachincheWeb.Controllers
             return View(zona);
         }
 
-        // GET: zonas/Edit/5
+        
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,9 +85,7 @@ namespace MiGuachincheWeb.Controllers
             return View(zona);
         }
 
-        // POST: zonas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -142,7 +138,6 @@ namespace MiGuachincheWeb.Controllers
             return View(zona);
         }
 
-        // POST: zonas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
