@@ -48,10 +48,8 @@
                 <label for="Id_tipo" class="control-label mt-3 fw-bold">Especialidad</label>
                 <select id="Id_tipo" asp-for="Id_tipo" class="form-control mt-3" asp-items="ViewBag.Id_tipo"></select>
             </div>
-            <div class="form-group mt-3">
+            <div class="form-group mt-5 me-5">
                 <input type="submit" value="Guardar" class="btn btn-primary me-5" />
-            </div>
-            <div class="my-3">
                 <a class="btn btn-info" asp-controller="Manager" asp-action="List" asp-route-id="@UserManager.GetUserId(User)">Volver</a>
             </div>
         </form>
