@@ -89,6 +89,7 @@ namespace MiGuachincheWeb.Controllers
             return View(await restaurantes.AsNoTracking().ToListAsync());
         }
 
+        [Authorize(Roles = "Manager,Default")]
         public async Task<IActionResult> Details(int? id)
         {
 
